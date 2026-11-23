@@ -49,16 +49,22 @@ export default function AdminPage() {
   const [statusKey, setStatusKey] = useState<"" | "saved" | "failed">("");
   const [saving, setSaving] = useState(false);
   const [loginError, setLoginError] = useState("");
-  const [uploadsAtRisk, setUploadsAtRisk] = useState(false);
+  const [uploadsState, setUploadsState] = useState<"ok" | "setup" | "">("");
+  const [storageRailway, setStorageRailway] = useState(false);
+  const [savedAt, setSavedAt] = useState("");
+  const [dirty, setDirty] = useState(false);
+  const [editorKey, setEditorKey] = useState(0);
   const persistTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const contentRef = useRef<SiteContent | null>(null);
+  const savedRef = useRef("");
 
   const loadStorageStatus = useCallback(async () => {
     try {
       const res = await fetch("/api/storage");
       if (!res.ok) return;
-      const data = (await res.json()) as { uploadsAtRisk?: boolean };
-      setUploadsAtRisk(Boolean(data.uploadsAtRisk));
+      const data = (await res.json()) as { state?: "ok" | "setup"; onRailway?: boolean };
+      setUploadsState(data.state === "setup" ? "setup" : "ok");
+      setStorageRailway(Boolean(data.onRailway));
     } catch {
       /* ignore */
     }
@@ -74,6 +80,8 @@ export default function AdminPage() {
       const res = await fetch("/api/content");
       const data = (await res.json()) as SiteContent;
       contentRef.current = data;
+      savedRef.current = JSON.stringify(data);
+      setDirty(false);
       setContent(data);
       void loadStorageStatus();
     }
@@ -88,6 +96,16 @@ export default function AdminPage() {
       if (persistTimer.current) clearTimeout(persistTimer.current);
     };
   }, []);
+
+  useEffect(() => {
+    function onLeave(event: BeforeUnloadEvent) {
+      if (!dirty) return;
+      event.preventDefault();
+      event.returnValue = "";
+    }
+    window.addEventListener("beforeunload", onLeave);
+    return () => window.removeEventListener("beforeunload", onLeave);
+  }, [dirty]);
 
   async function onLogin(e: FormEvent) {
     e.preventDefault();
@@ -106,6 +124,8 @@ export default function AdminPage() {
     const contentRes = await fetch("/api/content");
     const data = (await contentRes.json()) as SiteContent;
     contentRef.current = data;
+    savedRef.current = JSON.stringify(data);
+    setDirty(false);
     setContent(data);
     void loadStorageStatus();
   }
@@ -128,17 +148,14 @@ export default function AdminPage() {
     setSaving(false);
     if (!res.ok) {
       setStatusKey("failed");
-      return;
+      return false;
     }
+    savedRef.current = JSON.stringify(next);
+    setDirty(false);
+    setSavedAt(new Date().toISOString());
     setStatusKey("saved");
+    return true;
   }, []);
-
-  function schedulePersist(next: SiteContent) {
-    if (persistTimer.current) clearTimeout(persistTimer.current);
-    persistTimer.current = setTimeout(() => {
-      void persistContent(next);
-    }, 1200);
-  }
 
   function buildNextContent(next: LocaleContent): SiteContent | null {
     const current = contentRef.current;
@@ -151,16 +168,24 @@ export default function AdminPage() {
     if (!nextContent) return;
     contentRef.current = nextContent;
     setContent(nextContent);
-    schedulePersist(nextContent);
+    setDirty(JSON.stringify(nextContent) !== savedRef.current);
+    setStatusKey("");
   }
 
-  async function persistLocaleNow(next: LocaleContent) {
-    const nextContent = buildNextContent(next);
-    if (!nextContent) return;
-    contentRef.current = nextContent;
-    setContent(nextContent);
-    if (persistTimer.current) clearTimeout(persistTimer.current);
-    await persistContent(nextContent);
+  async function saveNow() {
+    const next = contentRef.current;
+    if (!next || saving) return;
+    await persistContent(next);
+  }
+
+  function discardChanges() {
+    if (!savedRef.current) return;
+    const next = JSON.parse(savedRef.current) as SiteContent;
+    contentRef.current = next;
+    setContent(next);
+    setDirty(false);
+    setStatusKey("");
+    setEditorKey((value) => value + 1);
   }
 
   if (checking) {
@@ -268,6 +293,7 @@ export default function AdminPage() {
                       key={item.id}
                       type="button"
                       onClick={() => {
+                        if (item.id !== section && dirty && !window.confirm(t.unsavedLeave)) return;
                         setSection(item.id);
                         setSidebarOpen(false);
                       }}
@@ -323,26 +349,72 @@ export default function AdminPage() {
               </div>
             </div>
 
-            <div className="flex shrink-0 items-center gap-3">
+            <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
               {section !== "dashboard" &&
               section !== "inquiries" &&
               section !== "mail" &&
-              section !== "security" ? (
+              section !== "security" &&
+              section !== "system" ? (
                 <>
-                  <p className="hidden text-xs text-[var(--muted)] sm:block">
+                  <p className="text-xs text-[var(--muted)]">
                     {saving
                       ? t.saving
-                      : statusKey === "saved"
-                        ? t.saved
-                        : statusKey === "failed"
-                          ? t.saveFailed
-                          : t.editing(activeMenu.label)}
+                      : statusKey === "failed"
+                        ? t.saveFailed
+                        : dirty
+                          ? t.unsaved
+                          : savedAt
+                            ? t.savedAt(
+                                new Date(savedAt).toLocaleTimeString(
+                                  editLocale === "ko" ? "ko-KR" : "en-GB",
+                                  { hour: "2-digit", minute: "2-digit" },
+                                ),
+                              )
+                            : t.noChanges}
                   </p>
+                  <a
+                    href={
+                      section === "greeting" || section === "company" || section === "history"
+                        ? "/about"
+                        : section === "team"
+                          ? "/team"
+                          : section === "services"
+                            ? "/services"
+                            : section === "performance"
+                              ? "/performance"
+                              : section === "gallery"
+                                ? "/gallery"
+                                : "/"
+                    }
+                    target="_blank"
+                    rel="noreferrer"
+                    className="border border-[var(--line)] px-3 py-1.5 text-xs"
+                  >
+                    {t.preview}
+                  </a>
+                  <button
+                    type="button"
+                    onClick={discardChanges}
+                    disabled={!dirty || saving}
+                    className="border border-[var(--line)] px-3 py-1.5 text-xs disabled:opacity-40"
+                  >
+                    {t.discard}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => void saveNow()}
+                    disabled={!dirty || saving}
+                    className="bg-[var(--ink)] px-3 py-1.5 text-xs text-white disabled:opacity-40"
+                  >
+                    {saving ? t.saving : t.save}
+                  </button>
                   {(["ko", "en"] as const).map((code) => (
                     <button
                       key={code}
                       type="button"
                       onClick={() => {
+                        if (code === editLocale) return;
+                        if (dirty && !window.confirm(t.unsavedLeave)) return;
                         setEditLocale(code);
                         setStatusKey("");
                       }}
@@ -361,19 +433,47 @@ export default function AdminPage() {
           </div>
         </header>
 
-        {uploadsAtRisk ? (
-          <div
-            role="alert"
-            className="shrink-0 border-b border-amber-300 bg-amber-50 px-3 py-3 text-sm text-amber-950 sm:px-4 md:px-6 lg:px-8"
+        {uploadsState ? (
+          <button
+            type="button"
+            onClick={() => {
+              if (section !== "system" && dirty && !window.confirm(t.unsavedLeave)) return;
+              setSection("system");
+            }}
+            className={`shrink-0 border-b px-3 py-2 text-left text-sm sm:px-4 md:px-6 lg:px-8 ${
+              uploadsState === "ok"
+                ? "border-emerald-200 bg-emerald-50 text-emerald-950"
+                : "border-amber-300 bg-amber-50 text-amber-950"
+            }`}
           >
-            <p className="font-semibold">{t.storageRiskTitle}</p>
-            <p className="mt-1 text-amber-900/90">{t.storageRiskBody}</p>
-          </div>
+            <span className="font-semibold">
+              {uploadsState === "ok" ? t.storageOk : t.storageSetup}
+            </span>
+            <span className="ml-3 underline">{t.storageOpen}</span>
+          </button>
         ) : null}
 
         <div className="min-h-0 flex-1 overflow-y-auto overflow-x-auto">
         {section === "dashboard" ? (
-          <AdminDashboard locale={editLocale} />
+          <AdminDashboard locale={editLocale} content={content} />
+        ) : section === "system" ? (
+          <div className="px-3 py-5 sm:px-4 md:px-6 md:py-6 lg:px-8">
+            <Panel title={t.systemTitle}>
+              <p className="text-sm font-semibold">
+                {uploadsState === "setup" ? t.storageSetup : t.storageOk}
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
+                {uploadsState === "setup" ? t.systemSetup : t.systemOk}
+              </p>
+              {uploadsState !== "setup" && !storageRailway ? (
+                <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{t.systemLocal}</p>
+              ) : null}
+              {uploadsState === "setup" ? (
+                <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">{t.systemHow}</p>
+              ) : null}
+              <p className="mt-3 text-sm text-[var(--muted)]">{t.systemBackup}</p>
+            </Panel>
+          </div>
         ) : section === "inquiries" ? (
           <div className="px-3 py-5 sm:px-4 md:px-6 md:py-6 lg:px-8">
             <div className="w-full min-w-0">
@@ -394,32 +494,31 @@ export default function AdminPage() {
           </div>
         ) : (
         <div className="px-3 py-5 sm:px-4 md:px-6 md:py-6 lg:px-8">
-            <div className="w-full min-w-0">
+            <div key={`${editLocale}-${editorKey}`} className="w-full min-w-0">
               {section === "hero" && (
                 <Panel
                   title={t.hero}
                   hint={
                     heroSlideMode === "list"
-                      ? editLocale === "ko"
-                        ? "슬라이드를 누르면 세부 화면에서 수정하고 삭제할 수 있습니다. 기본 문구는 슬라이드 값이 없을 때 쓰입니다."
-                        : "Open a slide to edit or delete it. Default copy is used when a slide field is empty."
+                      ? t.heroSlidesHint
                       : undefined
                   }
                 >
                   {heroSlideMode === "list" && (
                     <>
+                      <div className="border border-[var(--line)] bg-white p-4">
+                        <p className="text-[0.68rem] tracking-[0.14em] text-[var(--muted)] uppercase">
+                          {t.heroPreviewTitle}
+                        </p>
+                        <p className="mt-2 font-display text-2xl tracking-[-0.03em]">
+                          {localeContent.hero.headline.trim() || t.noTitle}
+                        </p>
+                        <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+                          {localeContent.hero.subheadline.trim() || "—"}
+                        </p>
+                      </div>
                       <Field
-                        label={t.brand}
-                        value={localeContent.hero.brand}
-                        onChange={(v) =>
-                          updateLocale({
-                            ...localeContent,
-                            hero: { ...localeContent.hero, brand: v },
-                          })
-                        }
-                      />
-                      <Field
-                        label={t.headline}
+                        label={t.heroFallbackHeadline}
                         value={localeContent.hero.headline}
                         onChange={(v) =>
                           updateLocale({
@@ -429,7 +528,7 @@ export default function AdminPage() {
                         }
                       />
                       <TextArea
-                        label={t.intro}
+                        label={t.heroFallbackBody}
                         value={localeContent.hero.subheadline}
                         onChange={(v) =>
                           updateLocale({
@@ -558,10 +657,8 @@ export default function AdminPage() {
                   ui={t}
                   items={localeContent.performances}
                   onSave={(performances) => {
-                    const current = contentRef.current;
-                    if (!current) return;
-                    void persistLocaleNow({
-                      ...current[editLocale],
+                    updateLocale({
+                      ...localeContent,
                       performances,
                     });
                   }}
@@ -668,17 +765,10 @@ function HistoryEditor({
     };
   }, []);
 
-  function commit(next: HistoryItem[], immediate = false) {
+  function commit(next: HistoryItem[]) {
     setRows(next);
     rowsRef.current = next;
-    if (saveTimer.current) clearTimeout(saveTimer.current);
-    if (immediate) {
-      onChange(next);
-      return;
-    }
-    saveTimer.current = setTimeout(() => {
-      onChange(rowsRef.current);
-    }, 1000);
+    onChange(next);
   }
 
   function updateItem(index: number, patch: Partial<HistoryItem>) {
@@ -696,7 +786,7 @@ function HistoryEditor({
   function addItem() {
     typingRef.current = false;
     const next = [...rowsRef.current, { id: `h-${Date.now()}`, date: "", detail: "" }];
-    commit(next, true);
+    commit(next);
     setOpenIndex(next.length - 1);
   }
 
@@ -704,7 +794,6 @@ function HistoryEditor({
     typingRef.current = false;
     commit(
       rowsRef.current.filter((_, i) => i !== index),
-      true,
     );
   }
 
@@ -716,7 +805,7 @@ function HistoryEditor({
     const tmp = copy[index];
     copy[index] = copy[nextIndex];
     copy[nextIndex] = tmp;
-    commit(copy, true);
+    commit(copy);
   }
 
   const openItem = openIndex !== null ? rows[openIndex] : null;
@@ -870,8 +959,6 @@ function PerformanceEditor({
   const [rows, setRows] = useState(() => ensurePerformanceIds(items));
   const [openId, setOpenId] = useState<string | null>(null);
   const [dirty, setDirty] = useState(false);
-  const [saving, setSaving] = useState(false);
-  const [savedFlash, setSavedFlash] = useState(false);
   const [pendingDelete, setPendingDelete] = useState<number | null>(null);
 
   useEffect(() => {
@@ -881,15 +968,20 @@ function PerformanceEditor({
 
   function updateItem(index: number, patch: Partial<PerformanceItem>) {
     setDirty(true);
-    setSavedFlash(false);
-    setRows((prev) => prev.map((item, i) => (i === index ? { ...item, ...patch } : item)));
+    setRows((prev) => {
+      const next = prev.map((item, i) => (i === index ? { ...item, ...patch } : item));
+      onSave(next);
+      return next;
+    });
   }
 
   function addItem() {
     const id = `p-${Date.now()}`;
-    setDirty(true);
-    setSavedFlash(false);
-    setRows((prev) => [...prev, { id, date: "", detail: "", client: "" }]);
+    setRows((prev) => {
+      const next = [...prev, { id, date: "", detail: "", client: "" }];
+      onSave(next);
+      return next;
+    });
     setOpenId(id);
   }
 
@@ -902,25 +994,16 @@ function PerformanceEditor({
     const index = pendingDelete;
     setPendingDelete(null);
     setDirty(true);
-    setSavedFlash(false);
     setRows((prev) => {
       if (prev[index]?.id === openId) setOpenId(null);
-      return prev.filter((_, i) => i !== index);
+      const next = prev.filter((_, i) => i !== index);
+      onSave(next);
+      return next;
     });
   }
 
   const openIndex = rows.findIndex((item) => item.id === openId);
   const openItem = openIndex >= 0 ? rows[openIndex] : null;
-
-  async function handleSave() {
-    const sorted = sortPerformances(rows, true);
-    setRows(sorted);
-    setSaving(true);
-    await onSave(sorted);
-    setSaving(false);
-    setDirty(false);
-    setSavedFlash(true);
-  }
 
   return (
     <>
@@ -1004,22 +1087,6 @@ function PerformanceEditor({
         </div>
           </>
         )}
-
-        <div className="flex flex-wrap items-center justify-end gap-3 border-t border-[var(--line)] pt-4">
-          {savedFlash && !dirty ? (
-            <p className="text-sm text-emerald-700">{ui.performanceSaved}</p>
-          ) : dirty ? (
-            <p className="text-sm text-[var(--muted)]">{ui.editing(ui.performance)}</p>
-          ) : null}
-          <button
-            type="button"
-            onClick={() => void handleSave()}
-            disabled={saving || !dirty}
-            className="btn btn-primary text-sm disabled:opacity-40"
-          >
-            {saving ? ui.saving : ui.performanceSave}
-          </button>
-        </div>
       </Panel>
 
       {pendingDelete !== null && (
@@ -1380,6 +1447,24 @@ function InquiriesPanel({ ui }: { ui: AdminUi }) {
     }
   }
 
+  async function updateInquiry(id: string, patch: Partial<Inquiry>) {
+    const res = await fetch("/api/inquiries", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, ...patch }),
+    });
+    if (!res.ok) return;
+    const next = (await res.json()) as Inquiry;
+    setItems((prev) => prev.map((item) => (item.id === id ? next : item)));
+  }
+
+  function openInquiry(item: Inquiry) {
+    setSelectedId(item.id);
+    if (!item.status || item.status === "new") {
+      void updateInquiry(item.id, { status: "read" });
+    }
+  }
+
   const selected = items.find((item) => item.id === selectedId) ?? null;
 
   return (
@@ -1407,6 +1492,37 @@ function InquiriesPanel({ ui }: { ui: AdminUi }) {
               <p className="text-sm text-[var(--muted)]">{selected.files.join(", ")}</p>
             ) : null}
             <time className="text-xs text-[var(--muted)]">{new Date(selected.createdAt).toLocaleString()}</time>
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-medium">{ui.inquiryStatus}</span>
+              <select
+                value={selected.status || "new"}
+                onChange={(event) =>
+                  void updateInquiry(selected.id, {
+                    status: event.target.value as Inquiry["status"],
+                  })
+                }
+                className="border border-[var(--line)] bg-white px-3 py-2"
+              >
+                <option value="new">{ui.inquiryStatusNew}</option>
+                <option value="read">{ui.inquiryStatusRead}</option>
+                <option value="replied">{ui.inquiryStatusReplied}</option>
+              </select>
+            </label>
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-medium">{ui.inquiryAssignee}</span>
+              <input
+                value={selected.assignee || ""}
+                onChange={(event) =>
+                  setItems((prev) =>
+                    prev.map((item) =>
+                      item.id === selected.id ? { ...item, assignee: event.target.value } : item,
+                    ),
+                  )
+                }
+                onBlur={(event) => void updateInquiry(selected.id, { assignee: event.target.value })}
+                className="border border-[var(--line)] bg-white px-3 py-2"
+              />
+            </label>
             <p className="whitespace-pre-wrap text-sm leading-relaxed">{selected.message}</p>
             <div className="flex items-center justify-between gap-2">
               <button
@@ -1429,12 +1545,19 @@ function InquiriesPanel({ ui }: { ui: AdminUi }) {
               <button
                 key={item.id}
                 type="button"
-                onClick={() => setSelectedId(item.id)}
+                onClick={() => openInquiry(item)}
                 className="flex w-full items-baseline justify-between gap-4 border-b border-[var(--line)] px-4 py-3 text-left last:border-b-0 hover:bg-[#f7f6f3]"
               >
                 <span className="min-w-0">
                   <span className="block truncate text-sm font-medium">{item.name}</span>
-                  <span className="block truncate text-xs text-[var(--muted)]">{item.email}</span>
+                  <span className="block truncate text-xs text-[var(--muted)]">
+                    {item.status === "replied"
+                      ? ui.inquiryStatusReplied
+                      : item.status === "read"
+                        ? ui.inquiryStatusRead
+                        : ui.inquiryStatusNew}
+                    {item.assignee ? ` · ${item.assignee}` : ""}
+                  </span>
                 </span>
                 <time className="shrink-0 text-xs text-[var(--muted)]">
                   {new Date(item.createdAt).toLocaleDateString()}
@@ -1923,8 +2046,8 @@ function TeamEditor({
                         // eslint-disable-next-line @next/next/no-img-element
                         <img src={row.person.photo} alt="" className="h-full w-full object-cover" />
                       ) : (
-                        <div className="flex h-full items-center justify-center text-[10px] text-[var(--muted)]">
-                          —
+                        <div className="flex h-full items-center justify-center px-0.5 text-center text-[9px] leading-tight text-[var(--muted)]">
+                          {ui.heroMediaMissing}
                         </div>
                       )}
                     </div>
@@ -2302,11 +2425,13 @@ function GalleryEditor({
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState("");
   const [pendingDelete, setPendingDelete] = useState<number | null>(null);
+  const [imageMode, setImageMode] = useState<"file" | "url">("file");
 
   function openCreate() {
     setMode("create");
     setEditingIndex(null);
     setDraft(emptyGalleryItem());
+    setImageMode("file");
     setUploadError("");
   }
 
@@ -2314,6 +2439,7 @@ function GalleryEditor({
     setMode("edit");
     setEditingIndex(index);
     setDraft({ ...gallery.items[index] });
+    setImageMode(gallery.items[index].image.startsWith("http") ? "url" : "file");
     setUploadError("");
   }
 
@@ -2443,8 +2569,8 @@ function GalleryEditor({
                         // eslint-disable-next-line @next/next/no-img-element
                         <img src={item.image} alt="" className="h-full w-full object-cover" />
                       ) : (
-                        <div className="flex h-full items-center justify-center text-[10px] text-[var(--muted)]">
-                          없음
+                        <div className="flex h-full items-center justify-center px-1 text-center text-[10px] leading-tight text-[var(--muted)]">
+                          {ui.heroMediaMissing}
                         </div>
                       )}
                     </div>
@@ -2498,9 +2624,10 @@ function GalleryEditor({
           </div>
 
           <div className="grid gap-4 md:grid-cols-[200px_1fr]">
+            {imageMode === "file" ? (
             <ImageAttach
               label="이미지"
-              hint="미리보기 클릭 또는 아래 버튼"
+              hint={ui.galleryFileHint}
               value={draft.image}
               uploading={uploading}
               fit="cover"
@@ -2508,8 +2635,29 @@ function GalleryEditor({
               onFile={(file) => void uploadImage(file)}
               onClear={() => setDraft((prev) => ({ ...prev, image: "" }))}
             />
+            ) : (
+              <div className="flex h-28 items-center justify-center border border-dashed border-[var(--line)] bg-white text-xs text-[var(--muted)]">
+                {draft.image ? draft.image : ui.heroMediaMissing}
+              </div>
+            )}
 
             <div className="grid gap-3">
+              <div className="flex border border-[var(--line)] bg-white text-xs">
+                <button
+                  type="button"
+                  onClick={() => setImageMode("file")}
+                  className={`flex-1 px-2 py-1.5 ${imageMode === "file" ? "bg-[var(--ink)] text-white" : "text-[var(--muted)]"}`}
+                >
+                  {ui.heroMediaFile}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setImageMode("url")}
+                  className={`flex-1 px-2 py-1.5 ${imageMode === "url" ? "bg-[var(--ink)] text-white" : "text-[var(--muted)]"}`}
+                >
+                  {ui.heroMediaLink}
+                </button>
+              </div>
               <Field
                 label="제목"
                 value={draft.title}
@@ -2520,11 +2668,15 @@ function GalleryEditor({
                 value={draft.caption}
                 onChange={(v) => setDraft((prev) => ({ ...prev, caption: v }))}
               />
-              <Field
-                label="이미지 URL"
-                value={draft.image}
-                onChange={(v) => setDraft((prev) => ({ ...prev, image: v }))}
-              />
+              {imageMode === "url" ? (
+                <Field
+                  label={ui.heroMediaLink}
+                  value={draft.image}
+                  onChange={(v) => setDraft((prev) => ({ ...prev, image: v }))}
+                />
+              ) : (
+                <p className="text-xs text-[var(--muted)]">{ui.galleryFileHint}</p>
+              )}
               {uploadError && <p className="text-sm text-red-600">{uploadError}</p>}
               <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
                 {mode === "edit" && editingIndex !== null ? (

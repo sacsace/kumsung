@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Locale } from "@/lib/types";
+import type { Locale, SiteContent } from "@/lib/types";
 import type { VisitRange, VisitSource } from "@/lib/visits";
 
 type Bucket = { label: string; count: number };
@@ -66,6 +66,21 @@ function copy(locale: Locale) {
     from: en ? "From" : "들어온 곳",
     loading: en ? "Loading…" : "불러오는 중…",
     failed: en ? "Could not load visits." : "방문 기록을 불러오지 못했습니다.",
+    adminExcluded: en
+      ? "Visits to the admin pages are not counted."
+      : "관리자 화면 방문은 집계하지 않습니다.",
+    work: en ? "To do" : "운영",
+    openInquiries: en ? "Open inquiries" : "미처리 문의",
+    missingMedia: en ? "Missing photos" : "사진 없는 항목",
+    translation: en ? "English still empty" : "영어 미입력",
+    storage: en ? "File storage" : "파일 저장소",
+    mail: en ? "Mail" : "메일 발송",
+    storageOk: en ? "Ready" : "정상",
+    storageSetup: en ? "Setup needed" : "설정 필요",
+    mailOn: en ? "Ready to send" : "발송 가능",
+    mailOff: en ? "Not ready" : "설정 필요",
+    backup: en ? "Last backup" : "마지막 백업",
+    backupNone: en ? "Not recorded" : "기록 없음",
     sourceLabel: {
       direct: en ? "Direct" : "직접",
       search: en ? "Search" : "검색",
@@ -128,11 +143,45 @@ function hostOf(referrer: string) {
   }
 }
 
-export function AdminDashboard({ locale }: { locale: Locale }) {
+function contentGaps(content: SiteContent) {
+  let missingMedia = 0;
+  let translation = 0;
+  for (const locale of ["ko", "en"] as const) {
+    const page = content[locale];
+    if (!page?.team?.ceo?.photo?.trim() && page?.team?.ceo?.name?.trim()) missingMedia += 1;
+    for (const member of page?.team?.members || []) {
+      if (member.name?.trim() && !member.photo?.trim()) missingMedia += 1;
+    }
+    for (const item of page?.gallery?.items || []) {
+      if (!item.image?.trim()) missingMedia += 1;
+    }
+    for (const slide of page?.hero?.slides || []) {
+      if (!slide.src?.trim()) missingMedia += 1;
+    }
+  }
+  const pairs: [string, string][] = [
+    [content.ko?.greeting?.title, content.en?.greeting?.title],
+    [content.ko?.greeting?.body, content.en?.greeting?.body],
+    [content.ko?.services?.title, content.en?.services?.title],
+    [content.ko?.services?.lead, content.en?.services?.lead],
+    [content.ko?.company?.chennaiOffice, content.en?.company?.chennaiOffice],
+    [content.ko?.hero?.headline, content.en?.hero?.headline],
+  ];
+  for (const [ko, en] of pairs) {
+    if (ko?.trim() && !en?.trim()) translation += 1;
+    if (en?.trim() && !ko?.trim()) translation += 1;
+  }
+  return { missingMedia, translation };
+}
+
+export function AdminDashboard({ locale, content }: { locale: Locale; content: SiteContent }) {
   const t = copy(locale);
   const [range, setRange] = useState<VisitRange>("7d");
   const [summary, setSummary] = useState<Summary | null>(null);
   const [error, setError] = useState("");
+  const [ops, setOps] = useState({ inquiries: 0, mailReady: false, storageOk: true });
+
+  const gaps = contentGaps(content);
 
   useEffect(() => {
     let cancelled = false;
@@ -153,10 +202,33 @@ export function AdminDashboard({ locale }: { locale: Locale }) {
     };
   }, [range, t.failed]);
 
+  useEffect(() => {
+    let cancelled = false;
+    void Promise.all([
+      fetch("/api/inquiries").then((response) => (response.ok ? response.json() : [])),
+      fetch("/api/mail").then((response) => (response.ok ? response.json() : null)),
+      fetch("/api/storage").then((response) => (response.ok ? response.json() : null)),
+    ]).then(([inquiries, mail, storage]) => {
+      if (cancelled) return;
+      const list = Array.isArray(inquiries) ? inquiries : [];
+      setOps({
+        inquiries: list.filter((item) => !item?.status || item.status !== "replied").length,
+        mailReady: Boolean(mail?.enabled && mail?.hasPassword && mail?.to),
+        storageOk: storage?.state !== "setup",
+      });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <div className="px-3 py-6 sm:px-4 md:px-6 md:py-8 lg:px-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
-        <p className="max-w-xl text-sm text-[var(--muted)]">{t.lead}</p>
+        <div>
+          <p className="max-w-xl text-sm text-[var(--muted)]">{t.lead}</p>
+          <p className="mt-2 text-xs text-[var(--muted)]">{t.adminExcluded}</p>
+        </div>
         <div className="flex border border-[var(--line)] bg-white">
           {RANGES.map((item) => (
             <button
@@ -171,6 +243,15 @@ export function AdminDashboard({ locale }: { locale: Locale }) {
             </button>
           ))}
         </div>
+      </div>
+
+      <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+        <Stat label={t.openInquiries} value={String(ops.inquiries)} />
+        <Stat label={t.missingMedia} value={String(gaps.missingMedia)} />
+        <Stat label={t.translation} value={String(gaps.translation)} />
+        <Stat label={t.storage} value={ops.storageOk ? t.storageOk : t.storageSetup} />
+        <Stat label={t.mail} value={ops.mailReady ? t.mailOn : t.mailOff} />
+        <Stat label={t.backup} value={t.backupNone} />
       </div>
 
       {error ? <p className="mt-6 text-sm text-red-700">{error}</p> : null}

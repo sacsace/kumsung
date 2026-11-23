@@ -26,6 +26,8 @@ export type HeroSlide = {
   subheadline: string;
   ctaLabel: string;
   ctaHref: string;
+  /** default: use the banner fallback copy. custom: use this slide's own copy. */
+  copyMode?: "default" | "custom";
 };
 
 export type ClientItem = {

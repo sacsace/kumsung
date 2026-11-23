@@ -49,6 +49,17 @@ export function isPersistentStorage() {
   return Boolean(process.env.DATA_DIR || process.env.RAILWAY_VOLUME_MOUNT_PATH);
 }
 
+/** Admin-facing storage status. Omits machine paths. */
+export function storageSummary() {
+  const status = storageStatus();
+  return {
+    state: status.uploadsAtRisk ? ("setup" as const) : ("ok" as const),
+    persistent: status.persistent,
+    onRailway: status.onRailway,
+    volumeMounted: Boolean(process.env.RAILWAY_VOLUME_MOUNT_PATH),
+  };
+}
+
 export function storageStatus() {
   const dataDir = getDataDir();
   const persistent = isPersistentStorage();

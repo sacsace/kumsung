@@ -10,4 +10,6 @@ export type Inquiry = {
   files?: string[];
   message: string;
   createdAt: string;
+  status?: "new" | "read" | "replied";
+  assignee?: string;
 };

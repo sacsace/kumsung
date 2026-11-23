@@ -162,7 +162,7 @@ export function ServicesEditor({
             onChange={(v) => onChange({ ...services, title: v })}
           />
           <Field
-            label="Label"
+            label={ui.servicesFieldLabel}
             value={services.label}
             onChange={(v) => onChange({ ...services, label: v })}
           />
@@ -173,45 +173,45 @@ export function ServicesEditor({
             rows={3}
           />
           <Field
-            label={`${ui.servicesOfferings} title`}
+            label={ui.servicesOfferingsTitle}
             value={services.offeringsTitle}
             onChange={(v) => onChange({ ...services, offeringsTitle: v })}
           />
           <TextArea
-            label={`${ui.servicesOfferings} lead`}
+            label={ui.servicesOfferingsLead}
             value={services.offeringsLead}
             onChange={(v) => onChange({ ...services, offeringsLead: v })}
             rows={2}
           />
           <Field
-            label={`${ui.servicesCategories} title`}
+            label={ui.servicesCategoryTitle}
             value={services.equipmentTitle}
             onChange={(v) => onChange({ ...services, equipmentTitle: v })}
           />
           <TextArea
-            label={`${ui.servicesCategories} lead`}
+            label={ui.servicesCategoryLead}
             value={services.equipmentLead}
             onChange={(v) => onChange({ ...services, equipmentLead: v })}
             rows={2}
           />
           <Field
-            label="CTA title"
+            label={ui.servicesCtaTitle}
             value={services.ctaTitle}
             onChange={(v) => onChange({ ...services, ctaTitle: v })}
           />
           <TextArea
-            label="CTA lead"
+            label={ui.servicesCtaLead}
             value={services.ctaLead}
             onChange={(v) => onChange({ ...services, ctaLead: v })}
             rows={2}
           />
           <Field
-            label="CTA button"
+            label={ui.servicesCtaButton}
             value={services.ctaButton}
             onChange={(v) => onChange({ ...services, ctaButton: v })}
           />
           <Field
-            label="View docs label"
+            label={ui.servicesViewDocs}
             value={services.viewDocs}
             onChange={(v) => onChange({ ...services, viewDocs: v })}
           />

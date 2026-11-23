@@ -34,7 +34,9 @@ function HomeSections() {
           <p className="text-[0.72rem] tracking-[0.16em] text-[var(--signal)] uppercase">
             Kumsung Engineering Private Limited
           </p>
-          <p className="mt-3 text-[1.05rem] leading-relaxed">{t.heroDiscipline}</p>
+          <p className="mt-3 text-[1.05rem] leading-relaxed">
+            {content.hero?.headline?.trim() || t.heroDiscipline}
+          </p>
         </div>
         <div className="flex flex-wrap gap-3">
           <a href="/performance" className="btn btn-primary">

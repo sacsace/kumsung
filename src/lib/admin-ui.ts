@@ -13,7 +13,8 @@ export type AdminSectionId =
   | "gallery"
   | "inquiries"
   | "mail"
-  | "security";
+  | "security"
+  | "system";
 
 export type MenuItem = { id: AdminSectionId; label: string; desc: string };
 export type MenuGroup = { id: string; label: string; items: MenuItem[] };
@@ -38,7 +39,7 @@ const menuGroupsKo: MenuGroup[] = [
     id: "site",
     label: "사이트",
     items: [
-      { id: "hero", label: "히어로", desc: "메인 배너·미디어" },
+      { id: "hero", label: "메인 배너", desc: "홈 문장·슬라이드" },
       { id: "gallery", label: "갤러리", desc: "사진 관리" },
     ],
   },
@@ -58,6 +59,7 @@ const menuGroupsKo: MenuGroup[] = [
       { id: "inquiries", label: "문의 내역", desc: "접수된 문의" },
       { id: "mail", label: "메일 설정", desc: "Google SMTP" },
       { id: "security", label: "보안", desc: "비밀번호 변경" },
+      { id: "system", label: "시스템", desc: "파일 저장소" },
     ],
   },
 ];
@@ -82,7 +84,7 @@ const menuGroupsEn: MenuGroup[] = [
     id: "site",
     label: "Website",
     items: [
-      { id: "hero", label: "Hero", desc: "Main banner & media" },
+      { id: "hero", label: "Main banner", desc: "Home sentence and slides" },
       { id: "gallery", label: "Gallery", desc: "Photo management" },
     ],
   },
@@ -102,6 +104,7 @@ const menuGroupsEn: MenuGroup[] = [
       { id: "inquiries", label: "Inquiries", desc: "Received messages" },
       { id: "mail", label: "Mail", desc: "Google SMTP" },
       { id: "security", label: "Security", desc: "Change password" },
+      { id: "system", label: "System", desc: "File storage" },
     ],
   },
 ];
@@ -126,12 +129,9 @@ export function adminUi(locale: Locale) {
     saving: en ? "Saving…" : "저장 중…",
     saved: en ? "Saved · applied to the site" : "저장됨 · 사이트에 반영됨",
     saveFailed: en ? "Save failed. Please log in again." : "저장 실패. 다시 로그인해 주세요.",
-    storageRiskTitle: en
-      ? "Uploads may be lost on redeploy"
-      : "재배포 시 업로드 이미지가 사라질 수 있습니다",
-    storageRiskBody: en
-      ? "Attach a Railway Volume at /data so client logos and gallery photos persist. Seed images in the deploy image are restored automatically when missing."
-      : "Railway Volume을 /data 경로에 연결하세요. 고객사 로고·갤러리 사진이 유지됩니다. 배포 이미지에 포함된 seed 이미지는 없을 때 자동으로 복구됩니다.",
+    storageOk: en ? "File storage: ready" : "파일 저장소 정상",
+    storageSetup: en ? "File storage: setup needed" : "파일 저장소 설정 필요",
+    storageOpen: en ? "System settings" : "시스템 설정",
     editing: (label: string) =>
       en ? `English · ${label}` : `한국어 · ${label}`,
     loading: en ? "Loading…" : "로딩 중…",
@@ -158,8 +158,19 @@ export function adminUi(locale: Locale) {
     confirmTitle: en ? "Please confirm" : "확인",
     confirmOk: en ? "OK" : "확인",
     confirmCancel: en ? "Cancel" : "취소",
-    applyAdd: en ? "Add" : "추가 반영",
-    applyEdit: en ? "Apply edit" : "수정 반영",
+    applyAdd: en ? "Register" : "등록",
+    applyEdit: en ? "Save changes" : "변경사항 저장",
+    noChanges: en ? "No unsaved changes" : "변경사항 없음",
+    unsaved: en ? "Unsaved changes" : "저장하지 않은 변경사항 있음",
+    savedAt: (time: string) => (en ? `Saved ${time}` : `${time} 저장됨`),
+    preview: en ? "Preview" : "미리보기",
+    discard: en ? "Discard changes" : "변경 취소",
+    unsavedLeave: en
+      ? "There are unsaved changes. Leave without saving?"
+      : "저장하지 않은 변경사항이 있습니다. 저장하지 않고 이동할까요?",
+    publishNote: en
+      ? "Save publishes the change on the site."
+      : "저장하면 사이트에 바로 반영됩니다.",
     total: (n: number) => (en ? `Total ${n}` : `총 ${n}건`),
     totalPeople: (n: number) => (en ? `Total ${n}` : `총 ${n}명`),
     no: "No",
@@ -180,18 +191,30 @@ export function adminUi(locale: Locale) {
     logoHint: en ? "Optional · JPG, PNG, WEBP" : "선택 사항 · JPG, PNG, WEBP",
     logoRemove: en ? "Remove logo" : "로고 제거",
 
-    hero: en ? "Hero" : "히어로",
-    heroSlides: en ? "Hero slides" : "히어로 슬라이드",
+    hero: en ? "Main banner" : "메인 배너",
+    heroSlides: en ? "Banner slides" : "배너 슬라이드",
     heroSlidesHint: en
-      ? "Upload or replace each slide image/video. Changes auto-save and show on the home page."
-      : "슬라이드별 이미지·동영상을 업로드하거나 교체할 수 있습니다. 저장 후 메인 페이지에 바로 반영됩니다.",
+      ? "The home page shows the fallback sentence under the company name. Slide photos and custom sentences are stored here and are not drawn on the current home hero."
+      : "홈에는 회사명 아래 기본 문구가 표시됩니다. 슬라이드 사진과 개별 문구는 여기에 저장되며, 현재 홈 상단 화면에는 나오지 않습니다.",
+    heroFallbackHeadline: en
+      ? "Sentence used when a slide has no text of its own"
+      : "슬라이드에 별도 문구가 없을 때 사용하는 문장",
+    heroFallbackBody: en
+      ? "Supporting sentence used when a slide has no text of its own"
+      : "슬라이드에 별도 문구가 없을 때 사용하는 설명",
+    heroPreviewTitle: en ? "What the home page shows" : "홈에 표시되는 내용",
+    heroCopyDefault: en ? "Use fallback sentence" : "기본 문구 사용",
+    heroCopyCustom: en ? "Use this slide's sentence" : "개별 문구 사용",
+    heroMediaMissing: en ? "No image" : "이미지 미등록",
+    heroMediaFile: en ? "Upload a file" : "파일 업로드",
+    heroMediaLink: en ? "External address" : "외부 이미지 주소",
     heroSlidesEmpty: en
       ? "No slides yet. Add an image or video slide."
       : "등록된 슬라이드가 없습니다. 이미지 또는 동영상 슬라이드를 추가하세요.",
     heroSlideAdd: en ? "Add slide" : "슬라이드 추가",
     heroSlideEdit: en ? "Edit slide" : "슬라이드 수정",
     heroSlideDeleteConfirm: en ? "Delete this hero slide?" : "이 히어로 슬라이드를 삭제할까요?",
-    heroSlideLabel: en ? "Label" : "라벨",
+    heroSlideLabel: en ? "English label above the title" : "상단 영문 표시",
     heroType: en ? "Type" : "유형",
     heroTypeImage: en ? "Image" : "이미지",
     heroTypeVideo: en ? "Video" : "동영상",
@@ -235,6 +258,15 @@ export function adminUi(locale: Locale) {
       ? "Edit page copy, offerings, brands, and product documents shown on /services."
       : "제공 서비스·브랜드·제품 자료를 관리합니다. 저장하면 /services에 바로 반영됩니다.",
     servicesPage: en ? "Page copy" : "페이지 문구",
+    servicesFieldLabel: en ? "English label above the title" : "상단 영문 표시",
+    servicesOfferingsTitle: en ? "Service area title" : "서비스 영역 제목",
+    servicesOfferingsLead: en ? "Service area description" : "서비스 영역 설명",
+    servicesCategoryTitle: en ? "Category title" : "분류 제목",
+    servicesCategoryLead: en ? "Category description" : "분류 설명",
+    servicesCtaTitle: en ? "Inquiry heading" : "문의 안내 제목",
+    servicesCtaLead: en ? "Inquiry description" : "문의 안내 설명",
+    servicesCtaButton: en ? "Inquiry button" : "문의 버튼 문구",
+    servicesViewDocs: en ? "Document button" : "자료 보기 버튼 문구",
     servicesOfferings: en ? "Offerings" : "제공 서비스",
     servicesBrands: en ? "Brands & products" : "브랜드·제품",
     servicesCategories: en ? "Categories" : "분류",
@@ -294,8 +326,11 @@ export function adminUi(locale: Locale) {
     teamDeleteConfirm: en ? "Delete this member?" : "이 팀원을 삭제할까요?",
     gallery: en ? "Gallery" : "갤러리",
     galleryHint: en
-      ? "Save after add/edit — applied to the gallery."
-      : "등록·수정 후 저장하면 갤러리에 바로 반영됩니다.",
+      ? "Register a photo, then use Save in the header to publish it."
+      : "사진을 등록한 뒤 상단 저장을 누르면 갤러리에 반영됩니다.",
+    galleryFileHint: en
+      ? "JPG, PNG, WEBP · max 8MB · a wide photo works best"
+      : "JPG, PNG, WEBP · 최대 8MB · 가로로 긴 사진을 권장합니다",
     galleryEmpty: en ? "No photos yet. Use Add to create one." : "등록된 사진이 없습니다. 등록 버튼으로 추가하세요.",
     galleryCreate: en ? "Add photo" : "사진 등록",
     galleryEdit: en ? "Edit photo" : "사진 수정",
@@ -323,12 +358,10 @@ export function adminUi(locale: Locale) {
       employees: en ? "Employees" : "임직원",
       businessType: en ? "Business type" : "업종",
       businessItem: en ? "Business scope" : "사업 내용",
-      branchIndia: en ? "Registration Office" : "Registration Office",
-      branchIndiaMapEmbed: en
-        ? "Registration Office map embed URL"
-        : "Registration Office 지도 embed URL",
-      chennaiOffice: en ? "Chennai office" : "첸나이 사무실",
-      chennaiMapEmbed: en ? "Chennai map embed URL" : "첸나이 지도 embed URL",
+      branchIndia: en ? "Visit note" : "방문 안내",
+      branchIndiaMapEmbed: en ? "Visit-note map address" : "방문 안내 지도 삽입 주소",
+      chennaiOffice: en ? "Office address" : "사무실 주소",
+      chennaiMapEmbed: en ? "Map embed address" : "지도 삽입 주소",
       cin: "CIN",
       pan: "PAN",
       tan: "TAN",
@@ -353,6 +386,30 @@ export function adminUi(locale: Locale) {
     inquiriesEmpty: en ? "No inquiries yet." : "접수된 문의가 없습니다.",
     inquiriesRefresh: en ? "Refresh" : "새로고침",
     inquiriesDelete: en ? "Delete" : "삭제",
+    inquiryStatus: en ? "Status" : "상태",
+    inquiryAssignee: en ? "Owner" : "담당자",
+    inquiryStatusNew: en ? "New" : "신규",
+    inquiryStatusRead: en ? "Seen" : "확인",
+    inquiryStatusReplied: en ? "Replied" : "답변 완료",
+    systemTitle: en ? "File storage" : "파일 저장소",
+    systemOk: en
+      ? "Uploads are stored on a persistent path and remain after a restart."
+      : "업로드 파일은 유지되는 저장 경로에 있습니다.",
+    systemLocal: en
+      ? "This environment uses the project data folder."
+      : "이 환경은 프로젝트의 data 폴더를 사용합니다.",
+    systemSetup: en
+      ? "No persistent volume is connected. Uploaded images can disappear on the next deploy."
+      : "영구 저장소가 연결되어 있지 않습니다. 업로드한 이미지는 다음 배포 때 사라질 수 있습니다.",
+    systemHow: en
+      ? "On Railway, add a Volume and mount it at /data, then redeploy. This screen changes to Ready when the volume is connected. Do not mount it at /app/data."
+      : "Railway에서 Volume을 추가하고 마운트 경로를 /data 로 지정한 뒤 다시 배포하세요. 연결되면 이 화면이 정상으로 바뀝니다. /app/data 에는 연결하지 마세요.",
+    systemBackup: en
+      ? "No backup time is recorded."
+      : "마지막 백업 시각은 기록되어 있지 않습니다.",
+    visitsNote: en
+      ? "Visits to the admin pages are not counted."
+      : "관리자 화면 방문은 집계하지 않습니다.",
     inquiriesDeleteConfirm: en ? "Delete this inquiry?" : "이 문의를 삭제할까요?",
     inquiriesLoading: en ? "Loading inquiries…" : "문의 불러오는 중…",
     inquiryDeleteConfirm: en ? "Delete this inquiry?" : "이 문의를 삭제할까요?",

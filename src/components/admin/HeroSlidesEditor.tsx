@@ -10,12 +10,19 @@ function emptySlide(locale: "ko" | "en"): HeroSlide {
     type: "image",
     src: "",
     label: "",
-    brand: "Chicago Pneumatic",
+    brand: "",
     headline: "",
     subheadline: "",
-    ctaLabel: locale === "ko" ? "제품 보기" : "View Products",
-    ctaHref: "/services/chicago-pneumatic",
+    ctaLabel: locale === "ko" ? "프로젝트 문의" : "Project inquiry",
+    ctaHref: "/contact#inquiry",
+    copyMode: "default",
   };
+}
+
+function shownHeadline(slide: HeroSlide, fallback: string) {
+  if (slide.copyMode === "custom") return slide.headline;
+  if (slide.copyMode === "default" || !slide.headline.trim()) return fallback;
+  return slide.headline;
 }
 
 function isVideoUrl(src: string) {
@@ -42,6 +49,7 @@ export function HeroSlidesEditor({
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState("");
   const [pendingDelete, setPendingDelete] = useState<number | null>(null);
+  const [mediaMode, setMediaMode] = useState<"file" | "url">("file");
   const inputRef = useRef<HTMLInputElement>(null);
 
   function commitSlides(nextSlides: HeroSlide[]) {
@@ -65,7 +73,11 @@ export function HeroSlidesEditor({
     setMode("edit");
     onModeChange?.("edit");
     setEditingIndex(index);
-    setDraft({ ...slides[index] });
+    setDraft({
+      ...slides[index],
+      copyMode: slides[index].copyMode || (slides[index].headline.trim() ? "custom" : "default"),
+    });
+    setMediaMode(slides[index].src.startsWith("http") ? "url" : "file");
     setUploadError("");
   }
 
@@ -208,8 +220,8 @@ export function HeroSlidesEditor({
                           />
                         )
                       ) : (
-                        <div className="flex h-full items-center justify-center text-[10px] text-[var(--muted)]">
-                          {ui.none}
+                        <div className="flex h-full items-center justify-center px-1 text-center text-[10px] leading-tight text-[var(--muted)]">
+                          {ui.heroMediaMissing}
                         </div>
                       )}
                     </div>
@@ -218,7 +230,7 @@ export function HeroSlidesEditor({
                     {slide.type === "video" ? ui.heroTypeVideo : ui.heroTypeImage}
                   </td>
                   <td className="max-w-[14rem] truncate px-3 py-2.5 font-medium text-[var(--ink)]">
-                    {slide.headline || slide.label || ui.noTitle}
+                    {shownHeadline(slide, hero.headline) || ui.noTitle}
                   </td>
                   <td className="hidden max-w-[10rem] truncate px-3 py-2.5 text-[var(--muted)] md:table-cell">
                     {slide.brand || "—"}
@@ -272,6 +284,22 @@ export function HeroSlidesEditor({
           <div className="grid gap-4 lg:grid-cols-[240px_1fr]">
             <div className="grid gap-2">
               <p className="text-sm font-medium text-[var(--ink)]">{ui.heroMedia}</p>
+              <div className="flex border border-[var(--line)] bg-white text-xs">
+                <button
+                  type="button"
+                  onClick={() => setMediaMode("file")}
+                  className={`flex-1 px-2 py-1.5 ${mediaMode === "file" ? "bg-[var(--ink)] text-white" : "text-[var(--muted)]"}`}
+                >
+                  {ui.heroMediaFile}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMediaMode("url")}
+                  className={`flex-1 px-2 py-1.5 ${mediaMode === "url" ? "bg-[var(--ink)] text-white" : "text-[var(--muted)]"}`}
+                >
+                  {ui.heroMediaLink}
+                </button>
+              </div>
               <button
                 type="button"
                 onClick={() => inputRef.current?.click()}
@@ -348,6 +376,7 @@ export function HeroSlidesEditor({
                 </select>
               </label>
 
+              {mediaMode === "url" ? (
               <label className="grid gap-1.5">
                 <span className="text-sm font-medium text-[var(--ink)]">{ui.heroMediaUrl}</span>
                 <input
@@ -362,81 +391,64 @@ export function HeroSlidesEditor({
                     }));
                   }}
                   className="border border-[var(--line)] bg-white px-3 py-2 text-sm"
-                  placeholder="/images/hero/... or /uploads/..."
+                  placeholder="https://"
                 />
               </label>
+              ) : null}
 
-              <label className="grid gap-1.5">
-                <span className="text-sm font-medium text-[var(--ink)]">{ui.brand}</span>
-                <input
-                  value={draft.brand}
-                  onChange={(e) =>
-                    setDraft((prev) => ({ ...prev, brand: e.target.value }))
-                  }
-                  className="border border-[var(--line)] bg-white px-3 py-2 text-sm"
-                />
-              </label>
+              <div className="flex border border-[var(--line)] bg-white text-sm">
+                <button
+                  type="button"
+                  onClick={() => setDraft((prev) => ({ ...prev, copyMode: "default" }))}
+                  className={`flex-1 px-3 py-2 ${draft.copyMode !== "custom" ? "bg-[var(--ink)] text-white" : "text-[var(--muted)]"}`}
+                >
+                  {ui.heroCopyDefault}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDraft((prev) => ({ ...prev, copyMode: "custom" }))}
+                  className={`flex-1 px-3 py-2 ${draft.copyMode === "custom" ? "bg-[var(--ink)] text-white" : "text-[var(--muted)]"}`}
+                >
+                  {ui.heroCopyCustom}
+                </button>
+              </div>
+
+              {draft.copyMode === "custom" ? (
+                <>
+                  <label className="grid gap-1.5">
+                    <span className="text-sm font-medium text-[var(--ink)]">{ui.headline}</span>
+                    <input
+                      value={draft.headline}
+                      onChange={(e) => setDraft((prev) => ({ ...prev, headline: e.target.value }))}
+                      className="border border-[var(--line)] bg-white px-3 py-2 text-sm"
+                    />
+                  </label>
+                  <label className="grid gap-1.5">
+                    <span className="text-sm font-medium text-[var(--ink)]">{ui.subheadline}</span>
+                    <textarea
+                      value={draft.subheadline}
+                      onChange={(e) => setDraft((prev) => ({ ...prev, subheadline: e.target.value }))}
+                      rows={3}
+                      className="border border-[var(--line)] bg-white px-3 py-2 text-sm"
+                    />
+                  </label>
+                </>
+              ) : (
+                <p className="border border-[var(--line)] bg-white px-3 py-2 text-sm text-[var(--muted)]">
+                  {hero.headline || ui.noTitle}
+                </p>
+              )}
 
               <label className="grid gap-1.5">
                 <span className="text-sm font-medium text-[var(--ink)]">{ui.heroSlideLabel}</span>
                 <input
                   value={draft.label}
-                  onChange={(e) =>
-                    setDraft((prev) => ({ ...prev, label: e.target.value }))
-                  }
+                  onChange={(e) => setDraft((prev) => ({ ...prev, label: e.target.value }))}
                   className="border border-[var(--line)] bg-white px-3 py-2 text-sm"
                 />
               </label>
 
-              <label className="grid gap-1.5">
-                <span className="text-sm font-medium text-[var(--ink)]">{ui.headline}</span>
-                <input
-                  value={draft.headline}
-                  onChange={(e) =>
-                    setDraft((prev) => ({ ...prev, headline: e.target.value }))
-                  }
-                  className="border border-[var(--line)] bg-white px-3 py-2 text-sm"
-                />
-              </label>
-
-              <label className="grid gap-1.5">
-                <span className="text-sm font-medium text-[var(--ink)]">{ui.subheadline}</span>
-                <textarea
-                  value={draft.subheadline}
-                  onChange={(e) =>
-                    setDraft((prev) => ({ ...prev, subheadline: e.target.value }))
-                  }
-                  rows={3}
-                  className="border border-[var(--line)] bg-white px-3 py-2 text-sm"
-                />
-              </label>
-
-              <div className="grid gap-3 sm:grid-cols-2">
-                <label className="grid gap-1.5">
-                  <span className="text-sm font-medium text-[var(--ink)]">{ui.ctaLabel}</span>
-                  <input
-                    value={draft.ctaLabel}
-                    onChange={(e) =>
-                      setDraft((prev) => ({ ...prev, ctaLabel: e.target.value }))
-                    }
-                    className="border border-[var(--line)] bg-white px-3 py-2 text-sm"
-                  />
-                </label>
-                <label className="grid gap-1.5">
-                  <span className="text-sm font-medium text-[var(--ink)]">{ui.ctaHref}</span>
-                  <input
-                    value={draft.ctaHref}
-                    onChange={(e) =>
-                      setDraft((prev) => ({ ...prev, ctaHref: e.target.value }))
-                    }
-                    className="border border-[var(--line)] bg-white px-3 py-2 text-sm"
-                  />
-                </label>
-              </div>
-
-              {uploadError ? (
-                <p className="text-sm text-red-600">{uploadError}</p>
-              ) : null}
+              {uploadError ? <p className="text-sm text-red-600">{uploadError}</p> : null}
 
               <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
                 {mode === "edit" && editingIndex !== null ? (

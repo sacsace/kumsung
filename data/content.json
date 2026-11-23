@@ -3,7 +3,7 @@
     "hero": {
       "brand": "Kumsung Engineering",
       "headline": "기술과 신뢰로 완성하는 공간",
-      "subheadline": "고객의 구상에 현장에 맞는 기술을 더합니다. 공간의 기능과 설비의 효율, 세부 마감까지 고려해 오래도록 가치를 지니는 공간을 만들어갑니다.",
+      "subheadline": "고객의 구상에 현장에 맞는 기술을 더합니다. 공간의 기능과 세부 마감까지 고려해 오래도록 가치를 지니는 공간을 만들어갑니다.",
       "ctaLabel": "회사 소개",
       "ctaHref": "/about",
       "videoUrl": "",
@@ -118,7 +118,7 @@
       "offeringsTitle": "수행하는 일",
       "offeringsLead": "각 업무는 상담으로 범위를 정한 뒤, 해당 프로젝트 문의로 이어집니다.",
       "equipmentLabel": "Studies",
-      "equipmentTitle": "분야별 설비",
+      "equipmentTitle": "작업의 결",
       "equipmentLead": "\t사용 목적과 운영 조건에 맞는 설비를 검토합니다. 성능과 설치 환경, 유지관리 요건을 함께 고려해 적합한 구성을 제안합니다.",
       "viewDocs": "관련 자료 보기",
       "ctaTitle": "프로젝트 상담",

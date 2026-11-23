@@ -153,6 +153,38 @@ export async function POST(request: Request) {
   });
 }
 
+export async function PATCH(request: Request) {
+  if (!(await isAuthenticated())) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const body = await request.json().catch(() => null);
+  const id = body && typeof body.id === "string" ? body.id : "";
+  if (!id) {
+    return NextResponse.json({ error: "Missing id" }, { status: 400 });
+  }
+
+  const status = body.status;
+  const nextStatus =
+    status === "new" || status === "read" || status === "replied" ? status : undefined;
+  const assignee = typeof body.assignee === "string" ? body.assignee.trim().slice(0, 80) : undefined;
+
+  const items = await readInquiries();
+  const index = items.findIndex((item) => item.id === id);
+  if (index < 0) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+
+  const current = items[index];
+  items[index] = {
+    ...current,
+    ...(nextStatus ? { status: nextStatus } : {}),
+    ...(assignee !== undefined ? { assignee } : {}),
+  };
+  await writeInquiries(items);
+  return NextResponse.json(items[index]);
+}
+
 export async function DELETE(request: Request) {
   if (!(await isAuthenticated())) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
