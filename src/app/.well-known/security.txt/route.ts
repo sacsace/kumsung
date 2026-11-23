@@ -4,7 +4,7 @@ export function GET() {
   const siteUrl = getSiteUrl();
   const expires = "2027-12-31T23:59:59.000Z";
   const body = [
-    `Contact: mailto:hyun.hs@hksc.in`,
+    `Contact: mailto:admin@kumsungindia.com`,
     `Contact: ${siteUrl}/contact`,
     `Preferred-Languages: en, ko`,
     `Canonical: ${siteUrl}/.well-known/security.txt`,

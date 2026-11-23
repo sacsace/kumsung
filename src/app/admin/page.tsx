@@ -1051,7 +1051,7 @@ function MailPanel({ ui }: { ui: AdminUi }) {
   const [hasPassword, setHasPassword] = useState(false);
   const [fromName, setFromName] = useState("Kumsung Engineering Private Limited");
   const [fromEmail, setFromEmail] = useState("");
-  const [to, setTo] = useState("team@hksc.in");
+  const [to, setTo] = useState("admin@kumsungindia.com");
 
   useEffect(() => {
     void (async () => {
@@ -1068,7 +1068,7 @@ function MailPanel({ ui }: { ui: AdminUi }) {
       setHasPassword(Boolean(data.hasPassword));
       setFromName(data.fromName || "Kumsung Engineering Private Limited");
       setFromEmail(data.fromEmail || "");
-      setTo(data.to || "team@hksc.in");
+      setTo(data.to || "admin@kumsungindia.com");
     })();
   }, []);
 
@@ -1233,7 +1233,7 @@ function MailPanel({ ui }: { ui: AdminUi }) {
             value={to}
             onChange={(e) => setTo(e.target.value)}
             className="mt-1.5 w-full border border-[var(--line)] px-3 py-2 outline-none focus:border-[var(--navy)]"
-            placeholder="team@hksc.in"
+            placeholder="admin@kumsungindia.com"
             required={enabled}
           />
         </label>
@@ -1399,7 +1399,13 @@ function InquiriesPanel({ ui }: { ui: AdminUi }) {
               {selected.email}
               {selected.phone ? ` · ${selected.phone}` : ""}
               {selected.company ? ` · ${selected.company}` : ""}
+              {selected.location ? ` · ${selected.location}` : ""}
+              {selected.service ? ` · ${selected.service}` : ""}
+              {selected.schedule ? ` · ${selected.schedule}` : ""}
             </p>
+            {selected.files?.length ? (
+              <p className="text-sm text-[var(--muted)]">{selected.files.join(", ")}</p>
+            ) : null}
             <time className="text-xs text-[var(--muted)]">{new Date(selected.createdAt).toLocaleString()}</time>
             <p className="whitespace-pre-wrap text-sm leading-relaxed">{selected.message}</p>
             <div className="flex items-center justify-between gap-2">

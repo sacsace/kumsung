@@ -118,7 +118,7 @@ export function Header({ variant = "overlay" }: { variant?: "overlay" | "solid" 
                 : "bg-[var(--navy)] !text-white hover:bg-[var(--navy-deep)]"
             }`}
           >
-            {t.nav.contact}
+            {t.nav.clients}
             <span aria-hidden className="text-[0.85em] leading-none">
               ↗
             </span>
@@ -176,7 +176,7 @@ export function Header({ variant = "overlay" }: { variant?: "overlay" | "solid" 
               className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-full bg-[var(--navy)] px-4 py-2.5 text-[0.866rem] font-semibold !text-white"
               onClick={() => setOpen(false)}
             >
-              {t.nav.contact}
+              {t.nav.clients}
               <span aria-hidden>↗</span>
             </a>
             <button

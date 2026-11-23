@@ -16,7 +16,12 @@ export function ContactForm() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [company, setCompany] = useState("");
+  const [location, setLocation] = useState("");
+  const [service, setService] = useState("");
+  const [schedule, setSchedule] = useState("");
   const [message, setMessage] = useState("");
+  const [files, setFiles] = useState<File[]>([]);
+  const [consent, setConsent] = useState(false);
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
@@ -32,11 +37,39 @@ export function ContactForm() {
     setSending(true);
     setError("");
     setDone(false);
+    if (!consent) {
+      setSending(false);
+      setError(t.contactForm.error);
+      return;
+    }
+    for (const file of files) {
+      const ext = file.name.toLowerCase().split(".").pop() || "";
+      if (!["jpg", "jpeg", "png", "webp", "pdf"].includes(ext)) {
+        setSending(false);
+        setError(t.contactForm.fileType);
+        return;
+      }
+      if (file.size > 8 * 1024 * 1024) {
+        setSending(false);
+        setError(t.contactForm.fileTooLarge);
+        return;
+      }
+    }
+
+    const form = new FormData();
+    form.set("name", name);
+    form.set("email", email);
+    form.set("phone", phone);
+    form.set("company", company);
+    form.set("location", location);
+    form.set("service", service);
+    form.set("schedule", schedule);
+    form.set("message", message);
+    files.forEach((file) => form.append("files", file));
 
     const res = await fetch("/api/inquiries", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, phone, company, message }),
+      body: form,
     });
 
     setSending(false);
@@ -52,6 +85,11 @@ export function ContactForm() {
     setPhone("");
     setCompany("");
     setMessage("");
+    setLocation("");
+    setService("");
+    setSchedule("");
+    setFiles([]);
+    setConsent(false);
   }
 
   if (!mounted) {
@@ -124,6 +162,36 @@ export function ContactForm() {
             placeholder={t.contactForm.companyPlaceholder}
           />
         </label>
+        <label className="block text-sm text-[var(--ink)]">
+          {t.contactForm.location}
+          <input
+            name="location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className={fieldClass}
+            placeholder={t.contactForm.locationPlaceholder}
+          />
+        </label>
+        <label className="block text-sm text-[var(--ink)]">
+          {t.contactForm.service}
+          <input
+            name="service"
+            value={service}
+            onChange={(e) => setService(e.target.value)}
+            className={fieldClass}
+            placeholder={t.contactForm.servicePlaceholder}
+          />
+        </label>
+        <label className="block text-sm text-[var(--ink)] sm:col-span-2">
+          {t.contactForm.schedule}
+          <input
+            name="schedule"
+            value={schedule}
+            onChange={(e) => setSchedule(e.target.value)}
+            className={fieldClass}
+            placeholder={t.contactForm.schedulePlaceholder}
+          />
+        </label>
       </div>
 
       <label className="block text-sm text-[var(--ink)]">
@@ -131,12 +199,36 @@ export function ContactForm() {
         <textarea
           required
           name="message"
-          rows={5}
+          rows={7}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           className={`${fieldClass} resize-y`}
           placeholder={t.contactForm.messagePlaceholder}
         />
+      </label>
+
+      <label className="block text-sm text-[var(--ink)]">
+        {t.contactForm.file}
+        <input
+          type="file"
+          name="files"
+          accept="image/jpeg,image/png,image/webp,application/pdf"
+          multiple
+          onChange={(e) => setFiles(Array.from(e.target.files || []).slice(0, 3))}
+          className={`${fieldClass} file:mr-3 file:border-0 file:bg-transparent file:text-sm file:font-semibold`}
+        />
+        <span className="mt-1 block text-xs text-[var(--muted)]">{t.contactForm.fileHint}</span>
+      </label>
+
+      <label className="flex items-start gap-2 text-sm text-[var(--ink)]">
+        <input
+          type="checkbox"
+          required
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+          className="mt-1"
+        />
+        <span>{t.contactForm.privacyConsent}</span>
       </label>
 
       {error && <p className="text-sm text-red-600">{error}</p>}

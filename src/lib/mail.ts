@@ -21,7 +21,7 @@ export type PublicMailSettings = Omit<MailSettings, "pass"> & {
 };
 
 /** Default inbox for contact-form notifications */
-export const INQUIRY_MAIL_TO = "team@hksc.in";
+export const INQUIRY_MAIL_TO = "admin@kumsungindia.com";
 
 const DEFAULTS: MailSettings = {
   enabled: false,
@@ -138,6 +138,10 @@ function formatInquiryMail(inquiry: Inquiry) {
     `이메일: ${inquiry.email}`,
     `연락처: ${inquiry.phone || "-"}`,
     `회사: ${inquiry.company || "-"}`,
+    `프로젝트 위치: ${inquiry.location || "-"}`,
+    `요청 업무: ${inquiry.service || "-"}`,
+    `희망 일정: ${inquiry.schedule || "-"}`,
+    `첨부: ${(inquiry.files || []).join(", ") || "-"}`,
     `일시: ${inquiry.createdAt}`,
     "",
     "내용:",
@@ -152,6 +156,10 @@ function formatInquiryMail(inquiry: Inquiry) {
         <tr><td style="padding:4px 12px 4px 0;color:#666">이메일</td><td>${escapeHtml(inquiry.email)}</td></tr>
         <tr><td style="padding:4px 12px 4px 0;color:#666">연락처</td><td>${escapeHtml(inquiry.phone || "-")}</td></tr>
         <tr><td style="padding:4px 12px 4px 0;color:#666">회사</td><td>${escapeHtml(inquiry.company || "-")}</td></tr>
+        <tr><td style="padding:4px 12px 4px 0;color:#666">프로젝트 위치</td><td>${escapeHtml(inquiry.location || "-")}</td></tr>
+        <tr><td style="padding:4px 12px 4px 0;color:#666">요청 업무</td><td>${escapeHtml(inquiry.service || "-")}</td></tr>
+        <tr><td style="padding:4px 12px 4px 0;color:#666">희망 일정</td><td>${escapeHtml(inquiry.schedule || "-")}</td></tr>
+        <tr><td style="padding:4px 12px 4px 0;color:#666">첨부</td><td>${escapeHtml((inquiry.files || []).join(", ") || "-")}</td></tr>
         <tr><td style="padding:4px 12px 4px 0;color:#666">일시</td><td>${escapeHtml(inquiry.createdAt)}</td></tr>
       </table>
       <p style="color:#666;margin:0 0 6px">내용</p>
@@ -170,7 +178,10 @@ function escapeHtml(value: string) {
     .replace(/"/g, "&quot;");
 }
 
-export async function sendInquiryEmail(inquiry: Inquiry): Promise<{ ok: true } | { ok: false; error: string }> {
+export async function sendInquiryEmail(
+  inquiry: Inquiry,
+  attachments: Array<{ filename: string; content: Buffer; contentType: string }> = [],
+): Promise<{ ok: true } | { ok: false; error: string }> {
   const settings = await readMailSettings();
   if (!isReady(settings)) {
     return { ok: false, error: "Mail is not configured" };
@@ -198,6 +209,7 @@ export async function sendInquiryEmail(inquiry: Inquiry): Promise<{ ok: true } |
       subject,
       text,
       html,
+      attachments,
     });
 
     return { ok: true };

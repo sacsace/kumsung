@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { ApplicationModal } from "@/components/ApplicationModal";
 import { LanguageProvider, useLanguage } from "@/components/LanguageProvider";
 import { PageIntro } from "@/components/PageIntro";
 import { SiteFrame } from "@/components/SiteFrame";
@@ -14,10 +12,13 @@ const ctaBtnClass =
   "inline-flex items-center justify-center border border-[var(--ink)] px-4 py-2 text-sm text-[var(--ink)] hover:bg-[var(--ink)] hover:!text-[var(--bg)]";
 
 function ServicesSections() {
-  const { locale, content, t } = useLanguage();
-  const [applyOpen, setApplyOpen] = useState(false);
+  const { locale, content } = useLanguage();
   const copy = content.services || defaultServicesContent(locale);
   const extra = servicesPageExtraUi[locale];
+  const categories = (copy.categories || []).filter(
+    (category) => (category.items || []).length > 0 || Boolean(category.file?.trim()),
+  );
+  const showCatalog = copy.brands.length > 0 || categories.length > 0;
 
   return (
     <SiteFrame>
@@ -42,12 +43,16 @@ function ServicesSections() {
                   <p className="mt-2.5 text-sm leading-relaxed text-[var(--muted)]">
                     {item.description}
                   </p>
+                  <a href="/contact#inquiry" className="mt-4 inline-flex text-sm font-semibold text-[var(--signal)]">
+                    {copy.ctaButton}
+                  </a>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
+        {showCatalog ? (
         <section className="section bg-[#f5f7f9]">
           <div className="container">
             <p className="section-label">{copy.equipmentLabel}</p>
@@ -91,7 +96,7 @@ function ServicesSections() {
             </div>
 
             <div className="mt-10 space-y-4">
-              {copy.categories.map((category) => (
+              {categories.map((category) => (
                 <article
                   key={category.id}
                   id={category.id}
@@ -138,6 +143,7 @@ function ServicesSections() {
             </div>
           </div>
         </section>
+        ) : null}
 
         <section className="border-t border-[var(--line)] py-12">
           <div className="container flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
@@ -149,13 +155,9 @@ function ServicesSections() {
               <a href="/contact#inquiry" className={ctaBtnClass}>
                 {copy.ctaButton}
               </a>
-              <button type="button" onClick={() => setApplyOpen(true)} className={ctaBtnClass}>
-                {t.openApplyCta}
-              </button>
             </div>
           </div>
         </section>
-      <ApplicationModal open={applyOpen} onClose={() => setApplyOpen(false)} />
     </SiteFrame>
   );
 }

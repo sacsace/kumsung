@@ -24,7 +24,10 @@ export function SiteFrame({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   const [applyOpen, setApplyOpen] = useState(false);
   const [hash, setHash] = useState("");
-  const links = siteNav(t);
+  const hasTeam = Boolean(
+    content.team?.ceo?.name?.trim() || content.team?.members?.some((member) => member.name?.trim()),
+  );
+  const links = siteNav(t, { includeTeam: hasTeam });
 
   useEffect(() => {
     setOpen(false);
@@ -158,9 +161,20 @@ export function SiteFrame({ children }: { children: React.ReactNode }) {
         <main className="flex-1">{children}</main>
         <footer className="border-t border-[var(--line)] px-[var(--page-x)] py-6 text-[0.75rem] text-[var(--muted)]">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <p>
-              © {new Date().getFullYear()} Kumsung Engineering Private Limited
-            </p>
+            <div>
+              <p>© {new Date().getFullYear()} Kumsung Engineering Private Limited</p>
+              <p className="mt-1">
+                {t.developedBy}{" "}
+                <a
+                  href="https://www.msventures.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[var(--ink)]"
+                >
+                  Minsub Ventures
+                </a>
+              </p>
+            </div>
             <p className="flex flex-wrap gap-x-4 gap-y-1">
               <a href="/admin" className="hover:text-[var(--ink)]">
                 {t.footerAdmin}

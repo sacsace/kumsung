@@ -5,6 +5,7 @@ import { LanguageProvider, useLanguage } from "@/components/LanguageProvider";
 import { PageIntro } from "@/components/PageIntro";
 import { SiteFrame } from "@/components/SiteFrame";
 import { SafeSearchInput } from "@/components/SafeSearchInput";
+import { isSamplePerformance } from "@/lib/public-content";
 import {
   dateSortKey,
   type Locale,
@@ -48,7 +49,8 @@ function PerformanceSections() {
   const allRows = useMemo(
     () =>
       (content.performances || []).filter(
-        (row) => row.date?.trim() || row.detail?.trim() || row.client?.trim(),
+        (row) =>
+          (row.date?.trim() || row.detail?.trim() || row.client?.trim()) && !isSamplePerformance(row),
       ),
     [content.performances],
   );

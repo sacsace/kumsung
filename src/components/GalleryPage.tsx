@@ -7,6 +7,7 @@ import { PageIntro } from "@/components/PageIntro";
 import { SiteFrame } from "@/components/SiteFrame";
 import { SafeSearchInput } from "@/components/SafeSearchInput";
 import { ViewModeToggle } from "@/components/ViewModeToggle";
+import { isTestGalleryItem } from "@/lib/public-content";
 import type { SiteContent } from "@/lib/types";
 
 function GallerySections() {
@@ -14,7 +15,7 @@ function GallerySections() {
   const { gallery } = content;
   const [query, setQuery] = useState("");
   const [viewMode, setViewMode] = useState<GalleryViewMode>("card");
-  const allItems = gallery?.items || [];
+  const allItems = (gallery?.items || []).filter((item) => !isTestGalleryItem(item));
 
   const items = useMemo(() => {
     const q = query.trim().toLowerCase();

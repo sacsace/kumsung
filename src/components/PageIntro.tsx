@@ -12,7 +12,7 @@ export function PageIntro({
   return (
       <header className="relative overflow-hidden border-b border-[var(--ink)] px-[var(--page-x)] py-12 md:py-16">
       <span
-        className="pointer-events-none absolute -right-[0.18em] -bottom-[0.28em] font-display text-[clamp(8rem,22vw,16rem)] leading-none font-medium tracking-[-0.08em] text-[var(--signal)] select-none"
+        className="pointer-events-none absolute -right-[0.18em] -bottom-[0.28em] font-display text-[clamp(6rem,14vw,11rem)] leading-none font-medium tracking-[-0.08em] text-[var(--signal)] select-none"
         aria-hidden
       >
         {title.slice(0, 1)}

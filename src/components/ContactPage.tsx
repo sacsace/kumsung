@@ -15,10 +15,9 @@ function ContactSections() {
     <SiteFrame>
         <PageIntro eyebrow={t.contactLabel} title={t.contactTitle} lead={t.contactLead} />
 
-        <section id="inquiry" className="section scroll-mt-24 bg-white text-[var(--ink)]">
-          <div className="container grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <section id="inquiry" className="scroll-mt-24 bg-white px-[var(--page-x)] py-12 text-[var(--ink)] md:py-16">
+          <div className="grid items-start gap-10 lg:grid-cols-[minmax(16rem,22rem)_minmax(0,1fr)] lg:gap-16">
             <div id="visit" className="scroll-mt-24 space-y-4 text-sm text-[var(--muted)]">
-              <h2 className="font-display text-3xl tracking-[-0.04em] text-[var(--signal)]">{t.nav.contact}</h2>
               {company.branchIndia?.trim() ? (
                 <div>
                   <p className="text-xs font-semibold tracking-wide text-[var(--steel)]">
@@ -34,6 +33,9 @@ function ContactSections() {
                   </p>
                   <p className="mt-1 leading-relaxed text-[var(--ink)]">{company.chennaiOffice}</p>
                 </div>
+              ) : null}
+              {company.phone?.trim() ? (
+                <p className="font-semibold text-[var(--ink)]">{company.phone}</p>
               ) : null}
               {company.email ? (
                 <p>
@@ -56,19 +58,33 @@ function ContactSections() {
             <ContactForm />
           </div>
 
-          {company.branchIndiaMapEmbed?.trim() || company.chennaiMapEmbed?.trim() ? (
-          <div className="container">
+          {company.chennaiOffice?.trim() || company.chennaiMapEmbed?.trim() ? (
             <OfficeMaps
-              bangaloreLabel={t.fields.branchIndia}
-              bangaloreAddress={company.branchIndia}
-              bangaloreMapEmbed={company.branchIndiaMapEmbed}
+              bangaloreLabel=""
+              bangaloreAddress=""
               chennaiLabel={t.fields.chennaiOffice}
               chennaiAddress={company.chennaiOffice}
               chennaiMapEmbed={company.chennaiMapEmbed}
               openInMapsLabel={t.openInMaps}
             />
-          </div>
           ) : null}
+
+          <div id="privacy" className="mt-12 grid gap-8 border-t border-[var(--line)] pt-8 md:grid-cols-2">
+            <div>
+              <h2 className="font-display text-2xl tracking-[-0.04em]">{t.contactForm.stepsTitle}</h2>
+              <ol className="mt-4 space-y-2 text-sm leading-relaxed">
+                {t.contactForm.steps.map((step, index) => (
+                  <li key={step}>
+                    {index + 1}. {step}
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div>
+              <h2 className="font-display text-2xl tracking-[-0.04em]">{t.contactForm.privacyTitle}</h2>
+              <p className="mt-4 text-sm leading-relaxed text-[var(--muted)]">{t.contactForm.privacyBody}</p>
+            </div>
+          </div>
         </section>
     </SiteFrame>
   );

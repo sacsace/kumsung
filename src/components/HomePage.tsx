@@ -5,15 +5,26 @@ import { sortPerformances } from "@/lib/types";
 import { LanguageProvider, useLanguage } from "@/components/LanguageProvider";
 import { LetterMasthead } from "@/components/LetterMasthead";
 import { SiteFrame } from "@/components/SiteFrame";
+import { isSamplePerformance } from "@/lib/public-content";
 import { siteNav } from "@/lib/ui";
 
 function HomeSections() {
   const { content, t } = useLanguage();
   const rows = sortPerformances(content.performances || [], true).filter(
-    (row) => row.date?.trim() || row.detail?.trim() || row.client?.trim(),
+    (row) =>
+      (row.date?.trim() || row.detail?.trim() || row.client?.trim()) && !isSamplePerformance(row),
   );
-  const essay = (content.greeting?.body || t.studioStatement).split(/\n\n+/).filter(Boolean);
-  const contents = siteNav(t).filter((item) => item.href !== "/");
+  const note =
+    (content.greeting?.body || t.studioStatement)
+      .split(/\n+/)
+      .map((part) => part.trim())
+      .filter(Boolean)
+      .slice(0, 2)
+      .join(" ") || t.studioStatement;
+  const hasTeam = Boolean(
+    content.team?.ceo?.name?.trim() || content.team?.members?.some((member) => member.name?.trim()),
+  );
+  const contents = siteNav(t, { includeTeam: hasTeam }).filter((item) => item.href !== "/");
 
   return (
     <SiteFrame>
@@ -43,19 +54,10 @@ function HomeSections() {
         >
           [ Note ]
         </p>
-        <div className="max-w-xl">
-          {essay.map((paragraph, index) => (
-            <p
-              key={paragraph.slice(0, 24)}
-              className={
-                index === 0
-                  ? "font-display text-[clamp(1.55rem,2.6vw,2.15rem)] leading-[1.25] tracking-[-0.03em] text-[var(--ink)]"
-                  : "mt-5 text-[1.02rem] leading-relaxed text-[var(--muted)]"
-              }
-            >
-              {paragraph}
-            </p>
-          ))}
+        <div className="max-w-2xl">
+          <p className="font-display text-[clamp(1.35rem,2.2vw,1.85rem)] leading-[1.35] tracking-[-0.03em]">
+            {note}
+          </p>
         </div>
         <ol className="border-t border-[var(--ink)]">
           {contents.map((item, index) => (

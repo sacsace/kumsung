@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import { ensureServicesContent } from "@/lib/services-default";
+import { migratePublicPlaceholders } from "@/lib/public-content";
 import { sortPerformances, type SiteContent } from "@/lib/types";
 import {
   ensureRuntimeContentFile,
@@ -289,6 +290,10 @@ export async function getContent(): Promise<SiteContent> {
   }
 
   if (ensureCatalogFileFields(content)) {
+    contentMigrated = true;
+  }
+
+  if (migratePublicPlaceholders(content)) {
     contentMigrated = true;
   }
 

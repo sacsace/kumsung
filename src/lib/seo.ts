@@ -21,7 +21,7 @@ type SeoCopy = {
 
 const SITE_NAME = "Kumsung Engineering Private Limited";
 const LEGAL_NAME = "Kumsung Engineering Private Limited";
-const CONTACT_EMAIL = "hyun.hs@hksc.in";
+const CONTACT_EMAIL = "admin@kumsungindia.com";
 
 export function getSiteUrl() {
   return (process.env.NEXT_PUBLIC_SITE_URL || "https://hksc.in").replace(/\/$/, "");
@@ -51,31 +51,31 @@ const seo: Record<Locale, Record<SeoPage, SeoCopy>> = {
       ogDescription: "대표 인사말과 회사 개요, 연혁을 확인하세요.",
     },
     services: {
-      title: `설계 | ${SITE_NAME}`,
-      description: "건축, 실내, 그 사이를 점과 선으로 편집하는 Kumsung Engineering의 설계.",
-      keywords: ["건축 설계", "실내", "공간", "Kumsung Engineering Private Limited"],
-      ogTitle: `설계 | ${SITE_NAME}`,
-      ogDescription: "대지, 빛, 재료를 한 장면으로 편집합니다.",
+      title: `서비스 | ${SITE_NAME}`,
+      description: "건축 설계, 실내 설계, 외부 공간을 수행합니다.",
+      keywords: ["서비스", "건축 설계", "실내 설계", "Kumsung Engineering Private Limited"],
+      ogTitle: `서비스 | ${SITE_NAME}`,
+      ogDescription: "건축 설계, 실내 설계, 외부 공간의 업무 범위입니다.",
     },
     team: {
-      title: `팀원 소개 | ${SITE_NAME}`,
+      title: `구성원 | ${SITE_NAME}`,
       description: "Kumsung Engineering Private Limited 대표 및 팀원 소개.",
       keywords: ["팀원", "대표", "Kumsung Engineering Private Limited"],
-      ogTitle: `팀원 소개 | ${SITE_NAME}`,
+      ogTitle: `구성원 | ${SITE_NAME}`,
       ogDescription: "공간을 함께 편집하는 사람들입니다.",
     },
     gallery: {
-      title: `갤러리 | ${SITE_NAME}`,
-      description: "Kumsung Engineering의 도면과 장면 아카이브.",
-      keywords: ["아카이브", "도면", "Kumsung Engineering Private Limited"],
-      ogTitle: `아카이브 | ${SITE_NAME}`,
-      ogDescription: "도면과 장면이 모이는 자리입니다.",
+      title: `자료실 | ${SITE_NAME}`,
+      description: "도면, 현장 사진, 작업 기록을 모읍니다.",
+      keywords: ["자료실", "도면", "Kumsung Engineering Private Limited"],
+      ogTitle: `자료실 | ${SITE_NAME}`,
+      ogDescription: "도면과 작업 기록이 모이는 자리입니다.",
     },
     contact: {
-      title: `문의 | ${SITE_NAME}`,
+      title: `프로젝트 문의 | ${SITE_NAME}`,
       description: "Kumsung Engineering Private Limited 설계 의뢰와 방문 안내.",
       keywords: ["문의", "연락처", "건축 설계", "Kumsung Engineering Private Limited"],
-      ogTitle: `문의 | ${SITE_NAME}`,
+      ogTitle: `프로젝트 문의 | ${SITE_NAME}`,
       ogDescription: "문의 양식을 통해 빠르게 상담받으세요.",
     },
     clients: {
@@ -86,10 +86,10 @@ const seo: Record<Locale, Record<SeoPage, SeoCopy>> = {
       ogDescription: "함께 성장해 온 주요 고객사를 확인하세요.",
     },
     performance: {
-      title: `실적 | ${SITE_NAME}`,
+      title: `프로젝트 | ${SITE_NAME}`,
       description: "Kumsung Engineering이 편집한 주택, 문화, 업무 공간.",
       keywords: ["작업", "건축", "주택", "Kumsung Engineering Private Limited"],
-      ogTitle: `실적 | ${SITE_NAME}`,
+      ogTitle: `프로젝트 | ${SITE_NAME}`,
       ogDescription: "주요 수행 실적을 확인하세요.",
     },
   },
@@ -116,31 +116,31 @@ const seo: Record<Locale, Record<SeoPage, SeoCopy>> = {
       ogDescription: "Learn about our CEO message, company overview, and history.",
     },
     services: {
-      title: `Practice | ${SITE_NAME}`,
-      description: "Architecture, interior, and the space between, edited by Kumsung Engineering.",
-      keywords: ["architecture", "interior", "spatial design", "Kumsung Engineering Private Limited"],
-      ogTitle: `Practice | ${SITE_NAME}`,
-      ogDescription: "Site, light, and material, edited into one scene.",
+      title: `Services | ${SITE_NAME}`,
+      description: "Architectural design, interior design, and outdoor space.",
+      keywords: ["services", "architectural design", "interior design", "Kumsung Engineering Private Limited"],
+      ogTitle: `Services | ${SITE_NAME}`,
+      ogDescription: "The scope of architectural, interior, and outdoor work.",
     },
     team: {
-      title: `Our Team | ${SITE_NAME}`,
+      title: `Team | ${SITE_NAME}`,
       description: "Meet the director and team behind Kumsung Engineering Private Limited.",
       keywords: ["team", "director", "Kumsung Engineering Private Limited"],
-      ogTitle: `Our Team | ${SITE_NAME}`,
+      ogTitle: `Team | ${SITE_NAME}`,
       ogDescription: "The people who edit space with us.",
     },
     gallery: {
-      title: `Gallery | ${SITE_NAME}`,
+      title: `Library | ${SITE_NAME}`,
       description: "Drawings and scenes from Kumsung Engineering.",
       keywords: ["archive", "drawings", "Kumsung Engineering Private Limited"],
-      ogTitle: `Archive | ${SITE_NAME}`,
+      ogTitle: `Library | ${SITE_NAME}`,
       ogDescription: "A place for drawings and scenes.",
     },
     contact: {
-      title: `Contact | ${SITE_NAME}`,
+      title: `Project inquiry | ${SITE_NAME}`,
       description: "Commission a project or arrange a visit with Kumsung Engineering Private Limited.",
       keywords: ["contact", "inquiry", "architecture", "Kumsung Engineering Private Limited"],
-      ogTitle: `Contact | ${SITE_NAME}`,
+      ogTitle: `Project inquiry | ${SITE_NAME}`,
       ogDescription: "Contact us to discuss your requirements. We’ll get back to you shortly.",
     },
     clients: {
@@ -268,20 +268,19 @@ export function organizationJsonLd(locale: Locale) {
         areaServed: "IN",
       },
     ],
-    address: [
-      {
-        "@type": "PostalAddress",
-        addressLocality: "Bengaluru",
-        addressRegion: "Karnataka",
-        addressCountry: "IN",
-      },
-      {
-        "@type": "PostalAddress",
-        addressLocality: "Chennai",
-        addressRegion: "Tamil Nadu",
-        addressCountry: "IN",
-      },
-    ],
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Nazarathpet",
+      addressLocality: "Poonamallee",
+      addressRegion: "Tamil Nadu",
+      postalCode: "600056",
+      addressCountry: "IN",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 13.048873,
+      longitude: 80.090135,
+    },
     areaServed: {
       "@type": "Country",
       name: "India",

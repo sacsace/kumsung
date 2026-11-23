@@ -126,16 +126,31 @@ export type UiCopy = {
     email: string;
     phone: string;
     company: string;
+    location: string;
+    service: string;
+    schedule: string;
     message: string;
+    file: string;
+    fileHint: string;
     namePlaceholder: string;
     emailPlaceholder: string;
     phonePlaceholder: string;
     companyPlaceholder: string;
+    locationPlaceholder: string;
+    servicePlaceholder: string;
+    schedulePlaceholder: string;
     messagePlaceholder: string;
     submit: string;
     sending: string;
     success: string;
     error: string;
+    fileTooLarge: string;
+    fileType: string;
+    stepsTitle: string;
+    steps: string[];
+    privacyTitle: string;
+    privacyBody: string;
+    privacyConsent: string;
   };
   footerTagline: string;
   footerRights: string;
@@ -171,7 +186,7 @@ export const ui: Record<Locale, UiCopy> = {
     aboutLabel: "인사말",
     aboutPageLabel: "About",
     aboutPageTitle: "회사 소개",
-    aboutPageLead: "대표 인사말, 회사 개요, 연혁과 인증을 안내합니다.",
+    aboutPageLead: "대표 인사말, 회사 개요, 설계 철학과 인증을 안내합니다.",
     companyLabel: "회사정보",
     companyTitle: "회사 개요",
     companyLead: "공간의 목적과 사용자의 동선에서 설계를 시작합니다.",
@@ -187,12 +202,12 @@ export const ui: Record<Locale, UiCopy> = {
       cin: "CIN",
       email: "이메일",
     },
-    historyLabel: "연혁",
-    historyTitle: "회사 연혁",
-    historyLead: "관찰에서 선이 되고, 선에서 공간이 됩니다.",
+    historyLabel: "설계 철학",
+    historyTitle: "설계 철학",
+    historyLead: "연도별 연혁이 아니라, 설계를 시작하는 기준입니다.",
     performanceLabel: "실적",
     performanceTitle: "프로젝트",
-    performanceLead: "감성적인 제목은 유지하고, 담당 업무와 진행 상태를 함께 적습니다. 아래는 설계 스터디입니다.",
+    performanceLead: "프로젝트별 주요 내용과 수행 범위, 진행 현황을 소개합니다.",
     performanceEmpty: "등록된 실적이 없습니다.",
     performanceSearch: "검색",
     performanceSearchPlaceholder: "날짜, 내용, 고객사 검색",
@@ -204,7 +219,7 @@ export const ui: Record<Locale, UiCopy> = {
       details: "내용",
       client: "고객사",
     },
-    galleryLabel: "Gallery",
+    galleryLabel: "자료실",
     galleryTitle: "자료실",
     galleryLead: "도면과 장면은 아직 비어 있습니다.",
     galleryClose: "닫기",
@@ -227,7 +242,7 @@ export const ui: Record<Locale, UiCopy> = {
     familyLead: "한국 관계사 안내입니다.",
     contactLabel: "문의",
     contactTitle: "프로젝트 문의",
-    contactLead: "공간의 목적과 쓰고 싶은 방식을 알려 주시면 설계 범위를 함께 정합니다.",
+    contactLead: "프로젝트 위치와 필요한 업무, 희망 일정을 알려주세요. 내용을 검토한 후 상담을 통해 진행 방향을 안내해드리겠습니다.",
     clientsLabel: "고객사",
     clientsTitle: "고객사",
     clientsLead: "장면을 함께 만든 의뢰입니다.",
@@ -267,16 +282,36 @@ export const ui: Record<Locale, UiCopy> = {
       email: "이메일",
       phone: "연락처",
       company: "회사명",
+      location: "프로젝트 위치",
+      service: "요청 업무",
+      schedule: "희망 일정",
       message: "문의 내용",
+      file: "도면·현장 사진",
+      fileHint: "JPG, PNG, WEBP, PDF (최대 8MB, 3개까지)",
       namePlaceholder: "홍길동",
       emailPlaceholder: "name@example.com",
       phonePlaceholder: "+91 98765 43210",
       companyPlaceholder: "회사명을 입력하세요",
+      locationPlaceholder: "도시 또는 대지 위치",
+      servicePlaceholder: "건축 설계, 실내 설계, 외부 공간",
+      schedulePlaceholder: "희망하는 시작 시기",
       messagePlaceholder: "문의하실 내용을 적어 주세요.",
       submit: "문의 보내기",
       sending: "전송 중…",
-      success: "문의가 접수되었습니다. 감사합니다.",
+      success: "문의가 접수되었습니다. 검토 후 상담으로 안내드립니다.",
       error: "전송에 실패했습니다. 잠시 후 다시 시도해 주세요.",
+      fileTooLarge: "파일 크기는 8MB 이하여야 합니다.",
+      fileType: "JPG, PNG, WEBP, PDF 파일만 첨부할 수 있습니다.",
+      stepsTitle: "접수 후 진행",
+      steps: [
+        "문의 내용을 확인합니다.",
+        "범위와 일정을 검토한 뒤 연락드립니다.",
+        "상담에서 진행 방향을 정합니다.",
+      ],
+      privacyTitle: "개인정보 이용 안내",
+      privacyBody:
+        "이름, 이메일, 연락처, 회사명, 프로젝트 정보와 첨부 파일은 상담을 위해서만 사용합니다. 접수일부터 1년 보관 후 삭제합니다. 문의는 admin@kumsungindia.com 으로 보내 주세요.",
+      privacyConsent: "개인정보 수집 및 이용에 동의합니다.",
     },
     footerTagline: "건축 설계.",
     footerRights: "All rights reserved.",
@@ -317,7 +352,7 @@ export const ui: Record<Locale, UiCopy> = {
     aboutLabel: "Message from the CEO",
     aboutPageLabel: "About",
     aboutPageTitle: "About Us",
-    aboutPageLead: "Message from the CEO, company overview, history, and certifications.",
+    aboutPageLead: "A message, the company outline, our design approach, and certifications.",
     companyLabel: "Company",
     companyTitle: "Company Information",
     companyLead: "We begin with the purpose of a space and the way people move through it.",
@@ -333,12 +368,12 @@ export const ui: Record<Locale, UiCopy> = {
       cin: "CIN",
       email: "Email",
     },
-    historyLabel: "History",
-    historyTitle: "Company History",
-    historyLead: "Looking becomes a line. A line becomes a plane.",
+    historyLabel: "Approach",
+    historyTitle: "How we design",
+    historyLead: "These are the principles we start from, not a year-by-year history.",
     performanceLabel: "Projects",
     performanceTitle: "Projects",
-    performanceLead: "Titles stay evocative, with scope and status beside them. These are design studies.",
+    performanceLead: "Each project notes its scope, what was carried out, and where it stands.",
     performanceEmpty: "No projects listed yet.",
     performanceSearch: "Search",
     performanceSearchPlaceholder: "Search by date, project details, or client",
@@ -350,7 +385,7 @@ export const ui: Record<Locale, UiCopy> = {
       details: "Project Details",
       client: "Client",
     },
-    galleryLabel: "Gallery",
+    galleryLabel: "Library",
     galleryTitle: "Library",
     galleryLead: "Drawings and scenes will gather here.",
     galleryClose: "Close",
@@ -373,7 +408,7 @@ export const ui: Record<Locale, UiCopy> = {
     familyLead: "Reference affiliate in Korea.",
     contactLabel: "Contact",
     contactTitle: "Project inquiry",
-    contactLead: "Tell us the purpose of the space and how you want to use it. We will define the scope of design with you.",
+    contactLead: "Tell us the project location, the work you need, and your preferred schedule. We will review it and explain the next step in a consultation.",
     clientsLabel: "Clients",
     clientsTitle: "Our Clients",
     clientsLead: "Commissions we have shaped into scenes.",
@@ -413,16 +448,36 @@ export const ui: Record<Locale, UiCopy> = {
       email: "Email",
       phone: "Phone",
       company: "Company",
+      location: "Project location",
+      service: "Work requested",
+      schedule: "Preferred schedule",
       message: "Message",
+      file: "Drawings or site photos",
+      fileHint: "JPG, PNG, WEBP, PDF (max 8MB, up to 3 files)",
       namePlaceholder: "Your name",
       emailPlaceholder: "name@example.com",
       phonePlaceholder: "+91 98765 43210",
       companyPlaceholder: "Company name",
+      locationPlaceholder: "City or site",
+      servicePlaceholder: "Architectural design, interior, outdoor space",
+      schedulePlaceholder: "When you hope to start",
       messagePlaceholder: "Tell us about your inquiry.",
       submit: "Send Inquiry",
       sending: "Sending…",
-      success: "Your inquiry has been submitted. Thank you.",
+      success: "Your inquiry has been received. We will reply after review.",
       error: "Failed to send. Please try again.",
+      fileTooLarge: "Each file must be 8MB or smaller.",
+      fileType: "Only JPG, PNG, WEBP, and PDF files are allowed.",
+      stepsTitle: "After you send",
+      steps: [
+        "We read the inquiry.",
+        "We review the scope and schedule, then contact you.",
+        "The consultation sets the next step.",
+      ],
+      privacyTitle: "How we use your details",
+      privacyBody:
+        "Your name, email, phone, company, project details, and files are used only to answer this inquiry. We keep them for one year from the day we receive them, then delete them. Write to admin@kumsungindia.com with any question.",
+      privacyConsent: "I agree to this use of my details.",
     },
     footerTagline: "Architecture.",
     footerRights: "All rights reserved.",
@@ -445,7 +500,8 @@ export const ui: Record<Locale, UiCopy> = {
   },
 };
 
-export function siteNav(t: UiCopy) {
+export function siteNav(t: UiCopy, options?: { includeTeam?: boolean }) {
+  const includeTeam = options?.includeTeam !== false;
   return [
     { href: "/", label: t.nav.home },
     { href: "/about", label: t.nav.about },
@@ -454,6 +510,5 @@ export function siteNav(t: UiCopy) {
     { href: "/team", label: t.nav.team },
     { href: "/gallery", label: t.nav.gallery },
     { href: "/contact#inquiry", label: t.nav.clients },
-    { href: "/contact#visit", label: t.nav.contact },
-  ];
+  ].filter((item) => includeTeam || item.href !== "/team");
 }

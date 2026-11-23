@@ -214,7 +214,7 @@ export function LetterMasthead() {
         portfolio
       </p>
       <div className="flex items-stretch gap-3 md:gap-6">
-        <div ref={fieldRef} className="relative h-[clamp(36rem,calc(100svh-14rem),48rem)] min-w-0 flex-1 overflow-hidden" aria-hidden>
+        <div ref={fieldRef} className="relative h-[clamp(20rem,46vh,30rem)] min-w-0 flex-1 overflow-hidden" aria-hidden>
           <svg className="pointer-events-none absolute inset-0 h-full w-full">
             {GESTURES.map((gesture) => (
               <g key={gesture.axis}>

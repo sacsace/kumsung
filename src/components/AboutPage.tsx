@@ -7,23 +7,25 @@ import { PageIntro } from "@/components/PageIntro";
 import { SiteFrame } from "@/components/SiteFrame";
 import { SafeSearchInput } from "@/components/SafeSearchInput";
 import { ViewModeToggle } from "@/components/ViewModeToggle";
+import { visibleCompanyValue } from "@/lib/public-content";
 import type { SiteContent } from "@/lib/types";
 
 type CertViewMode = "card" | "list";
 
 function splitParagraphs(text: string) {
   return text
-    .split(/\n\n+/)
+    .split(/\n+/)
     .map((p) => p.trim())
     .filter(Boolean);
 }
 
 function InfoBlock({ label, value }: { label: string; value: string }) {
-  if (!value?.trim()) return null;
+  const text = visibleCompanyValue(value);
+  if (!text) return null;
   return (
     <div className="bg-white p-4 md:p-5">
       <p className="text-[0.7rem] font-semibold tracking-[0.1em] text-[var(--steel)]">{label}</p>
-      <p className="mt-1.5 text-sm leading-relaxed text-[var(--ink)]">{value}</p>
+      <p className="mt-1.5 text-sm leading-relaxed text-[var(--ink)]">{text}</p>
     </div>
   );
 }

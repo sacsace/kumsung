@@ -4,6 +4,10 @@ export type Inquiry = {
   email: string;
   phone: string;
   company: string;
+  location?: string;
+  service?: string;
+  schedule?: string;
+  files?: string[];
   message: string;
   createdAt: string;
 };

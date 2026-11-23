@@ -36,7 +36,7 @@ ADMIN_SECRET=your-random-secret
 # SMTP_PASS=your-16-char-app-password
 # SMTP_FROM_NAME=Kumsung Engineering Private Limited
 # SMTP_FROM_EMAIL=you@gmail.com
-# MAIL_TO=team@hksc.in
+# MAIL_TO=admin@kumsungindia.com
 ```
 
 After changing the password in the admin UI, it is stored in `data/admin.json` (not committed to git).

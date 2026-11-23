@@ -19,20 +19,27 @@ export function OfficeMaps({
   chennaiMapEmbed?: string;
   openInMapsLabel: string;
 }) {
+  const showBangalore = Boolean(bangaloreAddress?.trim() || bangaloreMapEmbed?.trim());
+  const showChennai = Boolean(chennaiAddress?.trim() || chennaiMapEmbed?.trim());
+
   return (
-    <div className="mt-10 grid gap-5 md:grid-cols-2">
+    <div className={`mt-14 grid gap-5 ${showBangalore && showChennai ? "md:grid-cols-2" : ""}`}>
+      {showBangalore ? (
       <MapCard
         label={bangaloreLabel}
         address={bangaloreAddress}
         embedSrc={bangaloreMapEmbed}
         openLabel={openInMapsLabel}
       />
+      ) : null}
+      {showChennai ? (
       <MapCard
         label={chennaiLabel}
         address={chennaiAddress}
         embedSrc={chennaiMapEmbed}
         openLabel={openInMapsLabel}
       />
+      ) : null}
     </div>
   );
 }
@@ -51,33 +58,27 @@ function MapCard({
   if (!address?.trim() && !embedSrc?.trim()) return null;
 
   const src = embedSrc?.trim() || mapEmbedSrc(address);
-  const openSrc = embedSrc?.trim()
-    ? embedSrc.replace("/maps/embed?", "/maps?").replace("&output=embed", "")
+  const mapsOpen = embedSrc?.trim()
+    ? embedSrc.replace("&output=embed", "").replace("?output=embed", "")
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
 
-  const mapsOpen = address?.trim()
-    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`
-    : openSrc;
-
   return (
-    <div className="overflow-hidden rounded-[1rem] border border-[var(--line)] bg-white">
-      <div className="flex items-center justify-between gap-3 px-4 py-3">
+    <div className="border border-[var(--ink)] bg-white">
+      <div className="flex items-end justify-between gap-4 px-4 py-4 md:px-6">
         <div className="min-w-0">
-          <p className="text-xs font-semibold tracking-wide text-[var(--steel)]">{label}</p>
-          {address ? (
-            <p className="mt-1 line-clamp-2 text-sm text-[var(--ink)]">{address}</p>
-          ) : null}
+          <p className="text-[0.72rem] font-medium tracking-[0.16em] text-[var(--signal)] uppercase">{label}</p>
+          {address ? <p className="mt-2 text-sm leading-relaxed text-[var(--ink)]">{address}</p> : null}
         </div>
         <a
           href={mapsOpen}
           target="_blank"
           rel="noopener noreferrer"
-          className="shrink-0 text-xs font-semibold text-[var(--navy)] underline underline-offset-4 hover:opacity-80"
+          className="shrink-0 text-sm font-semibold text-[var(--signal)] underline underline-offset-4"
         >
           {openLabel}
         </a>
       </div>
-      <div className="relative aspect-[16/11] w-full bg-[var(--bg)]">
+      <div className="relative h-[22rem] w-full border-t border-[var(--ink)] bg-[var(--bg)] md:h-[28rem]">
         <iframe
           title={label}
           src={src}
