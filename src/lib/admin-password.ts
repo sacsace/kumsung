@@ -45,8 +45,40 @@ async function writeStore(password: string): Promise<void> {
   await fs.writeFile(storePath(), JSON.stringify(payload, null, 2), "utf-8");
 }
 
+async function alignStoreWithEnv(envPassword: string) {
+  const store = await readStore();
+  if (store) {
+    const hashed = hashPassword(envPassword, store.salt);
+    try {
+      const a = Buffer.from(hashed, "hex");
+      const b = Buffer.from(store.passwordHash, "hex");
+      if (a.length === b.length && timingSafeEqual(a, b)) return;
+    } catch {
+      // The stored hash is unreadable, so replace it below.
+    }
+  }
+  await writeStore(envPassword);
+}
+
+function passwordsMatch(password: string, expected: string) {
+  const a = Buffer.from(password);
+  const b = Buffer.from(expected);
+  if (a.length !== b.length) return false;
+  try {
+    return timingSafeEqual(a, b);
+  } catch {
+    return false;
+  }
+}
+
 export async function verifyAdminPassword(password: string): Promise<boolean> {
   if (!password) return false;
+
+  const envPassword = process.env.ADMIN_PASSWORD;
+  if (envPassword) {
+    await alignStoreWithEnv(envPassword);
+    return passwordsMatch(password, envPassword);
+  }
 
   const store = await readStore();
   if (store) {
@@ -61,15 +93,7 @@ export async function verifyAdminPassword(password: string): Promise<boolean> {
     }
   }
 
-  const expected = getEnvPassword();
-  const a = Buffer.from(password);
-  const b = Buffer.from(expected);
-  if (a.length !== b.length) return false;
-  try {
-    return timingSafeEqual(a, b);
-  } catch {
-    return false;
-  }
+  return passwordsMatch(password, getEnvPassword());
 }
 
 export async function changeAdminPassword(
