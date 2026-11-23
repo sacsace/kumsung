@@ -1,4 +1,3 @@
-import { productCatalog } from "@/lib/products";
 import { servicesCopy } from "@/lib/services";
 import type {
   Locale,
@@ -8,30 +7,8 @@ import type {
   ServicesContent,
 } from "@/lib/types";
 
-function defaultBrands(locale: Locale): ServiceBrandItem[] {
-  return productCatalog
-    .filter((item) => item.slug !== "hankook")
-    .map((item) => {
-      const intro =
-        locale === "ko"
-          ? `${item.brand} 관련 제품 자료입니다.`
-          : `Product documents for ${item.brand}.`;
-      return {
-        id: item.slug,
-        slug: item.slug,
-        brand: item.brand,
-        folder: item.folder,
-        lead: intro,
-        products: item.products.map((product) => ({
-          id: product.id,
-          title: product.title,
-          image: product.image,
-          description: product.description,
-          file: "",
-          fileName: product.fileName || "",
-        })),
-      };
-    });
+function defaultBrands(): ServiceBrandItem[] {
+  return [];
 }
 
 function defaultOfferings(locale: Locale): ServiceOfferingItem[] {
@@ -68,7 +45,7 @@ export function defaultServicesContent(locale: Locale): ServicesContent {
     ctaLead: copy.ctaLead,
     ctaButton: copy.ctaButton,
     offerings: defaultOfferings(locale),
-    brands: defaultBrands(locale),
+    brands: defaultBrands(),
     categories: defaultCategories(locale),
   };
 }
@@ -95,9 +72,7 @@ export function ensureServicesContent(
     ctaLead: services.ctaLead || fallback.ctaLead,
     ctaButton: services.ctaButton || fallback.ctaButton,
     offerings: Array.isArray(services.offerings) ? services.offerings : fallback.offerings,
-    brands: Array.isArray(services.brands) && services.brands.length
-      ? services.brands
-      : fallback.brands,
+    brands: Array.isArray(services.brands) ? services.brands : fallback.brands,
     categories: Array.isArray(services.categories) ? services.categories : fallback.categories,
   };
 }

@@ -25,6 +25,9 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  async redirects() {
+    return [{ source: "/clients", destination: "/contact", permanent: true }];
+  },
   async headers() {
     return [
       {

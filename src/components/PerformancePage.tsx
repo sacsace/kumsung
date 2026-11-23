@@ -1,9 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
 import { LanguageProvider, useLanguage } from "@/components/LanguageProvider";
+import { PageIntro } from "@/components/PageIntro";
+import { SiteFrame } from "@/components/SiteFrame";
 import { SafeSearchInput } from "@/components/SafeSearchInput";
 import {
   dateSortKey,
@@ -34,7 +34,7 @@ function sortRows(items: PerformanceItem[], key: SortKey, dir: SortDir) {
 
 function SortMark({ active, dir }: { active: boolean; dir: SortDir }) {
   if (!active) {
-    return <span className="ml-1 inline-block text-white/35">↕</span>;
+    return <span className="ml-1 inline-block text-[var(--muted)]">↕</span>;
   }
   return <span className="ml-1 inline-block">{dir === "asc" ? "↑" : "↓"}</span>;
 }
@@ -81,17 +81,12 @@ function PerformanceSections() {
   ];
 
   return (
-    <div className="site-shell bg-white">
-      <Header variant="solid" />
-
-      <main className="flex-1">
-        <section className="border-b border-[var(--line)] bg-[var(--navy-deep)] pt-28 pb-14 text-white md:pt-32 md:pb-16">
-          <div className="container">
-            <p className="section-label !text-white/55">{t.performanceLabel}</p>
-            <h1 className="section-title !mb-3 !text-white">{t.performanceTitle}</h1>
-            <p className="max-w-xl text-white/70">{t.performanceLead}</p>
-          </div>
-        </section>
+    <SiteFrame>
+        <PageIntro
+          eyebrow={t.performanceLabel}
+          title={t.performanceTitle}
+          lead={t.performanceLead}
+        />
 
         <section className="section bg-white">
           <div className="container">
@@ -118,51 +113,48 @@ function PerformanceSections() {
             ) : rows.length === 0 ? (
               <p className="text-[var(--muted)]">{t.performanceNoResults}</p>
             ) : (
-              <div className="overflow-hidden border border-[var(--line)] bg-white">
-                <table className="min-w-full text-left text-sm">
-                  <thead className="bg-[var(--navy)] text-white">
-                    <tr>
-                      {headers.map((header) => (
-                        <th key={header.key} className="px-4 py-3 font-medium md:px-5">
-                          <button
-                            type="button"
-                            onClick={() => toggleSort(header.key)}
-                            className="inline-flex items-center text-left hover:text-white/85"
-                          >
-                            {header.label}
-                            <SortMark active={sortKey === header.key} dir={sortDir} />
-                          </button>
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {rows.map((row, i) => (
-                      <tr
-                        key={row.id || `${row.date}-${row.client}-${i}`}
-                        className="border-t border-[var(--line)] align-top"
-                      >
-                        <td className="whitespace-nowrap px-4 py-3 text-[var(--muted)] md:px-5">
-                          {row.date || "—"}
-                        </td>
-                        <td className="px-4 py-3 text-[var(--ink)] md:px-5">
-                          {row.detail || "—"}
-                        </td>
-                        <td className="px-4 py-3 font-medium text-[var(--ink)] md:px-5">
-                          {row.client || "—"}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <>
+              <div className="mb-2 flex flex-wrap gap-2 text-xs text-[var(--muted)]">
+                {headers.map((header) => (
+                  <button
+                    key={header.key}
+                    type="button"
+                    onClick={() => toggleSort(header.key)}
+                    className="inline-flex items-center border border-[var(--line)] bg-white px-2.5 py-1.5 hover:text-[var(--ink)]"
+                  >
+                    {header.label}
+                    <SortMark active={sortKey === header.key} dir={sortDir} />
+                  </button>
+                ))}
               </div>
+              <div className="border-t border-[var(--ink)]">
+                {rows.map((row, i) => (
+                  <article
+                    key={row.id || `${row.date}-${row.client}-${i}`}
+                    className="grid gap-4 border-b border-[var(--line)] py-6 sm:grid-cols-[4.5rem_8.5rem_1fr] sm:items-center"
+                  >
+                    <p className="font-display text-[clamp(2.2rem,4vw,3.2rem)] leading-none tracking-[-0.04em] text-[var(--signal)]">
+                      {String(i + 1).padStart(2, "0")}
+                    </p>
+                    <div className="sheet-grid relative aspect-[4/3] overflow-hidden border border-[var(--line)]" aria-hidden>
+                      <span className="absolute top-0 left-0 h-7 w-7 bg-[var(--signal)]" />
+                    </div>
+                    <div>
+                      <h2 className="box-decoration-clone inline bg-[var(--signal)] px-1.5 py-0.5 font-display text-[clamp(1.2rem,2vw,1.55rem)] leading-tight font-medium text-white">
+                        {row.detail || "—"}
+                      </h2>
+                      <p className="mt-2 text-sm text-[var(--muted)]">
+                        {[row.client, row.date].filter(Boolean).join(" · ") || "—"}
+                      </p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+              </>
             )}
           </div>
         </section>
-      </main>
-
-      <Footer />
-    </div>
+    </SiteFrame>
   );
 }
 

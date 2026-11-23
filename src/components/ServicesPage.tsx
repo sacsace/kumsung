@@ -3,15 +3,15 @@
 import Image from "next/image";
 import { useState } from "react";
 import { ApplicationModal } from "@/components/ApplicationModal";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
 import { LanguageProvider, useLanguage } from "@/components/LanguageProvider";
+import { PageIntro } from "@/components/PageIntro";
+import { SiteFrame } from "@/components/SiteFrame";
 import { servicesPageExtraUi } from "@/lib/products";
 import { defaultServicesContent } from "@/lib/services-default";
 import type { Locale, SiteContent } from "@/lib/types";
 
 const ctaBtnClass =
-  "inline-flex items-center justify-center rounded-md border border-white bg-white px-4 py-2 text-sm font-semibold !text-black transition-colors hover:bg-white/90";
+  "inline-flex items-center justify-center border border-[var(--ink)] px-4 py-2 text-sm text-[var(--ink)] hover:bg-[var(--ink)] hover:!text-[var(--bg)]";
 
 function ServicesSections() {
   const { locale, content, t } = useLanguage();
@@ -20,17 +20,8 @@ function ServicesSections() {
   const extra = servicesPageExtraUi[locale];
 
   return (
-    <div className="site-shell bg-white">
-      <Header variant="solid" />
-
-      <main className="flex-1">
-        <section className="border-b border-[var(--line)] bg-[var(--navy-deep)] pt-28 pb-14 text-white md:pt-32 md:pb-16">
-          <div className="container">
-            <p className="section-label !text-white/55">{copy.label}</p>
-            <h1 className="section-title !mb-3 !text-white">{copy.title}</h1>
-            <p className="max-w-3xl text-pretty leading-relaxed text-white/70">{copy.lead}</p>
-          </div>
-        </section>
+    <SiteFrame>
+        <PageIntro eyebrow={copy.label} title={copy.title} lead={copy.lead} />
 
         <section className="section bg-white">
           <div className="container">
@@ -39,9 +30,13 @@ function ServicesSections() {
             <p className="section-lead">{copy.offeringsLead}</p>
 
             <div className="mt-8 grid gap-px overflow-hidden border border-[var(--line)] bg-[var(--line)] sm:grid-cols-2 lg:grid-cols-3">
-              {copy.offerings.map((item) => (
-                <div key={item.id} className="bg-white p-5 md:p-6">
-                  <h3 className="text-[0.95rem] font-semibold tracking-wide text-[var(--ink)]">
+              {copy.offerings.map((item, index) => (
+                <div key={item.id} className="relative overflow-hidden bg-white p-5 md:p-6">
+                  <span className="absolute top-0 right-0 h-10 w-10 bg-[var(--signal)]" aria-hidden />
+                  <p className="font-display text-4xl leading-none tracking-[-0.04em] text-[var(--signal)]">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="mt-4 inline bg-[var(--ink)] px-1.5 py-0.5 text-[0.95rem] font-semibold tracking-wide text-white">
                     {item.title}
                   </h3>
                   <p className="mt-2.5 text-sm leading-relaxed text-[var(--muted)]">
@@ -144,16 +139,14 @@ function ServicesSections() {
           </div>
         </section>
 
-        <section className="border-t border-[var(--line)] bg-[var(--navy-deep)] py-14 text-white md:py-16">
+        <section className="border-t border-[var(--line)] py-12">
           <div className="container flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl">
-              <h2 className="text-xl font-semibold tracking-wide md:text-2xl">{copy.ctaTitle}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-white/65 md:text-[0.95rem]">
-                {copy.ctaLead}
-              </p>
+              <h2 className="font-display text-xl font-medium tracking-tight md:text-2xl">{copy.ctaTitle}</h2>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{copy.ctaLead}</p>
             </div>
             <div className="flex flex-wrap items-center gap-2.5">
-              <a href="/contact" className={ctaBtnClass}>
+              <a href="/contact#inquiry" className={ctaBtnClass}>
                 {copy.ctaButton}
               </a>
               <button type="button" onClick={() => setApplyOpen(true)} className={ctaBtnClass}>
@@ -162,11 +155,8 @@ function ServicesSections() {
             </div>
           </div>
         </section>
-      </main>
-
-      <Footer />
       <ApplicationModal open={applyOpen} onClose={() => setApplyOpen(false)} />
-    </div>
+    </SiteFrame>
   );
 }
 

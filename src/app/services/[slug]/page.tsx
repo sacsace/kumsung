@@ -29,11 +29,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const cover = brand.products[0]?.image;
 
   return {
-    title: `${brand.brand} | Hankook Service Center`,
+    title: `${brand.brand} | Kumsung Engineering Private Limited`,
     description: brand.lead,
     alternates: { canonical: url },
     openGraph: {
-      title: `${brand.brand} | Hankook Service Center`,
+      title: `${brand.brand} | Kumsung Engineering Private Limited`,
       description: brand.lead,
       url,
       images: cover ? [{ url: `${siteUrl}${cover}` }] : undefined,

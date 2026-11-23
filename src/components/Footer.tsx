@@ -59,7 +59,7 @@ export function Footer() {
 
         <div className="mt-10 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} Hankook Service Center Pvt. Ltd. {t.footerRights}
+            © {new Date().getFullYear()} Kumsung Engineering Private Limited {t.footerRights}
           </p>
           <p>
             {t.developedBy}{" "}

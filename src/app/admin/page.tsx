@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { FormEvent, type ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import type {
   CertificateItem,
@@ -15,9 +14,9 @@ import type {
 } from "@/lib/types";
 import { sortPerformances } from "@/lib/types";
 import type { Inquiry } from "@/lib/inquiry";
+import { AdminDashboard } from "@/components/admin/AdminDashboard";
 import { HeroSlidesEditor } from "@/components/admin/HeroSlidesEditor";
 import { ServicesEditor } from "@/components/admin/ServicesEditor";
-import { SiteLogo } from "@/components/SiteLogo";
 import {
   adminMenu,
   adminMenuGroups,
@@ -25,19 +24,16 @@ import {
   type AdminSectionId,
   type AdminUi,
 } from "@/lib/admin-ui";
-import { seedKoreanFromEnglish } from "@/lib/locale-seed";
 import { defaultServicesContent } from "@/lib/services-default";
 
-function AdminSymbol({ className = "" }: { className?: string }) {
+function AdminMark({ className = "" }: { className?: string }) {
   return (
-    <Image
-      src="/images/symbol-hsc.png"
-      alt="Hankook Service Center"
-      width={1330}
-      height={1182}
-      className={`object-contain ${className}`}
-      priority
-    />
+    <span
+      className={`inline-flex items-center justify-center bg-[var(--ink)] font-display font-medium text-[var(--bg)] ${className}`}
+      aria-hidden
+    >
+      K
+    </span>
   );
 }
 
@@ -47,9 +43,10 @@ export default function AdminPage() {
   const [password, setPassword] = useState("");
   const [content, setContent] = useState<SiteContent | null>(null);
   const [editLocale, setEditLocale] = useState<Locale>("ko");
-  const [section, setSection] = useState<AdminSectionId>("hero");
+  const [section, setSection] = useState<AdminSectionId>("dashboard");
+  const [heroSlideMode, setHeroSlideMode] = useState<"list" | "create" | "edit">("list");
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [statusKey, setStatusKey] = useState<"" | "saved" | "failed" | "synced">("");
+  const [statusKey, setStatusKey] = useState<"" | "saved" | "failed">("");
   const [saving, setSaving] = useState(false);
   const [loginError, setLoginError] = useState("");
   const [uploadsAtRisk, setUploadsAtRisk] = useState(false);
@@ -146,14 +143,7 @@ export default function AdminPage() {
   function buildNextContent(next: LocaleContent): SiteContent | null {
     const current = contentRef.current;
     if (!current) return null;
-    if (editLocale === "en") {
-      return {
-        ...current,
-        en: next,
-        ko: seedKoreanFromEnglish(current.ko, next),
-      };
-    }
-    return { ...current, ko: next };
+    return { ...current, [editLocale]: next };
   }
 
   function updateLocale(next: LocaleContent) {
@@ -173,20 +163,6 @@ export default function AdminPage() {
     await persistContent(nextContent);
   }
 
-  async function syncEnglishIntoKorean() {
-    const current = contentRef.current;
-    if (!current) return;
-    const nextContent: SiteContent = {
-      ...current,
-      ko: seedKoreanFromEnglish(current.ko, current.en),
-    };
-    contentRef.current = nextContent;
-    setContent(nextContent);
-    if (persistTimer.current) clearTimeout(persistTimer.current);
-    await persistContent(nextContent);
-    setStatusKey("synced");
-  }
-
   if (checking) {
     return (
       <div className="flex min-h-[100svh] items-center justify-center bg-[var(--bg)] px-4 text-[var(--muted)]">
@@ -203,7 +179,7 @@ export default function AdminPage() {
           className="w-full max-w-sm border border-[var(--line)] bg-white p-6 shadow-sm sm:p-8"
         >
           <div className="flex items-center gap-3">
-            <AdminSymbol className="h-10 w-auto" />
+            <AdminMark className="h-10 w-10 text-lg" />
             <div>
               <p className="text-xs font-semibold tracking-[0.14em] text-[var(--steel)]">ADMIN</p>
               <h1 className="font-display text-xl font-bold text-[var(--ink)] sm:text-2xl">
@@ -262,25 +238,29 @@ export default function AdminPage() {
 
       {/* Sidebar — fixed in viewport; only its own nav scrolls if needed */}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex h-[100svh] w-[min(18rem,85vw)] flex-col border-r border-[var(--line)] bg-[var(--navy-deep)] text-white transition-transform duration-200 lg:static lg:z-0 lg:w-64 lg:shrink-0 lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-40 flex h-[100svh] w-[min(18rem,85vw)] flex-col border-r border-[var(--line)] bg-white text-[var(--ink)] transition-transform duration-200 lg:static lg:z-0 lg:w-60 lg:shrink-0 lg:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="shrink-0 border-b border-white/10 px-5 py-5">
-          <a href="/" className="mb-3 block" aria-label="Hankook Service Center">
-            <SiteLogo tone="light" className="!h-8 !max-w-full md:!h-9" />
+        <div className="shrink-0 border-b border-[var(--line)] px-5 py-5">
+          <a href="/" className="flex items-center gap-3" aria-label="Kumsung Engineering Private Limited">
+            <AdminMark className="h-9 w-9 text-base" />
+            <span>
+              <span className="block font-display text-sm tracking-[-0.03em]">Kumsung</span>
+              <span className="mt-0.5 block text-[0.68rem] tracking-[0.14em] text-[var(--muted)] uppercase">
+                Admin
+              </span>
+            </span>
           </a>
-          <p className="text-[0.7rem] font-semibold tracking-[0.16em] text-white/50">ADMIN</p>
-          <p className="mt-1 text-xs text-white/55">{t.contentManage}</p>
         </div>
 
-        <nav className="min-h-0 flex-1 space-y-4 overflow-y-auto px-3 py-4">
-          {menuGroups.map((group) => (
-            <div key={group.id}>
-              <p className="px-3 pb-1.5 text-[0.65rem] font-semibold tracking-[0.14em] text-white/40">
+        <nav className="min-h-0 flex-1 overflow-y-auto px-3 py-3">
+          {menuGroups.map((group, groupIndex) => (
+            <div key={group.id} className={groupIndex === 0 ? "" : "mt-3 border-t border-[var(--line)] pt-3"}>
+              <p className="px-3 pb-1.5 text-[0.65rem] tracking-[0.14em] text-[var(--muted)] uppercase">
                 {group.label}
               </p>
-              <div className="space-y-1">
+              <div>
                 {group.items.map((item) => {
                   const active = section === item.id;
                   return (
@@ -291,14 +271,11 @@ export default function AdminPage() {
                         setSection(item.id);
                         setSidebarOpen(false);
                       }}
-                      className={`flex w-full flex-col rounded-sm px-3 py-2.5 text-left transition-colors ${
-                        active
-                          ? "bg-white/12 text-white"
-                          : "text-white/70 hover:bg-white/6 hover:text-white"
+                      className={`flex w-full px-3 py-2.5 text-left text-sm transition-colors ${
+                        active ? "bg-[var(--ink)] text-white" : "text-[var(--ink)] hover:bg-[var(--bg)]"
                       }`}
                     >
-                      <span className="text-sm font-semibold">{item.label}</span>
-                      <span className="text-xs text-white/45">{item.desc}</span>
+                      {item.label}
                     </button>
                   );
                 })}
@@ -307,14 +284,14 @@ export default function AdminPage() {
           ))}
         </nav>
 
-        <div className="shrink-0 space-y-2 border-t border-white/10 px-4 py-4 text-sm">
-          <a href="/" className="block text-white/65 transition-colors hover:text-white">
+        <div className="shrink-0 space-y-2 border-t border-[var(--line)] px-5 py-4 text-sm">
+          <a href="/" className="block text-[var(--muted)] hover:text-[var(--ink)]">
             {t.viewSite}
           </a>
           <button
             type="button"
             onClick={onLogout}
-            className="block text-white/65 transition-colors hover:text-white"
+            className="block text-[var(--muted)] hover:text-[var(--ink)]"
           >
             {t.logout}
           </button>
@@ -338,59 +315,48 @@ export default function AdminPage() {
                   <span className="h-px w-full bg-[var(--ink)]" />
                 </span>
               </button>
-              <AdminSymbol className="hidden h-8 w-auto sm:block lg:hidden" />
+              <AdminMark className="hidden h-8 w-8 text-sm sm:inline-flex lg:hidden" />
               <div className="min-w-0">
                 <h1 className="font-display truncate text-base font-bold sm:text-lg md:text-xl">
                   {activeMenu.label}
                 </h1>
-                <p className="truncate text-xs text-[var(--muted)]">{activeMenu.desc}</p>
               </div>
             </div>
 
             <div className="flex shrink-0 items-center gap-3">
-              <p className="hidden text-xs text-[var(--muted)] sm:block">
-                {saving
-                  ? t.saving
-                  : statusKey === "saved"
-                    ? t.saved
-                    : statusKey === "synced"
-                      ? t.syncEnToKoDone
-                      : statusKey === "failed"
-                        ? t.saveFailed
-                        : t.editing(activeMenu.label)}
-              </p>
-              {section !== "inquiries" &&
-                section !== "mail" &&
-                section !== "security" && (
-                  <>
+              {section !== "dashboard" &&
+              section !== "inquiries" &&
+              section !== "mail" &&
+              section !== "security" ? (
+                <>
+                  <p className="hidden text-xs text-[var(--muted)] sm:block">
+                    {saving
+                      ? t.saving
+                      : statusKey === "saved"
+                        ? t.saved
+                        : statusKey === "failed"
+                          ? t.saveFailed
+                          : t.editing(activeMenu.label)}
+                  </p>
+                  {(["ko", "en"] as const).map((code) => (
                     <button
+                      key={code}
                       type="button"
-                      onClick={() => void syncEnglishIntoKorean()}
-                      disabled={saving}
-                      className="border border-[var(--line)] px-2.5 py-1.5 text-xs font-semibold text-[var(--ink)] hover:bg-[#f5f7f9] disabled:opacity-50"
-                      title={t.enSeedsKoHint}
+                      onClick={() => {
+                        setEditLocale(code);
+                        setStatusKey("");
+                      }}
+                      className={`px-3 py-1.5 text-xs font-semibold transition-colors ${
+                        editLocale === code
+                          ? "bg-[var(--ink)] text-white"
+                          : "border border-[var(--line)] text-[var(--muted)] hover:text-[var(--ink)]"
+                      }`}
                     >
-                      {t.syncEnToKo}
+                      {code === "ko" ? "KO" : "EN"}
                     </button>
-                    {(["ko", "en"] as const).map((code) => (
-                      <button
-                        key={code}
-                        type="button"
-                        onClick={() => {
-                          setEditLocale(code);
-                          setStatusKey("");
-                        }}
-                        className={`px-3 py-1.5 text-xs font-semibold transition-colors ${
-                          editLocale === code
-                            ? "bg-[var(--navy)] text-white"
-                            : "border border-[var(--line)] text-[var(--muted)] hover:text-[var(--ink)]"
-                        }`}
-                      >
-                        {code === "ko" ? "KO" : "EN"}
-                      </button>
-                    ))}
-                  </>
-                )}
+                  ))}
+                </>
+              ) : null}
             </div>
           </div>
         </header>
@@ -405,17 +371,10 @@ export default function AdminPage() {
           </div>
         ) : null}
 
-        {editLocale === "en" &&
-        section !== "inquiries" &&
-        section !== "mail" &&
-        section !== "security" ? (
-          <div className="shrink-0 border-b border-[var(--line)] bg-[#f5f7f9] px-3 py-2.5 text-xs text-[var(--muted)] sm:px-4 md:px-6 lg:px-8">
-            {t.enSeedsKoHint}
-          </div>
-        ) : null}
-
         <div className="min-h-0 flex-1 overflow-y-auto overflow-x-auto">
-        {section === "inquiries" ? (
+        {section === "dashboard" ? (
+          <AdminDashboard locale={editLocale} />
+        ) : section === "inquiries" ? (
           <div className="px-3 py-5 sm:px-4 md:px-6 md:py-6 lg:px-8">
             <div className="w-full min-w-0">
               <InquiriesPanel ui={t} />
@@ -440,65 +399,72 @@ export default function AdminPage() {
                 <Panel
                   title={t.hero}
                   hint={
-                    editLocale === "ko"
-                      ? "기본 문구는 슬라이드에 값이 없을 때 사용됩니다. 이미지·동영상은 아래 슬라이드에서 변경하세요. 약 1초 후 자동 저장됩니다."
-                      : "Default copy is used when a slide field is empty. Change images/videos in the slides list below. Edits auto-save after about 1 second."
+                    heroSlideMode === "list"
+                      ? editLocale === "ko"
+                        ? "슬라이드를 누르면 세부 화면에서 수정하고 삭제할 수 있습니다. 기본 문구는 슬라이드 값이 없을 때 쓰입니다."
+                        : "Open a slide to edit or delete it. Default copy is used when a slide field is empty."
+                      : undefined
                   }
                 >
-                  <Field
-                    label={t.brand}
-                    value={localeContent.hero.brand}
-                    onChange={(v) =>
-                      updateLocale({
-                        ...localeContent,
-                        hero: { ...localeContent.hero, brand: v },
-                      })
-                    }
-                  />
-                  <Field
-                    label={t.headline}
-                    value={localeContent.hero.headline}
-                    onChange={(v) =>
-                      updateLocale({
-                        ...localeContent,
-                        hero: { ...localeContent.hero, headline: v },
-                      })
-                    }
-                  />
-                  <TextArea
-                    label={t.intro}
-                    value={localeContent.hero.subheadline}
-                    onChange={(v) =>
-                      updateLocale({
-                        ...localeContent,
-                        hero: { ...localeContent.hero, subheadline: v },
-                      })
-                    }
-                  />
-                  <Field
-                    label={t.ctaLabel}
-                    value={localeContent.hero.ctaLabel}
-                    onChange={(v) =>
-                      updateLocale({
-                        ...localeContent,
-                        hero: { ...localeContent.hero, ctaLabel: v },
-                      })
-                    }
-                  />
-                  <Field
-                    label={t.ctaHref}
-                    value={localeContent.hero.ctaHref}
-                    onChange={(v) =>
-                      updateLocale({
-                        ...localeContent,
-                        hero: { ...localeContent.hero, ctaHref: v },
-                      })
-                    }
-                  />
+                  {heroSlideMode === "list" && (
+                    <>
+                      <Field
+                        label={t.brand}
+                        value={localeContent.hero.brand}
+                        onChange={(v) =>
+                          updateLocale({
+                            ...localeContent,
+                            hero: { ...localeContent.hero, brand: v },
+                          })
+                        }
+                      />
+                      <Field
+                        label={t.headline}
+                        value={localeContent.hero.headline}
+                        onChange={(v) =>
+                          updateLocale({
+                            ...localeContent,
+                            hero: { ...localeContent.hero, headline: v },
+                          })
+                        }
+                      />
+                      <TextArea
+                        label={t.intro}
+                        value={localeContent.hero.subheadline}
+                        onChange={(v) =>
+                          updateLocale({
+                            ...localeContent,
+                            hero: { ...localeContent.hero, subheadline: v },
+                          })
+                        }
+                      />
+                      <Field
+                        label={t.ctaLabel}
+                        value={localeContent.hero.ctaLabel}
+                        onChange={(v) =>
+                          updateLocale({
+                            ...localeContent,
+                            hero: { ...localeContent.hero, ctaLabel: v },
+                          })
+                        }
+                      />
+                      <Field
+                        label={t.ctaHref}
+                        value={localeContent.hero.ctaHref}
+                        onChange={(v) =>
+                          updateLocale({
+                            ...localeContent,
+                            hero: { ...localeContent.hero, ctaHref: v },
+                          })
+                        }
+                      />
+                    </>
+                  )}
                   <HeroSlidesEditor
                     hero={localeContent.hero}
                     locale={editLocale}
                     ui={t}
+                    onModeChange={setHeroSlideMode}
                     onChange={(hero) =>
                       updateLocale({
                         ...localeContent,
@@ -653,32 +619,6 @@ export default function AdminPage() {
                 />
               )}
 
-              {section === "affiliate" && (
-                <Panel title={t.affiliate} layout="table">
-                  {(
-                    [
-                      ["name", t.affiliateName],
-                      ["tel", t.affiliateTel],
-                      ["fax", t.affiliateFax],
-                      ["email", t.affiliateEmail],
-                      ["website", t.affiliateWebsite],
-                    ] as const
-                  ).map(([key, label]) => (
-                    <ListRow
-                      key={key}
-                      label={label}
-                      value={localeContent.affiliate[key]}
-                      onChange={(v) =>
-                        updateLocale({
-                          ...localeContent,
-                          affiliate: { ...localeContent.affiliate, [key]: v },
-                        })
-                      }
-                    />
-                  ))}
-                </Panel>
-              )}
-
             </div>
         </div>
         )}
@@ -707,6 +647,7 @@ function HistoryEditor({
   onChange: (items: HistoryItem[]) => void;
 }) {
   const [rows, setRows] = useState(() => ensureHistoryIds(items));
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const rowsRef = useRef(rows);
   const typingRef = useRef(false);
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -754,10 +695,9 @@ function HistoryEditor({
 
   function addItem() {
     typingRef.current = false;
-    commit(
-      [...rowsRef.current, { id: `h-${Date.now()}`, date: "", detail: "" }],
-      true,
-    );
+    const next = [...rowsRef.current, { id: `h-${Date.now()}`, date: "", detail: "" }];
+    commit(next, true);
+    setOpenIndex(next.length - 1);
   }
 
   function removeItem(index: number) {
@@ -779,93 +719,127 @@ function HistoryEditor({
     commit(copy, true);
   }
 
+  const openItem = openIndex !== null ? rows[openIndex] : null;
+
   return (
     <Panel
       title="연혁"
-      hint="입력 후 잠시 지나면 자동 저장되어 사이트에 반영됩니다. 새 항목은 목록 맨 아래에 추가됩니다."
+      hint={openItem ? undefined : "항목을 누르면 세부 화면에서 수정하고 삭제할 수 있습니다."}
     >
-      <div className="flex justify-end">
-        <button
-          type="button"
-          onClick={addItem}
-          className="btn border border-[var(--line)] bg-white text-sm"
-        >
-          + 연혁 추가
-        </button>
-      </div>
-
-      <div className="overflow-hidden border border-[var(--line)]">
-        <div className="hidden border-b border-[var(--line)] bg-[#f5f7f9] px-3 py-2 text-xs font-medium text-[var(--muted)] sm:grid sm:grid-cols-[9rem_1fr_7.5rem] sm:gap-3 sm:px-4">
-          <span>날짜</span>
-          <span>내용</span>
-          <span className="text-right">관리</span>
-        </div>
-
-        {rows.length === 0 ? (
-          <p className="px-4 py-8 text-center text-sm text-[var(--muted)]">
-            등록된 연혁이 없습니다. 위 버튼으로 추가하세요.
-          </p>
-        ) : (
-          rows.map((item, index) => (
-            <div
-              key={item.id || `row-${index}`}
-              className="grid gap-2 border-b border-[var(--line)] px-3 py-3 last:border-b-0 sm:grid-cols-[9rem_1fr_7.5rem] sm:items-start sm:gap-3 sm:px-4"
+      {openItem && openIndex !== null ? (
+        <div className="grid gap-4">
+          <div className="flex items-center justify-between gap-3">
+            <h3 className="text-sm font-bold">연혁 수정</h3>
+            <button
+              type="button"
+              onClick={() => {
+                finishTyping();
+                setOpenIndex(null);
+              }}
+              className="text-sm text-[var(--muted)] hover:underline"
             >
-              <label className="block text-sm sm:text-inherit">
-                <span className="mb-1 block text-xs font-medium text-[var(--muted)] sm:hidden">
-                  날짜
-                </span>
-                <input
-                  value={item.date}
-                  onChange={(e) => updateItem(index, { date: e.target.value })}
-                  onBlur={finishTyping}
-                  placeholder="2021.11"
-                  className="w-full border border-[var(--line)] bg-[#f8fafb] px-2.5 py-2 text-sm outline-none focus:border-[var(--navy)] focus:bg-white"
-                />
-              </label>
-              <label className="block min-w-0 text-sm">
-                <span className="mb-1 block text-xs font-medium text-[var(--muted)] sm:hidden">
-                  내용
-                </span>
-                <input
-                  value={item.detail}
-                  onChange={(e) => updateItem(index, { detail: e.target.value })}
-                  onBlur={finishTyping}
-                  placeholder="연혁 내용을 입력하세요"
-                  className="w-full min-w-0 border border-[var(--line)] bg-[#f8fafb] px-2.5 py-2 text-sm outline-none focus:border-[var(--navy)] focus:bg-white"
-                />
-              </label>
-              <div className="flex items-center justify-end gap-1">
-                <button
-                  type="button"
-                  onClick={() => moveItem(index, -1)}
-                  disabled={index === 0}
-                  className="border border-[var(--line)] px-2 py-1.5 text-xs disabled:opacity-30"
-                  aria-label="위로"
+              목록으로
+            </button>
+          </div>
+          <label className="grid gap-1.5 text-sm">
+            <span className="font-medium">날짜</span>
+            <input
+              value={openItem.date}
+              onChange={(e) => updateItem(openIndex, { date: e.target.value })}
+              onBlur={finishTyping}
+              placeholder="2021.11"
+              className="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm outline-none focus:border-[var(--navy)]"
+            />
+          </label>
+          <label className="grid gap-1.5 text-sm">
+            <span className="font-medium">내용</span>
+            <input
+              value={openItem.detail}
+              onChange={(e) => updateItem(openIndex, { detail: e.target.value })}
+              onBlur={finishTyping}
+              placeholder="연혁 내용을 입력하세요"
+              className="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm outline-none focus:border-[var(--navy)]"
+            />
+          </label>
+          <div className="flex justify-between gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                removeItem(openIndex);
+                setOpenIndex(null);
+              }}
+              className="text-sm text-red-600 hover:underline"
+            >
+              삭제
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                finishTyping();
+                setOpenIndex(null);
+              }}
+              className="btn border border-[var(--line)] bg-white text-sm"
+            >
+              목록으로
+            </button>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="flex justify-end">
+            <button
+              type="button"
+              onClick={addItem}
+              className="btn border border-[var(--line)] bg-white text-sm"
+            >
+              + 연혁 추가
+            </button>
+          </div>
+          <div className="overflow-hidden border border-[var(--line)]">
+            {rows.length === 0 ? (
+              <p className="px-4 py-8 text-center text-sm text-[var(--muted)]">
+                등록된 연혁이 없습니다. 위 버튼으로 추가하세요.
+              </p>
+            ) : (
+              rows.map((item, index) => (
+                <div
+                  key={item.id || `row-${index}`}
+                  className="flex items-center gap-3 border-b border-[var(--line)] last:border-b-0"
                 >
-                  ↑
-                </button>
-                <button
-                  type="button"
-                  onClick={() => moveItem(index, 1)}
-                  disabled={index === rows.length - 1}
-                  className="border border-[var(--line)] px-2 py-1.5 text-xs disabled:opacity-30"
-                  aria-label="아래로"
-                >
-                  ↓
-                </button>
-                <button
-                  type="button"
-                  onClick={() => removeItem(index)}
-                  className="px-2 py-1.5 text-xs text-red-600 hover:underline"
-                >
-                  삭제
-                </button>
-              </div>
-            </div>
-          ))
-        )}
-      </div>
+                  <button
+                    type="button"
+                    onClick={() => setOpenIndex(index)}
+                    className="flex min-w-0 flex-1 items-baseline gap-4 px-4 py-3 text-left hover:bg-[#f7f6f3]"
+                  >
+                    <span className="w-24 shrink-0 text-sm text-[var(--muted)]">{item.date || "날짜 없음"}</span>
+                    <span className="truncate text-sm font-medium">{item.detail || "(내용 없음)"}</span>
+                  </button>
+                  <div className="flex shrink-0 items-center gap-1 pr-3">
+                    <button
+                      type="button"
+                      onClick={() => moveItem(index, -1)}
+                      disabled={index === 0}
+                      className="border border-[var(--line)] px-2 py-1.5 text-xs disabled:opacity-30"
+                      aria-label="위로"
+                    >
+                      ↑
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => moveItem(index, 1)}
+                      disabled={index === rows.length - 1}
+                      className="border border-[var(--line)] px-2 py-1.5 text-xs disabled:opacity-30"
+                      aria-label="아래로"
+                    >
+                      ↓
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </>
+      )}
     </Panel>
   );
 }
@@ -894,6 +868,7 @@ function PerformanceEditor({
   onSave: (items: PerformanceItem[]) => void | Promise<void>;
 }) {
   const [rows, setRows] = useState(() => ensurePerformanceIds(items));
+  const [openId, setOpenId] = useState<string | null>(null);
   const [dirty, setDirty] = useState(false);
   const [saving, setSaving] = useState(false);
   const [savedFlash, setSavedFlash] = useState(false);
@@ -910,14 +885,12 @@ function PerformanceEditor({
     setRows((prev) => prev.map((item, i) => (i === index ? { ...item, ...patch } : item)));
   }
 
-  function sortByDate() {
-    setRows((prev) => sortPerformances(prev, true));
-  }
-
   function addItem() {
+    const id = `p-${Date.now()}`;
     setDirty(true);
     setSavedFlash(false);
-    setRows((prev) => [...prev, { id: `p-${Date.now()}`, date: "", detail: "", client: "" }]);
+    setRows((prev) => [...prev, { id, date: "", detail: "", client: "" }]);
+    setOpenId(id);
   }
 
   function requestRemove(index: number) {
@@ -930,8 +903,14 @@ function PerformanceEditor({
     setPendingDelete(null);
     setDirty(true);
     setSavedFlash(false);
-    setRows((prev) => prev.filter((_, i) => i !== index));
+    setRows((prev) => {
+      if (prev[index]?.id === openId) setOpenId(null);
+      return prev.filter((_, i) => i !== index);
+    });
   }
+
+  const openIndex = rows.findIndex((item) => item.id === openId);
+  const openItem = openIndex >= 0 ? rows[openIndex] : null;
 
   async function handleSave() {
     const sorted = sortPerformances(rows, true);
@@ -945,7 +924,55 @@ function PerformanceEditor({
 
   return (
     <>
-      <Panel title={ui.performance} hint={ui.performanceHint}>
+      <Panel title={ui.performance} hint={openItem ? undefined : ui.performanceHint}>
+        {openItem ? (
+          <div className="grid gap-4">
+            <div className="flex items-center justify-between gap-3">
+              <h3 className="text-sm font-bold">{ui.performance}</h3>
+              <button type="button" onClick={() => setOpenId(null)} className="text-sm text-[var(--muted)] hover:underline">
+                {ui.backToList}
+              </button>
+            </div>
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-medium">{ui.date}</span>
+              <input
+                value={openItem.date}
+                onChange={(e) => updateItem(openIndex, { date: e.target.value })}
+                placeholder="2022.11.30"
+                className="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm outline-none focus:border-[var(--navy)]"
+              />
+            </label>
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-medium">{ui.detail}</span>
+              <input
+                value={openItem.detail}
+                onChange={(e) => updateItem(openIndex, { detail: e.target.value })}
+                className="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm outline-none focus:border-[var(--navy)]"
+              />
+            </label>
+            <label className="grid gap-1.5 text-sm">
+              <span className="font-medium">{ui.performanceClient}</span>
+              <input
+                value={openItem.client}
+                onChange={(e) => updateItem(openIndex, { client: e.target.value })}
+                className="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm outline-none focus:border-[var(--navy)]"
+              />
+            </label>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <button
+                type="button"
+                onClick={() => requestRemove(openIndex)}
+                className="text-sm text-red-600 hover:underline"
+              >
+                {ui.delete}
+              </button>
+              <button type="button" onClick={() => setOpenId(null)} className="btn border border-[var(--line)] bg-white text-sm">
+                {ui.backToList}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <>
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="text-sm text-[var(--muted)]">{ui.total(rows.length)}</p>
           <button
@@ -957,69 +984,26 @@ function PerformanceEditor({
           </button>
         </div>
 
-        <div className="overflow-x-auto border border-[var(--line)]">
-          <div className="hidden min-w-[36rem] border-b border-[var(--line)] bg-[#f5f7f9] px-3 py-2 text-xs font-medium text-[var(--muted)] sm:grid sm:grid-cols-[8.5rem_1fr_9rem_4.5rem] sm:gap-3 sm:px-4">
-            <span>{ui.date}</span>
-            <span>{ui.detail}</span>
-            <span>{ui.performanceClient}</span>
-            <span className="text-right">{ui.manage}</span>
-          </div>
-
+        <div className="overflow-hidden border border-[var(--line)]">
           {rows.length === 0 ? (
             <p className="px-4 py-10 text-center text-sm text-[var(--muted)]">{ui.performanceEmpty}</p>
           ) : (
-            rows.map((item, index) => (
-              <div
-                key={item.id || `perf-${index}`}
-                className="grid min-w-[36rem] gap-2 border-b border-[var(--line)] px-3 py-3 last:border-b-0 sm:grid-cols-[8.5rem_1fr_9rem_4.5rem] sm:items-start sm:gap-3 sm:px-4"
+            rows.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setOpenId(item.id || null)}
+                className="flex w-full items-baseline gap-4 border-b border-[var(--line)] px-4 py-3 text-left last:border-b-0 hover:bg-[#f7f6f3]"
               >
-                <label className="block text-sm">
-                  <span className="mb-1 block text-xs font-medium text-[var(--muted)] sm:hidden">
-                    {ui.date}
-                  </span>
-                  <input
-                    value={item.date}
-                    onChange={(e) => updateItem(index, { date: e.target.value })}
-                    onBlur={sortByDate}
-                    placeholder="2022.11.30"
-                    className="w-full border border-[var(--line)] bg-[#f8fafb] px-2.5 py-2 text-sm outline-none focus:border-[var(--navy)] focus:bg-white"
-                  />
-                </label>
-                <label className="block min-w-0 text-sm">
-                  <span className="mb-1 block text-xs font-medium text-[var(--muted)] sm:hidden">
-                    {ui.detail}
-                  </span>
-                  <input
-                    value={item.detail}
-                    onChange={(e) => updateItem(index, { detail: e.target.value })}
-                    placeholder={ui.detail}
-                    className="w-full min-w-0 border border-[var(--line)] bg-[#f8fafb] px-2.5 py-2 text-sm outline-none focus:border-[var(--navy)] focus:bg-white"
-                  />
-                </label>
-                <label className="block text-sm">
-                  <span className="mb-1 block text-xs font-medium text-[var(--muted)] sm:hidden">
-                    {ui.performanceClient}
-                  </span>
-                  <input
-                    value={item.client}
-                    onChange={(e) => updateItem(index, { client: e.target.value })}
-                    placeholder={ui.performanceClient}
-                    className="w-full border border-[var(--line)] bg-[#f8fafb] px-2.5 py-2 text-sm outline-none focus:border-[var(--navy)] focus:bg-white"
-                  />
-                </label>
-                <div className="flex items-center justify-end">
-                  <button
-                    type="button"
-                    onClick={() => requestRemove(index)}
-                    className="px-2 py-1.5 text-xs text-red-600 hover:underline"
-                  >
-                    {ui.delete}
-                  </button>
-                </div>
-              </div>
+                <span className="w-28 shrink-0 text-sm text-[var(--muted)]">{item.date || "—"}</span>
+                <span className="min-w-0 flex-1 truncate text-sm font-medium">{item.detail || "—"}</span>
+                <span className="hidden max-w-[10rem] truncate text-sm text-[var(--muted)] sm:block">{item.client || "—"}</span>
+              </button>
             ))
           )}
         </div>
+          </>
+        )}
 
         <div className="flex flex-wrap items-center justify-end gap-3 border-t border-[var(--line)] pt-4">
           {savedFlash && !dirty ? (
@@ -1065,7 +1049,7 @@ function MailPanel({ ui }: { ui: AdminUi }) {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const [hasPassword, setHasPassword] = useState(false);
-  const [fromName, setFromName] = useState("Hankook Service Center");
+  const [fromName, setFromName] = useState("Kumsung Engineering Private Limited");
   const [fromEmail, setFromEmail] = useState("");
   const [to, setTo] = useState("team@hksc.in");
 
@@ -1082,7 +1066,7 @@ function MailPanel({ ui }: { ui: AdminUi }) {
       setSecure(Boolean(data.secure));
       setUser(data.user || "");
       setHasPassword(Boolean(data.hasPassword));
-      setFromName(data.fromName || "Hankook Service Center");
+      setFromName(data.fromName || "Kumsung Engineering Private Limited");
       setFromEmail(data.fromEmail || "");
       setTo(data.to || "team@hksc.in");
     })();
@@ -1370,6 +1354,7 @@ function InquiriesPanel({ ui }: { ui: AdminUi }) {
   const [items, setItems] = useState<Inquiry[]>([]);
   const [loading, setLoading] = useState(true);
   const [pendingId, setPendingId] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -1391,46 +1376,64 @@ function InquiriesPanel({ ui }: { ui: AdminUi }) {
     const res = await fetch(`/api/inquiries?id=${encodeURIComponent(id)}`, { method: "DELETE" });
     if (res.ok) {
       setItems((prev) => prev.filter((item) => item.id !== id));
+      setSelectedId((current) => (current === id ? null : current));
     }
   }
 
+  const selected = items.find((item) => item.id === selectedId) ?? null;
+
   return (
     <>
-      <Panel title={ui.inquiriesTitle} hint={ui.inquiriesHint}>
+      <Panel title={ui.inquiriesTitle} hint={selected ? undefined : ui.inquiriesHint}>
         {loading ? (
           <p className="text-sm text-[var(--muted)]">{ui.inquiriesLoading}</p>
+        ) : selected ? (
+          <div className="grid gap-4">
+            <div className="flex items-center justify-between gap-3">
+              <h3 className="text-sm font-bold">{selected.name}</h3>
+              <button type="button" onClick={() => setSelectedId(null)} className="text-sm text-[var(--muted)] hover:underline">
+                {ui.backToList}
+              </button>
+            </div>
+            <p className="text-sm text-[var(--muted)]">
+              {selected.email}
+              {selected.phone ? ` · ${selected.phone}` : ""}
+              {selected.company ? ` · ${selected.company}` : ""}
+            </p>
+            <time className="text-xs text-[var(--muted)]">{new Date(selected.createdAt).toLocaleString()}</time>
+            <p className="whitespace-pre-wrap text-sm leading-relaxed">{selected.message}</p>
+            <div className="flex items-center justify-between gap-2">
+              <button
+                type="button"
+                onClick={() => setPendingId(selected.id)}
+                className="text-sm text-red-600 hover:underline"
+              >
+                {ui.inquiriesDelete}
+              </button>
+              <button type="button" onClick={() => setSelectedId(null)} className="btn border border-[var(--line)] bg-white text-sm">
+                {ui.backToList}
+              </button>
+            </div>
+          </div>
         ) : items.length === 0 ? (
           <p className="text-sm text-[var(--muted)]">{ui.inquiriesEmpty}</p>
         ) : (
-          <div className="space-y-3">
+          <div className="overflow-hidden border border-[var(--line)]">
             {items.map((item) => (
-              <article key={item.id} className="border border-[var(--line)] p-4">
-                <div className="flex flex-wrap items-start justify-between gap-2">
-                  <div>
-                    <p className="font-medium text-[var(--ink)]">{item.name}</p>
-                    <p className="mt-0.5 text-sm text-[var(--muted)]">
-                      {item.email}
-                      {item.phone ? ` · ${item.phone}` : ""}
-                      {item.company ? ` · ${item.company}` : ""}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <time className="text-xs text-[var(--muted)]">
-                      {new Date(item.createdAt).toLocaleString()}
-                    </time>
-                    <button
-                      type="button"
-                      onClick={() => setPendingId(item.id)}
-                      className="text-sm text-red-600 hover:underline"
-                    >
-                      {ui.inquiriesDelete}
-                    </button>
-                  </div>
-                </div>
-                <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-[var(--ink)]">
-                  {item.message}
-                </p>
-              </article>
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setSelectedId(item.id)}
+                className="flex w-full items-baseline justify-between gap-4 border-b border-[var(--line)] px-4 py-3 text-left last:border-b-0 hover:bg-[#f7f6f3]"
+              >
+                <span className="min-w-0">
+                  <span className="block truncate text-sm font-medium">{item.name}</span>
+                  <span className="block truncate text-xs text-[var(--muted)]">{item.email}</span>
+                </span>
+                <time className="shrink-0 text-xs text-[var(--muted)]">
+                  {new Date(item.createdAt).toLocaleDateString()}
+                </time>
+              </button>
             ))}
           </div>
         )}
@@ -1622,6 +1625,8 @@ function ClientsEditor({
         onChange={(v) => onChange({ ...clients, lead: v })}
       />
 
+      {mode === "list" && (
+      <>
       <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--line)] pt-4">
         <p className="text-sm text-[var(--muted)]">{ui.total(clients.items.length)}</p>
         <button
@@ -1641,13 +1646,12 @@ function ClientsEditor({
               <th className="w-12 px-3 py-2.5 text-center">No</th>
               <th className="w-16 px-3 py-2.5">로고</th>
               <th className="px-3 py-2.5">고객사명</th>
-              <th className="w-28 px-3 py-2.5 text-right">관리</th>
             </tr>
           </thead>
           <tbody>
             {clients.items.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-4 py-10 text-center text-[var(--muted)]">
+                <td colSpan={3} className="px-4 py-10 text-center text-[var(--muted)]">
                   등록된 고객사가 없습니다. 등록 버튼으로 추가하세요.
                 </td>
               </tr>
@@ -1655,9 +1659,8 @@ function ClientsEditor({
               clients.items.map((item, index) => (
                 <tr
                   key={item.id}
-                  className={`border-b border-[var(--line)] last:border-b-0 ${
-                    editingIndex === index ? "bg-[#f0f4f8]" : "bg-white"
-                  }`}
+                  onClick={() => openEdit(index)}
+                  className="cursor-pointer border-b border-[var(--line)] bg-white last:border-b-0 hover:bg-[#f7f6f3]"
                 >
                   <td className="px-3 py-2.5 text-center text-[var(--muted)]">{index + 1}</td>
                   <td className="px-3 py-2.5">
@@ -1673,32 +1676,14 @@ function ClientsEditor({
                   <td className="max-w-[16rem] truncate px-3 py-2.5 font-medium text-[var(--ink)]">
                     {item.name || "(이름 없음)"}
                   </td>
-                  <td className="px-3 py-2.5">
-                    <div className="flex items-center justify-end gap-1">
-                      <button
-                        type="button"
-                        onClick={() => openEdit(index)}
-                        disabled={mode !== "list"}
-                        className="border border-[var(--line)] px-2 py-1 text-xs hover:bg-[#f5f7f9] disabled:opacity-30"
-                      >
-                        수정
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => removeItem(index)}
-                        disabled={mode !== "list"}
-                        className="px-2 py-1 text-xs text-red-600 hover:underline disabled:opacity-30"
-                      >
-                        삭제
-                      </button>
-                    </div>
-                  </td>
                 </tr>
               ))
             )}
           </tbody>
         </table>
       </div>
+      </>
+      )}
 
       {mode !== "list" && (
         <div className="border border-[var(--navy)] bg-[#f8fafb] p-4 sm:p-5">
@@ -1707,7 +1692,7 @@ function ClientsEditor({
               {mode === "create" ? "고객사 등록" : "고객사 수정"}
             </h3>
             <button type="button" onClick={cancelForm} className="text-sm text-[var(--muted)] hover:underline">
-              취소
+              {ui.backToList}
             </button>
           </div>
 
@@ -1729,21 +1714,26 @@ function ClientsEditor({
 
           {uploadError && <p className="text-sm text-red-600">{uploadError}</p>}
 
-          <div className="flex flex-wrap justify-end gap-2 pt-1">
-            <button
-              type="button"
-              onClick={cancelForm}
-              className="btn border border-[var(--line)] bg-white text-sm"
-            >
-              취소
-            </button>
-            <button
-              type="button"
-              onClick={saveForm}
-              className="border border-[var(--navy)] bg-white px-4 py-2 text-sm text-[var(--navy)] hover:bg-[#f5f7f9]"
-            >
-              {mode === "create" ? ui.applyAdd : ui.applyEdit}
-            </button>
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+            {mode === "edit" && editingIndex !== null ? (
+              <button type="button" onClick={() => removeItem(editingIndex)} className="text-sm text-red-600 hover:underline">
+                삭제
+              </button>
+            ) : (
+              <span />
+            )}
+            <div className="flex flex-wrap justify-end gap-2">
+              <button type="button" onClick={cancelForm} className="btn border border-[var(--line)] bg-white text-sm">
+                {ui.backToList}
+              </button>
+              <button
+                type="button"
+                onClick={saveForm}
+                className="border border-[var(--navy)] bg-white px-4 py-2 text-sm text-[var(--navy)] hover:bg-[#f5f7f9]"
+              >
+                {mode === "create" ? ui.applyAdd : ui.applyEdit}
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -1887,6 +1877,8 @@ function TeamEditor({
         onChange={(v) => onChange({ ...team, lead: v })}
       />
 
+      {mode === "list" && (
+      <>
       <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--line)] pt-4">
         <p className="text-sm text-[var(--muted)]">{ui.totalPeople(rows.length)}</p>
         <button
@@ -1908,23 +1900,15 @@ function TeamEditor({
               <th className="w-16 px-3 py-2.5">구분</th>
               <th className="px-3 py-2.5">이름</th>
               <th className="hidden px-3 py-2.5 md:table-cell">직책</th>
-              <th className="w-28 px-3 py-2.5 text-right">관리</th>
             </tr>
           </thead>
           <tbody>
             {rows.map((row, index) => {
-              const editing =
-                mode === "edit" &&
-                ((row.target.kind === "ceo" && target?.kind === "ceo") ||
-                  (row.target.kind === "member" &&
-                    target?.kind === "member" &&
-                    target.index === row.target.index));
               return (
                 <tr
                   key={row.key}
-                  className={`border-b border-[var(--line)] last:border-b-0 ${
-                    editing ? "bg-[#f0f4f8]" : "bg-white"
-                  }`}
+                  onClick={() => openEdit(row.target)}
+                  className="cursor-pointer border-b border-[var(--line)] bg-white last:border-b-0 hover:bg-[#f7f6f3]"
                 >
                   <td className="px-3 py-2.5 text-center text-[var(--muted)]">{index + 1}</td>
                   <td className="px-3 py-2.5">
@@ -1946,34 +1930,14 @@ function TeamEditor({
                   <td className="hidden max-w-[12rem] truncate px-3 py-2.5 text-[var(--muted)] md:table-cell">
                     {row.person.role || "—"}
                   </td>
-                  <td className="px-3 py-2.5">
-                    <div className="flex items-center justify-end gap-1">
-                      <button
-                        type="button"
-                        onClick={() => openEdit(row.target)}
-                        disabled={mode !== "list"}
-                        className="border border-[var(--line)] px-2 py-1 text-xs hover:bg-[#f5f7f9] disabled:opacity-30"
-                      >
-                        수정
-                      </button>
-                      {row.removable ? (
-                        <button
-                          type="button"
-                          onClick={() => removeMember(row.target.kind === "member" ? row.target.index : -1)}
-                          disabled={mode !== "list"}
-                          className="px-2 py-1 text-xs text-red-600 hover:underline disabled:opacity-30"
-                        >
-                          삭제
-                        </button>
-                      ) : null}
-                    </div>
-                  </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
       </div>
+      </>
+      )}
 
       {mode !== "list" && (
         <div className="border border-[var(--navy)] bg-[#f8fafb] p-4 sm:p-5">
@@ -1986,7 +1950,7 @@ function TeamEditor({
                   : "팀원 수정"}
             </h3>
             <button type="button" onClick={cancelForm} className="text-sm text-[var(--muted)] hover:underline">
-              취소
+              {ui.backToList}
             </button>
           </div>
 
@@ -2020,21 +1984,26 @@ function TeamEditor({
 
           {uploadError && <p className="text-sm text-red-600">{uploadError}</p>}
 
-          <div className="flex flex-wrap justify-end gap-2 pt-1">
-            <button
-              type="button"
-              onClick={cancelForm}
-              className="btn border border-[var(--line)] bg-white text-sm"
-            >
-              취소
-            </button>
-            <button
-              type="button"
-              onClick={saveForm}
-              className="border border-[var(--navy)] bg-white px-4 py-2 text-sm text-[var(--navy)] hover:bg-[#f5f7f9]"
-            >
-              {mode === "create" ? ui.applyAdd : ui.applyEdit}
-            </button>
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+            {mode === "edit" && target?.kind === "member" ? (
+              <button type="button" onClick={() => removeMember(target.index)} className="text-sm text-red-600 hover:underline">
+                삭제
+              </button>
+            ) : (
+              <span />
+            )}
+            <div className="flex flex-wrap justify-end gap-2">
+              <button type="button" onClick={cancelForm} className="btn border border-[var(--line)] bg-white text-sm">
+                {ui.backToList}
+              </button>
+              <button
+                type="button"
+                onClick={saveForm}
+                className="border border-[var(--navy)] bg-white px-4 py-2 text-sm text-[var(--navy)] hover:bg-[#f5f7f9]"
+              >
+                {mode === "create" ? ui.applyAdd : ui.applyEdit}
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -2143,6 +2112,8 @@ function CertificatesEditor({
   return (
     <>
       <Panel title={ui.certificates} hint={ui.certificatesHint}>
+        {mode === "list" && (
+        <>
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="text-sm text-[var(--muted)]">{ui.total(items.length)}</p>
           <button
@@ -2176,9 +2147,8 @@ function CertificatesEditor({
                 items.map((item, index) => (
                   <tr
                     key={`${item.title}-${index}`}
-                    className={`border-b border-[var(--line)] last:border-b-0 ${
-                      editingIndex === index ? "bg-[#f0f4f8]" : "bg-white"
-                    }`}
+                    onClick={() => openEdit(index)}
+                    className="cursor-pointer border-b border-[var(--line)] bg-white last:border-b-0 hover:bg-[#f7f6f3]"
                   >
                     <td className="px-3 py-2.5 text-center text-[var(--muted)]">{index + 1}</td>
                     <td className="px-3 py-2.5">
@@ -2196,7 +2166,7 @@ function CertificatesEditor({
                     <td className="max-w-[16rem] truncate px-3 py-2.5 font-medium text-[var(--ink)]">
                       {item.title || ui.noTitle}
                     </td>
-                    <td className="px-3 py-2.5">
+                    <td className="px-3 py-2.5" onClick={(event) => event.stopPropagation()}>
                       <div className="flex flex-wrap items-center justify-end gap-1">
                         <button
                           type="button"
@@ -2216,22 +2186,6 @@ function CertificatesEditor({
                         >
                           ↓
                         </button>
-                        <button
-                          type="button"
-                          onClick={() => openEdit(index)}
-                          disabled={mode !== "list"}
-                          className="border border-[var(--line)] px-2 py-1 text-xs hover:bg-[#f5f7f9] disabled:opacity-30"
-                        >
-                          {ui.edit}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setPendingDelete(index)}
-                          disabled={mode !== "list"}
-                          className="px-2 py-1 text-xs text-red-600 hover:underline disabled:opacity-30"
-                        >
-                          {ui.delete}
-                        </button>
                       </div>
                     </td>
                   </tr>
@@ -2240,6 +2194,8 @@ function CertificatesEditor({
             </tbody>
           </table>
         </div>
+        </>
+        )}
 
         {mode !== "list" && (
           <div className="border border-[var(--navy)] bg-[#f8fafb] p-4 sm:p-5">
@@ -2252,7 +2208,7 @@ function CertificatesEditor({
                 onClick={cancelForm}
                 className="text-sm text-[var(--muted)] hover:underline"
               >
-                {ui.cancel}
+                {ui.backToList}
               </button>
             </div>
 
@@ -2280,21 +2236,26 @@ function CertificatesEditor({
                   onChange={(v) => setDraft((prev) => ({ ...prev, image: v }))}
                 />
                 {uploadError && <p className="text-sm text-red-600">{uploadError}</p>}
-                <div className="flex flex-wrap justify-end gap-2 pt-1">
-                  <button
-                    type="button"
-                    onClick={cancelForm}
-                    className="btn border border-[var(--line)] bg-white text-sm"
-                  >
-                    {ui.cancel}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={saveForm}
-                    className="border border-[var(--navy)] bg-white px-4 py-2 text-sm text-[var(--navy)] hover:bg-[#f5f7f9]"
-                  >
-                    {mode === "create" ? ui.applyAdd : ui.applyEdit}
-                  </button>
+                <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+                  {mode === "edit" && editingIndex !== null ? (
+                    <button type="button" onClick={() => setPendingDelete(editingIndex)} className="text-sm text-red-600 hover:underline">
+                      {ui.delete}
+                    </button>
+                  ) : (
+                    <span />
+                  )}
+                  <div className="flex flex-wrap justify-end gap-2">
+                    <button type="button" onClick={cancelForm} className="btn border border-[var(--line)] bg-white text-sm">
+                      {ui.backToList}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={saveForm}
+                      className="border border-[var(--navy)] bg-white px-4 py-2 text-sm text-[var(--navy)] hover:bg-[#f5f7f9]"
+                    >
+                      {mode === "create" ? ui.applyAdd : ui.applyEdit}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2430,6 +2391,8 @@ function GalleryEditor({
         onChange={(v) => onChange({ ...gallery, lead: v })}
       />
 
+      {mode === "list" && (
+      <>
       <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[var(--line)] pt-4">
         <p className="text-sm text-[var(--muted)]">총 {gallery.items.length}건</p>
         <button
@@ -2464,9 +2427,8 @@ function GalleryEditor({
               gallery.items.map((item, index) => (
                 <tr
                   key={item.id}
-                  className={`border-b border-[var(--line)] last:border-b-0 ${
-                    editingIndex === index ? "bg-[#f0f4f8]" : "bg-white"
-                  }`}
+                  onClick={() => openEdit(index)}
+                  className="cursor-pointer border-b border-[var(--line)] bg-white last:border-b-0 hover:bg-[#f7f6f3]"
                 >
                   <td className="px-3 py-2.5 text-center text-[var(--muted)]">{index + 1}</td>
                   <td className="px-3 py-2.5">
@@ -2487,7 +2449,7 @@ function GalleryEditor({
                   <td className="hidden max-w-[16rem] truncate px-3 py-2.5 text-[var(--muted)] md:table-cell">
                     {item.caption || "—"}
                   </td>
-                  <td className="px-3 py-2.5">
+                  <td className="px-3 py-2.5" onClick={(event) => event.stopPropagation()}>
                     <div className="flex flex-wrap items-center justify-end gap-1">
                       <button
                         type="button"
@@ -2507,22 +2469,6 @@ function GalleryEditor({
                       >
                         ↓
                       </button>
-                      <button
-                        type="button"
-                        onClick={() => openEdit(index)}
-                        disabled={mode !== "list"}
-                        className="border border-[var(--line)] px-2 py-1 text-xs hover:bg-[#f5f7f9] disabled:opacity-30"
-                      >
-                        수정
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => removeItem(index)}
-                        disabled={mode !== "list"}
-                        className="px-2 py-1 text-xs text-red-600 hover:underline disabled:opacity-30"
-                      >
-                        삭제
-                      </button>
                     </div>
                   </td>
                 </tr>
@@ -2531,6 +2477,8 @@ function GalleryEditor({
           </tbody>
         </table>
       </div>
+      </>
+      )}
 
       {mode !== "list" && (
         <div className="border border-[var(--navy)] bg-[#f8fafb] p-4 sm:p-5">
@@ -2539,7 +2487,7 @@ function GalleryEditor({
               {mode === "create" ? "사진 등록" : "사진 수정"}
             </h3>
             <button type="button" onClick={cancelForm} className="text-sm text-[var(--muted)] hover:underline">
-              취소
+              {ui.backToList}
             </button>
           </div>
 
@@ -2572,21 +2520,26 @@ function GalleryEditor({
                 onChange={(v) => setDraft((prev) => ({ ...prev, image: v }))}
               />
               {uploadError && <p className="text-sm text-red-600">{uploadError}</p>}
-              <div className="flex flex-wrap justify-end gap-2 pt-1">
-                <button
-                  type="button"
-                  onClick={cancelForm}
-                  className="btn border border-[var(--line)] bg-white text-sm"
-                >
-                  취소
-                </button>
-                <button
-                  type="button"
-                  onClick={saveForm}
-                  className="border border-[var(--navy)] bg-white px-4 py-2 text-sm text-[var(--navy)] hover:bg-[#f5f7f9]"
-                >
-                  {mode === "create" ? ui.applyAdd : ui.applyEdit}
-                </button>
+              <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+                {mode === "edit" && editingIndex !== null ? (
+                  <button type="button" onClick={() => removeItem(editingIndex)} className="text-sm text-red-600 hover:underline">
+                    삭제
+                  </button>
+                ) : (
+                  <span />
+                )}
+                <div className="flex flex-wrap justify-end gap-2">
+                  <button type="button" onClick={cancelForm} className="btn border border-[var(--line)] bg-white text-sm">
+                    {ui.backToList}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={saveForm}
+                    className="border border-[var(--navy)] bg-white px-4 py-2 text-sm text-[var(--navy)] hover:bg-[#f5f7f9]"
+                  >
+                    {mode === "create" ? ui.applyAdd : ui.applyEdit}
+                  </button>
+                </div>
               </div>
             </div>
           </div>

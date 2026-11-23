@@ -1,6 +1,6 @@
-# Hankook Service Center Company Website
+# Kumsung Engineering Private Limited Company Website
 
-Simple corporate site for **Hankook Service Center Pvt. Ltd.** with an admin panel for content editing.
+Simple corporate site for **Kumsung Engineering Private Limited** with an admin panel for content editing.
 
 Repository: [https://github.com/sacsace/hsc](https://github.com/sacsace/hsc)
 
@@ -14,14 +14,14 @@ npm run dev
 - Site: [http://localhost:3500](http://localhost:3500)
 - Admin: [http://localhost:3500/admin](http://localhost:3500/admin)
 
-Default admin password: `hankook@2026` (change in admin **보안** menu or `.env.local`)
+Default admin password: `kumsung@2026` (change in admin **보안** menu or `.env.local`)
 
 ## Environment
 
 ```env
 NEXT_PUBLIC_SITE_URL=https://hksc.in
 NEXT_PUBLIC_MVS_URL=https://www.mvsystem.in
-ADMIN_PASSWORD=hankook@2026
+ADMIN_PASSWORD=kumsung@2026
 ADMIN_SECRET=your-random-secret
 # Optional override for persistent storage (defaults to ./data locally,
 # or RAILWAY_VOLUME_MOUNT_PATH on Railway)
@@ -34,7 +34,7 @@ ADMIN_SECRET=your-random-secret
 # SMTP_SECURE=true
 # SMTP_USER=you@gmail.com
 # SMTP_PASS=your-16-char-app-password
-# SMTP_FROM_NAME=Hankook Service Center
+# SMTP_FROM_NAME=Kumsung Engineering Private Limited
 # SMTP_FROM_EMAIL=you@gmail.com
 # MAIL_TO=team@hksc.in
 ```

@@ -1,6 +1,7 @@
 import type { Locale } from "@/lib/types";
 
 export type AdminSectionId =
+  | "dashboard"
   | "hero"
   | "greeting"
   | "company"
@@ -10,7 +11,6 @@ export type AdminSectionId =
   | "clients"
   | "team"
   | "gallery"
-  | "affiliate"
   | "inquiries"
   | "mail"
   | "security";
@@ -20,6 +20,11 @@ export type MenuGroup = { id: string; label: string; items: MenuItem[] };
 
 const menuGroupsKo: MenuGroup[] = [
   {
+    id: "overview",
+    label: "개요",
+    items: [{ id: "dashboard", label: "대시보드", desc: "방문과 유입 환경" }],
+  },
+  {
     id: "company",
     label: "회사 소개",
     items: [
@@ -27,7 +32,6 @@ const menuGroupsKo: MenuGroup[] = [
       { id: "company", label: "회사 정보", desc: "법인·주소·인증" },
       { id: "history", label: "연혁", desc: "회사 히스토리" },
       { id: "team", label: "팀원", desc: "대표·팀원 소개" },
-      { id: "affiliate", label: "관계사", desc: "한국 관계사" },
     ],
   },
   {
@@ -42,7 +46,7 @@ const menuGroupsKo: MenuGroup[] = [
     id: "business",
     label: "사업·서비스",
     items: [
-      { id: "services", label: "설비·서비스", desc: "제공 서비스·제품" },
+      { id: "services", label: "서비스", desc: "제공 서비스·제품" },
       { id: "performance", label: "실적", desc: "주요 수행" },
       { id: "clients", label: "고객사", desc: "고객사 목록" },
     ],
@@ -60,6 +64,11 @@ const menuGroupsKo: MenuGroup[] = [
 
 const menuGroupsEn: MenuGroup[] = [
   {
+    id: "overview",
+    label: "Overview",
+    items: [{ id: "dashboard", label: "Dashboard", desc: "Visits and arrival environment" }],
+  },
+  {
     id: "company",
     label: "Company",
     items: [
@@ -67,7 +76,6 @@ const menuGroupsEn: MenuGroup[] = [
       { id: "company", label: "Company", desc: "Legal · address · certs" },
       { id: "history", label: "History", desc: "Company timeline" },
       { id: "team", label: "Team", desc: "CEO · members" },
-      { id: "affiliate", label: "Affiliate", desc: "Korea affiliate" },
     ],
   },
   {
@@ -82,7 +90,7 @@ const menuGroupsEn: MenuGroup[] = [
     id: "business",
     label: "Business",
     items: [
-      { id: "services", label: "Services", desc: "Equipment & products" },
+      { id: "services", label: "Services", desc: "Offerings and products" },
       { id: "performance", label: "Performance", desc: "Key projects" },
       { id: "clients", label: "Clients", desc: "Client list" },
     ],
@@ -126,11 +134,6 @@ export function adminUi(locale: Locale) {
       : "Railway Volume을 /data 경로에 연결하세요. 고객사 로고·갤러리 사진이 유지됩니다. 배포 이미지에 포함된 seed 이미지는 없을 때 자동으로 복구됩니다.",
     editing: (label: string) =>
       en ? `English · ${label}` : `한국어 · ${label}`,
-    enSeedsKoHint: en
-      ? "English edits also fill empty Korean fields and sync shared media/order."
-      : "영문 수정 시 비어 있는 한글 항목에 영문이 기본 입력되고, 이미지·순서가 함께 맞춰집니다.",
-    syncEnToKo: en ? "Sync EN → KO" : "영문→한글 동기화",
-    syncEnToKoDone: en ? "Korean gaps filled from English." : "영문 기준으로 한글 빈 항목을 채웠습니다.",
     loading: en ? "Loading…" : "로딩 중…",
     contentLoading: en ? "Loading content…" : "콘텐츠 로딩 중…",
 
@@ -150,6 +153,7 @@ export function adminUi(locale: Locale) {
     edit: en ? "Edit" : "수정",
     delete: en ? "Delete" : "삭제",
     cancel: en ? "Cancel" : "취소",
+    backToList: en ? "Back to list" : "목록으로",
     confirm: en ? "Confirm" : "확인",
     confirmTitle: en ? "Please confirm" : "확인",
     confirmOk: en ? "OK" : "확인",
@@ -226,14 +230,14 @@ export function adminUi(locale: Locale) {
     performanceSaved: en ? "Saved" : "저장됨",
     performanceClient: en ? "Client" : "고객사",
     performanceDeleteConfirm: en ? "Delete this performance record?" : "이 실적을 삭제할까요?",
-    services: en ? "Equipment & Services" : "설비·서비스",
+    services: en ? "Services" : "서비스",
     servicesHint: en
       ? "Edit page copy, offerings, brands, and product documents shown on /services."
       : "제공 서비스·브랜드·제품 자료를 관리합니다. 저장하면 /services에 바로 반영됩니다.",
     servicesPage: en ? "Page copy" : "페이지 문구",
     servicesOfferings: en ? "Offerings" : "제공 서비스",
     servicesBrands: en ? "Brands & products" : "브랜드·제품",
-    servicesCategories: en ? "Categories" : "설비 분류",
+    servicesCategories: en ? "Categories" : "분류",
     servicesAddOffering: en ? "Add offering" : "서비스 추가",
     servicesAddBrand: en ? "Add brand" : "브랜드 추가",
     servicesAddProduct: en ? "Add product" : "제품 추가",

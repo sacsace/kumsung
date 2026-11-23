@@ -16,6 +16,7 @@
 # next.js
 /.next/
 /out/
+*.tsbuildinfo
 
 # production
 /build
@@ -40,6 +41,7 @@ yarn-error.log*
 /data/admin.json
 /data/mail.json
 /data/inquiries.json
+/data/visits.json
 
 # runtime uploads (persisted via Railway Volume in production)
 /data/uploads/

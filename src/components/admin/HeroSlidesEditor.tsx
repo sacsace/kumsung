@@ -27,11 +27,13 @@ export function HeroSlidesEditor({
   locale,
   ui,
   onChange,
+  onModeChange,
 }: {
   hero: LocaleContent["hero"];
   locale: "ko" | "en";
   ui: AdminUi;
   onChange: (hero: LocaleContent["hero"]) => void;
+  onModeChange?: (mode: "list" | "create" | "edit") => void;
 }) {
   const slides = hero.slides || [];
   const [mode, setMode] = useState<"list" | "create" | "edit">("list");
@@ -53,6 +55,7 @@ export function HeroSlidesEditor({
 
   function openCreate() {
     setMode("create");
+    onModeChange?.("create");
     setEditingIndex(null);
     setDraft(emptySlide(locale));
     setUploadError("");
@@ -60,6 +63,7 @@ export function HeroSlidesEditor({
 
   function openEdit(index: number) {
     setMode("edit");
+    onModeChange?.("edit");
     setEditingIndex(index);
     setDraft({ ...slides[index] });
     setUploadError("");
@@ -67,6 +71,7 @@ export function HeroSlidesEditor({
 
   function cancelForm() {
     setMode("list");
+    onModeChange?.("list");
     setEditingIndex(null);
     setDraft(emptySlide(locale));
     setUploadError("");
@@ -135,6 +140,8 @@ export function HeroSlidesEditor({
 
   return (
     <div className="grid gap-4 border-t border-[var(--line)] pt-4">
+      {mode === "list" && (
+      <>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
           <p className="text-sm font-semibold text-[var(--ink)]">{ui.heroSlides}</p>
@@ -175,9 +182,8 @@ export function HeroSlidesEditor({
               slides.map((slide, index) => (
                 <tr
                   key={slide.id}
-                  className={`border-b border-[var(--line)] last:border-b-0 ${
-                    editingIndex === index ? "bg-[#f0f4f8]" : "bg-white"
-                  }`}
+                  onClick={() => openEdit(index)}
+                  className="cursor-pointer border-b border-[var(--line)] bg-white last:border-b-0 hover:bg-[#f7f6f3]"
                 >
                   <td className="px-3 py-2.5 text-center text-[var(--muted)]">
                     {index + 1}
@@ -217,7 +223,7 @@ export function HeroSlidesEditor({
                   <td className="hidden max-w-[10rem] truncate px-3 py-2.5 text-[var(--muted)] md:table-cell">
                     {slide.brand || "—"}
                   </td>
-                  <td className="px-3 py-2.5">
+                  <td className="px-3 py-2.5" onClick={(event) => event.stopPropagation()}>
                     <div className="flex flex-wrap items-center justify-end gap-1">
                       <button
                         type="button"
@@ -237,22 +243,6 @@ export function HeroSlidesEditor({
                       >
                         ↓
                       </button>
-                      <button
-                        type="button"
-                        onClick={() => openEdit(index)}
-                        disabled={mode !== "list"}
-                        className="border border-[var(--line)] px-2 py-1 text-xs hover:bg-[#f5f7f9] disabled:opacity-30"
-                      >
-                        {ui.edit}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setPendingDelete(index)}
-                        disabled={mode !== "list"}
-                        className="px-2 py-1 text-xs text-red-600 hover:underline disabled:opacity-30"
-                      >
-                        {ui.delete}
-                      </button>
                     </div>
                   </td>
                 </tr>
@@ -261,6 +251,8 @@ export function HeroSlidesEditor({
           </tbody>
         </table>
       </div>
+      </>
+      )}
 
       {mode !== "list" && (
         <div className="border border-[var(--navy)] bg-[#f8fafb] p-4 sm:p-5">
@@ -273,7 +265,7 @@ export function HeroSlidesEditor({
               onClick={cancelForm}
               className="text-sm text-[var(--muted)] hover:underline"
             >
-              {ui.cancel}
+              {ui.backToList}
             </button>
           </div>
 
@@ -446,21 +438,34 @@ export function HeroSlidesEditor({
                 <p className="text-sm text-red-600">{uploadError}</p>
               ) : null}
 
-              <div className="flex flex-wrap justify-end gap-2 pt-1">
-                <button
-                  type="button"
-                  onClick={cancelForm}
-                  className="btn border border-[var(--line)] bg-white text-sm"
-                >
-                  {ui.cancel}
-                </button>
-                <button
-                  type="button"
-                  onClick={saveForm}
-                  className="border border-[var(--navy)] bg-white px-4 py-2 text-sm text-[var(--navy)] hover:bg-[#f5f7f9]"
-                >
-                  {mode === "create" ? ui.applyAdd : ui.applyEdit}
-                </button>
+              <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+                {mode === "edit" && editingIndex !== null ? (
+                  <button
+                    type="button"
+                    onClick={() => setPendingDelete(editingIndex)}
+                    className="text-sm text-red-600 hover:underline"
+                  >
+                    {ui.delete}
+                  </button>
+                ) : (
+                  <span />
+                )}
+                <div className="flex flex-wrap justify-end gap-2">
+                  <button
+                    type="button"
+                    onClick={cancelForm}
+                    className="btn border border-[var(--line)] bg-white text-sm"
+                  >
+                    {ui.backToList}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={saveForm}
+                    className="border border-[var(--navy)] bg-white px-4 py-2 text-sm text-[var(--navy)] hover:bg-[#f5f7f9]"
+                  >
+                    {mode === "create" ? ui.applyAdd : ui.applyEdit}
+                  </button>
+                </div>
               </div>
             </div>
           </div>

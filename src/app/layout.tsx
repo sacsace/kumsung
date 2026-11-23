@@ -18,17 +18,18 @@ import "@fontsource/noto-sans-kr/400.css";
 import "@fontsource/noto-sans-kr/500.css";
 import "@fontsource/noto-sans-kr/600.css";
 import "@fontsource/noto-sans-kr/700.css";
+import { VisitBeacon } from "@/components/VisitBeacon";
 import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getRequestLocale();
   return {
     metadataBase: new URL(getSiteUrl()),
-    title: "Hankook Service Center | Total Air Solution",
-    applicationName: "Hankook Service Center",
+    title: "Kumsung Engineering",
+    applicationName: "Kumsung Engineering",
     icons: {
       icon: [
-        { url: "/favicon.ico", sizes: "any" },
+        { url: "/favicon.svg", type: "image/svg+xml" },
         { url: "/icon.png", type: "image/png", sizes: "32x32" },
       ],
       apple: "/apple-icon.png",
@@ -55,7 +56,10 @@ export default async function RootLayout({
           {serializeJsonLd(graphs)}
         </script>
       </head>
-      <body className="min-h-full antialiased">{children}</body>
+      <body className="min-h-full antialiased">
+        <VisitBeacon />
+        {children}
+      </body>
     </html>
   );
 }

@@ -13,7 +13,7 @@ export function SiteLogo({
     <span className="inline-flex items-center gap-2.5">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src="/images/symbol-hsc.png"
+        src="/images/symbol-kumsung.png"
         alt=""
         width={1272}
         height={1153}
@@ -23,14 +23,14 @@ export function SiteLogo({
         aria-hidden
       />
       <span className={`font-display leading-[1.05] ${textTone}`}>
-        <span className="block text-[0.72rem] font-semibold tracking-[0.04em] sm:text-[0.8rem] md:text-[0.88rem]">
-          HANKOOK
+        <span className="block text-[0.62rem] font-semibold tracking-[0.02em] sm:text-[0.68rem] md:text-[0.74rem]">
+          KUMSUNG ENGINEERING
         </span>
-        <span className="mt-0.5 block text-[0.52rem] font-medium tracking-[0.14em] opacity-80 sm:text-[0.58rem] md:text-[0.62rem]">
-          SERVICE CENTER
+        <span className="mt-0.5 block text-[0.48rem] font-medium tracking-[0.12em] opacity-80 sm:text-[0.52rem] md:text-[0.56rem]">
+          PRIVATE LIMITED
         </span>
       </span>
-      <span className="sr-only">Hankook Service Center</span>
+      <span className="sr-only">Kumsung Engineering Private Limited</span>
     </span>
   );
 }

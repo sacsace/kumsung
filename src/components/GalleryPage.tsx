@@ -1,10 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Footer } from "@/components/Footer";
 import { GallerySection, type GalleryViewMode } from "@/components/GallerySection";
-import { Header } from "@/components/Header";
 import { LanguageProvider, useLanguage } from "@/components/LanguageProvider";
+import { PageIntro } from "@/components/PageIntro";
+import { SiteFrame } from "@/components/SiteFrame";
 import { SafeSearchInput } from "@/components/SafeSearchInput";
 import { ViewModeToggle } from "@/components/ViewModeToggle";
 import type { SiteContent } from "@/lib/types";
@@ -26,19 +26,12 @@ function GallerySections() {
   }, [allItems, query]);
 
   return (
-    <div className="site-shell bg-white">
-      <Header variant="solid" />
-
-      <main className="flex-1">
-        <section className="border-b border-[var(--line)] bg-[var(--navy-deep)] pt-28 pb-14 text-white md:pt-32 md:pb-16">
-          <div className="container">
-            <p className="section-label !text-white/55">{t.galleryLabel}</p>
-            <h1 className="section-title !mb-3 !text-white">
-              {gallery?.title || t.galleryTitle}
-            </h1>
-            <p className="max-w-xl text-white/70">{gallery?.lead || t.galleryLead}</p>
-          </div>
-        </section>
+    <SiteFrame>
+        <PageIntro
+          eyebrow={t.galleryLabel}
+          title={gallery?.title || t.galleryTitle}
+          lead={gallery?.lead || t.galleryLead}
+        />
 
         <section className="border-b border-[var(--line)] bg-white py-5">
           <div className="container">
@@ -92,10 +85,7 @@ function GallerySections() {
             viewMode={viewMode}
           />
         )}
-      </main>
-
-      <Footer />
-    </div>
+    </SiteFrame>
   );
 }
 

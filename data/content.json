@@ -1,1658 +1,372 @@
 {
   "ko": {
     "hero": {
-      "brand": "Hankook Service Center",
-      "headline": "Total Air Solution Service",
-      "subheadline": "에어 컴프레서 판매·수리·유지보수 인도에서 신뢰할 수 있는 산업용 에어 솔루션을 제공합니다.",
-      "ctaLabel": "문의하기",
-      "ctaHref": "/contact",
-      "videoUrl": "/videos/hero-reel.mp4",
+      "brand": "Kumsung Engineering",
+      "headline": "기술과 신뢰로 완성하는 공간",
+      "subheadline": "고객의 구상에 현장에 맞는 기술을 더합니다. 공간의 기능과 설비의 효율, 세부 마감까지 고려해 오래도록 가치를 지니는 공간을 만들어갑니다.",
+      "ctaLabel": "회사 소개",
+      "ctaHref": "/about",
+      "videoUrl": "",
       "slides": [
         {
-          "id": "slide-compressor",
-          "type": "video",
-          "src": "/videos/hero-reel.mp4",
-          "label": "에어 컴프레서",
-          "brand": "Hankook Service Center",
-          "headline": "Total Air Solution",
-          "subheadline": "에어 컴프레서 판매·수리·유지보수. 인도에서 신뢰할 수 있는 산업용 에어 솔루션을 제공합니다.",
-          "ctaLabel": "문의하기",
-          "ctaHref": "/contact"
-        },
-        {
-          "id": "slide-facility",
+          "id": "studio",
           "type": "image",
-          "src": "/images/slide-2.png",
-          "label": "컴프레서 설비",
-          "brand": "Reliable Service",
-          "headline": "안정적인 설비 운영",
-          "subheadline": "산업 현장의 컴프레서 설비를 점검하고, 생산이 멈추지 않도록 신속하고 정확한 서비스를 제공합니다.",
-          "ctaLabel": "실적 보기",
-          "ctaHref": "/performance"
-        },
-        {
-          "id": "slide-pipe",
-          "type": "video",
-          "src": "/videos/pipe.mp4",
-          "label": "배관",
-          "brand": "Engineering",
-          "headline": "배관과 엔지니어링",
-          "subheadline": "압축공기 배관 설계부터 시공·유지관리까지, 현장 맞춤형 엔지니어링 솔루션을 지원합니다.",
-          "ctaLabel": "회사 소개",
+          "src": "",
+          "label": "Kumsung",
+          "brand": "Kumsung Engineering",
+          "headline": "점과 선",
+          "subheadline": "대지와 빛을 하나의 장면으로 편집합니다.",
+          "ctaLabel": "소개",
           "ctaHref": "/about"
-        },
-        {
-          "id": "slide-1794308288313",
-          "type": "image",
-          "src": "/uploads/1794308299177-ecc320b0.png",
-          "label": "",
-          "brand": "Chicago Pneumatic",
-          "headline": "",
-          "subheadline": "",
-          "ctaLabel": "제품 보기",
-          "ctaHref": "/services/chicago-pneumatic"
         }
       ]
     },
     "greeting": {
-      "title": "대표 인사말",
-      "body": "고객의 안정적인 생산을 함께하는 압축공기 솔루션 파트너\n한국서비스센터를 찾아주셔서 감사합니다.\n한국서비스센터는 산업용 공기압축기의 판매부터 유지보수, 수리 및 오버홀까지, 고객의 생산 현장에 필요한 압축공기 솔루션을 제공합니다.\n안정적인 압축공기 공급은 생산성과 품질을 지키는 중요한 기반입니다. 저희는 고객의 설비와 운영 환경을 세심하게 이해하고, 현장에 맞는 기술 지원과 신속한 서비스로 설비 가동 중단을 줄이고 운영 효율을 높이는 데 힘쓰고 있습니다.\n\n고객과의 약속을 소중히 여기며, 제품 공급 이후에도 책임 있는 서비스를 이어가겠습니다. 기술력과 신뢰를 바탕으로 고객이 안심하고 생산에 집중할 수 있도록 돕는 든든한 파트너가 되겠습니다.\n앞으로도 한국서비스센터에 많은 관심과 성원 부탁드립니다.\n감사합니다."
+      "title": "신뢰를 바탕으로, 공간의 가치를 만듭니다.",
+      "body": "Kumsung Engineering을 찾아주셔서 감사합니다.\n우리는 고객의 생각과 공간의 목적을 이해하는 것에서 시작합니다. 사용자의 편의와 동선, 기능과 미감을 함께 고려하며, 작은 디테일까지 세심하게 살펴 오래도록 가치를 지니는 공간을 추구합니다.\n좋은 결과는 충분한 소통과 약속을 지키는 과정에서 나온다고 믿습니다. 고객의 요구에 귀 기울이고, 현장 여건에 맞는 합리적인 해결책을 제안하며, 모든 프로젝트에 책임 있는 자세로 임하겠습니다.\n고객의 구상이 실질적인 가치로 이어질 수 있도록, 신뢰할 수 있는 파트너로 함께하겠습니다.\n감사합니다.\n"
     },
     "company": {
-      "legalName": "Hankook Service Center Private Limited",
-      "founded": "2021년 11월 8일",
-      "employees": "6명",
-      "businessType": "서비스업",
-      "businessItem": "산업용 에어 컴프레서 수리·판매",
-      "hqKorea": "충청남도 천안시 서북구 성환읍 연암율금로 166",
-      "branchIndia": "Office 119, 24/1, Doddanekundi, Ferns City Road, Outer Ring Road, Marathahalli, Bangalore, Karnataka 560037",
-      "branchIndiaMapEmbed": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1973.0562914194513!2d77.69682492859985!3d12.978534306050603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDU4JzQyLjciTiA3N8KwNDEnNTAuOSJF!5e1!3m2!1sko!2sin!4v1790584743425!5m2!1sko!2sin",
-      "chennaiOffice": "28-B, CASA Grande Futura, Singaperumal Koil Road, Sriperumbudur, Kancheepuram, Tamil Nadu - 602105, India.",
-      "chennaiMapEmbed": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1973.2628005165345!2d79.93732026970514!3d12.95249630619212!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDU3JzA5LjAiTiA3OcKwNTYnMTYuNyJF!5e1!3m2!1sko!2skr!4v1790449072251!5m2!1sko!2skr",
-      "cin": "U29100KA2021PTC153989",
-      "pan": "AAGCH0318F",
-      "tan": "BLRH13130F",
+      "legalName": "Kumsung Engineering Private Limited",
+      "founded": "스튜디오",
+      "employees": "—",
+      "businessType": "건축 설계",
+      "businessItem": "건축, 실내, 사이 공간",
+      "hqKorea": "",
+      "branchIndia": "방문은 약속 후",
+      "branchIndiaMapEmbed": "",
+      "chennaiOffice": "",
+      "chennaiMapEmbed": "",
+      "cin": "",
+      "pan": "",
+      "tan": "",
       "email": "hyun.hs@hksc.in",
       "phone": ""
     },
     "history": [
       {
         "id": "h-en-0",
-        "date": "2023.08",
-        "detail": "test"
+        "date": "01",
+        "detail": "대지를 점으로 읽는다"
       },
       {
         "id": "h-en-1",
-        "date": "2010.02",
-        "detail": "컴프레서 서비스센터 설립"
+        "date": "02",
+        "detail": "점을 선으로 잇는다"
       },
       {
         "id": "h-en-2",
-        "date": "2010.08",
-        "detail": "컴프레서 서비스센터 법인 설립"
-      },
-      {
-        "id": "h-en-3",
-        "date": "2012.01",
-        "detail": "태국 Hankook Compressor 설립"
-      },
-      {
-        "id": "h-en-4",
-        "date": "2014.01",
-        "detail": "태국 Hankook Compressor Co., Ltd. 서비스센터 본사 이전"
-      },
-      {
-        "id": "h-en-5",
-        "date": "2016.10",
-        "detail": "서비스센터 법인으로 상호 변경"
-      },
-      {
-        "id": "h-en-6",
-        "date": "2016.10",
-        "detail": "컴프레서 공식 대리점 계약"
-      },
-      {
-        "id": "h-en-7",
-        "date": "2021.11",
-        "detail": "인도 Hankook Service Center Pvt. Ltd. 설립"
-      },
-      {
-        "id": "h-en-8",
-        "date": "2022.05",
-        "detail": "Tectyl Oil & Chemicals (India) Pvt Ltd 컴프레서 오일 판매 계약"
+        "date": "03",
+        "detail": "선이 면이 되고, 면이 장면이 된다"
       }
     ],
     "performances": [
       {
         "id": "p-en-0",
-        "date": "2022.11.30",
-        "detail": "GA75+ 오버홀",
-        "client": "Dae Seung Autopart"
+        "date": "2026",
+        "detail": "중정이 있는 주택",
+        "client": "건축 설계 · 설계 스터디"
       },
       {
         "id": "p-en-1",
-        "date": "2022.11.20",
-        "detail": "GA132 오버홀",
-        "client": "DAS"
+        "date": "2025",
+        "detail": "골목으로 열린 작은 도서관",
+        "client": "건축 설계 · 설계 스터디"
       },
       {
         "id": "p-en-2",
-        "date": "2022.09.06",
-        "detail": "ES-4000 Control Unit (CPC 50G) 교체",
-        "client": "SIT"
+        "date": "2024",
+        "detail": "빛을 접는 갤러리",
+        "client": "건축 설계 · 설계 스터디"
       },
       {
         "id": "p-en-3",
-        "date": "2022.09.01",
-        "detail": "ELGI Air Compressor EN-22 Package 판매",
-        "client": "Kolon India"
-      },
-      {
-        "id": "p-en-4",
-        "date": "2022.08.26",
-        "detail": "GA160, GA75, GA55, GA37 연간 유지보수 계약",
-        "client": "SHC INDIA"
-      },
-      {
-        "id": "p-en-5",
-        "date": "2022.08.24",
-        "detail": "GA30 판매",
-        "client": "Hando Precision"
-      },
-      {
-        "id": "p-en-6",
-        "date": "2022.08.05",
-        "detail": "TA-100 (FS Curtis) 판매",
-        "client": "Samwoo Packing"
-      },
-      {
-        "id": "p-en-7",
-        "date": "2022.07.10",
-        "detail": "GA55, GA37 연간 유지보수 계약",
-        "client": "Woory Automotive"
-      },
-      {
-        "id": "p-en-8",
-        "date": "2022.07.08",
-        "detail": "GA75 판매",
-        "client": "Jintech Automotive"
-      },
-      {
-        "id": "p-en-9",
-        "date": "2022.05.20",
-        "detail": "GA37 VSD 오버홀",
-        "client": "KB Autosys"
-      },
-      {
-        "id": "p-en-10",
-        "date": "2022.05.01",
-        "detail": "test",
-        "client": "test"
+        "date": "2023",
+        "detail": "바람길을 품은 사무공간",
+        "client": "건축 설계 · 설계 스터디"
       }
     ],
-    "affiliate": {
-      "name": "서비스센터 주식회사",
-      "tel": "041-585-9090",
-      "fax": "041-585-9696",
-      "email": "serive9090@naver.com",
-      "website": "https://www.service9090.co.kr"
+    "clients": {
+      "title": "의뢰",
+      "lead": "장면을 함께 만든 일들입니다.",
+      "items": [
+        {
+          "id": "c-1",
+          "name": "주택",
+          "logo": ""
+        },
+        {
+          "id": "c-2",
+          "name": "문화",
+          "logo": ""
+        },
+        {
+          "id": "c-3",
+          "name": "업무",
+          "logo": ""
+        }
+      ]
     },
-    "certificates": [
-      {
-        "title": "법인설립증명서 (Certificate of Incorporation)",
-        "image": "/images/certificate-incorporation.png"
-      }
-    ],
     "team": {
-      "title": "팀원 소개",
-      "lead": "산업용 컴프레서 판매·서비스를 책임지는 Hankook Service Center 팀입니다.",
+      "title": "함께 만드는 공간",
+      "lead": "좋은 공간은 서로의 생각을 나누고 세심하게 조율하는 과정에서 완성됩니다. Kumsung Engineering은 고객의 요구에 귀 기울이고, 구성원 간 긴밀한 협업을 통해 현장에 맞는 해결책을 찾아갑니다. 작은 디테일부터 전체의 완성도까지, 각자의 역할에 책임을 다하며 공간의 가치를 함께 만들어갑니다.",
       "ceo": {
-        "name": "Hoseb Hyun",
-        "role": "Managing Director",
-        "bio": "인도 현지에서 산업용 컴프레서 판매·수리·유지보수 Total Air Solution을 이끌고 있습니다.",
+        "name": "",
+        "role": "",
+        "bio": "",
         "photo": ""
       },
       "members": []
     },
     "media": {
-      "title": "현장 영상",
+      "title": "영상",
       "lead": "",
       "items": []
     },
     "gallery": {
-      "title": "갤러리",
-      "lead": "현장과 서비스 활동 사진입니다.",
+      "title": "공간의 기록",
+      "lead": "구상부터 완성까지, 공간이 만들어지는 과정을 기록합니다. 도면과 현장 사진, 완성된 공간의 디테일을 통해 Kumsung Engineering의 생각과 작업 과정을 소개합니다.",
       "items": [
         {
-          "id": "g1",
-          "title": "Partnership",
-          "image": "/images/hero-graphic.png",
-          "caption": "Trusted business partnership"
-        },
-        {
-          "id": "g2",
-          "title": "Brand",
-          "image": "/images/banner-blue.png",
-          "caption": "Hankook Service Center"
-        },
-        {
-          "id": "g3",
-          "title": "Incorporation",
-          "image": "/images/certificate-incorporation.png",
-          "caption": "Certificate of Incorporation"
-        },
-        {
-          "id": "g4",
-          "title": "Visual motif",
-          "image": "/images/pattern-light.png",
-          "caption": "Brand visual"
+          "id": "g-1795473231686",
+          "title": "111111111",
+          "image": "/uploads/1795473235619-3dc6bed5.png",
+          "caption": "11111111111"
         }
       ]
     },
-    "clients": {
-      "title": "고객사",
-      "lead": "고객의 생산 현장에 필요한 압축공기 솔루션과 책임 있는 서비스로, 안정적인 설비 운영과 지속적인 성장을 함께합니다.",
-      "items": [
-        {
-          "id": "c-1",
-          "name": "SHC INDIA",
-          "logo": ""
-        },
-        {
-          "id": "c-2",
-          "name": "KB Autosys",
-          "logo": "/uploads/1790459412606-f5128ae1.jpg"
-        },
-        {
-          "id": "c-3",
-          "name": "Jintech Automotive",
-          "logo": "/uploads/1790460470095-e785c571.png"
-        },
-        {
-          "id": "c-4",
-          "name": "Woory Automotive",
-          "logo": ""
-        },
-        {
-          "id": "c-5",
-          "name": "Samwoo Packing",
-          "logo": ""
-        },
-        {
-          "id": "c-6",
-          "name": "Hando Precision",
-          "logo": ""
-        },
-        {
-          "id": "c-8",
-          "name": "Kolon India",
-          "logo": ""
-        },
-        {
-          "id": "c-9",
-          "name": "SIT",
-          "logo": ""
-        },
-        {
-          "id": "c-10",
-          "name": "DAS",
-          "logo": ""
-        },
-        {
-          "id": "c-11",
-          "name": "Dae Seung Autopart",
-          "logo": ""
-        }
-      ]
+    "affiliate": {
+      "name": "",
+      "tel": "",
+      "fax": "",
+      "email": "",
+      "website": ""
     },
+    "certificates": [],
     "services": {
-      "label": "Products & Services",
-      "title": "설비와 서비스",
-      "lead": "산업용 압축공기 Total Air Solution. 멀티 브랜드 에어 컴프레서와 주변 설비 공급부터 설치, 수리·오버홀, 연간 유지보수까지 한곳에서 지원합니다.",
-      "offeringsLabel": "Services",
-      "offeringsTitle": "제공 서비스",
-      "offeringsLead": "현장 가동을 안정적으로 유지하기 위한 판매·정비·공사 서비스를 제공합니다.",
-      "equipmentLabel": "Equipment",
-      "equipmentTitle": "취급 설비",
-      "equipmentLead": "브랜드를 선택하면 설비 사진, 제품 정보, 카탈로그를 확인할 수 있습니다.",
-      "viewDocs": "제품 자료 보기",
-      "ctaTitle": "설비 선정이나 유지보수 상담이 필요하신가요?",
-      "ctaLead": "현장 조건에 맞는 컴프레서·처리설비·유지보수 방안을 함께 검토합니다.",
-      "ctaButton": "문의하기",
+      "label": "Practice",
+      "title": "서비스",
+      "lead": "\t공간의 목적과 현장의 조건을 고려해 필요한 설비와 서비스를 제안합니다. 기능과 효율, 유지관리의 편의성을 함께 검토하여 고객의 운영 환경에 맞는 해결책을 찾아갑니다.",
+      "offeringsLabel": "Practice",
+      "offeringsTitle": "우리가 그리는 것",
+      "offeringsLead": "고객의 요구와 프로젝트 여건을 바탕으로 업무 범위와 진행 방향을 구체화합니다. 현장에 필요한 기술과 공정을 검토하고, 품질과 일정을 고려한 실행 계획을 제안합니다.",
+      "equipmentLabel": "Studies",
+      "equipmentTitle": "분야별 설비",
+      "equipmentLead": "\t사용 목적과 운영 조건에 맞는 설비를 검토합니다. 성능과 설치 환경, 유지관리 요건을 함께 고려해 적합한 구성을 제안합니다.",
+      "viewDocs": "관련 자료 보기",
+      "ctaTitle": "프로젝트에 필요한 솔루션을 함께 찾겠습니다.",
+      "ctaLead": "프로젝트 위치, 필요한 설비 및 공사 범위, 예상 일정 등을 알려주세요. 전달해주신 내용을 검토한 후 상담을 통해 진행 방향을 안내해드리겠습니다.",
+      "ctaButton": "프로젝트 상담하기",
       "offerings": [
         {
-          "id": "sales",
-          "title": "신규 설비 판매",
-          "description": "에어 컴프레서, 드라이어, 필터, 오일, UPS, DG 등 현장 요구에 맞는 설비를 제안하고 공급합니다."
+          "id": "architecture",
+          "title": "건축",
+          "description": "신축과 증개축. 구조와 입면, 동선이 하나의 제스처가 되도록 계획합니다."
         },
         {
-          "id": "repair",
-          "title": "수리 · 오버홀",
-          "description": "Atlas Copco, ELGI, Chicago Pneumatic, FS Curtis 등 멀티 브랜드 컴프레서의 에어엔드·모터·제어반 정비와 오버홀을 수행합니다."
+          "id": "interior",
+          "title": "실내",
+          "description": "가구, 빛, 촉감. 머무는 자리가 먼저 보이고 벽은 그 뒤를 받칩니다."
         },
         {
-          "id": "amc",
-          "title": "연간 유지보수(AMC)",
-          "description": "예방정비 계약으로 정기 점검, 소모품 교체, 고장 대응을 지원해 비가동 리스크를 낮춥니다."
-        },
-        {
-          "id": "treatment",
-          "title": "공기처리 · 배관 공사",
-          "description": "드라이어·필터·애프터쿨러 구성과 파이프라인 공사로 안정적인 압축공기 품질과 공급 라인을 구축합니다."
-        },
-        {
-          "id": "rental",
-          "title": "렌탈 컴프레서",
-          "description": "설비 교체·증설·돌발 대응 시 렌탈 컴프레서로 생산 중단을 최소화합니다."
-        },
-        {
-          "id": "special",
-          "title": "질소·냉각·전원 설비",
-          "description": "질소 발생장치, 칠러 재컨디셔닝, DG·UPS 등 생산 유틸리티 설비를 함께 지원합니다."
+          "id": "between",
+          "title": "사이",
+          "description": "마당, 골목, 처마. 건물과 바깥이 만나는 선을 설계의 중심으로 둡니다."
         }
       ],
-      "brands": [
-        {
-          "id": "alisha",
-          "slug": "alisha",
-          "brand": "Alisha",
-          "folder": "Alisha",
-          "lead": "Alisha 관련 제품 자료입니다.",
-          "products": [
-            {
-              "id": "alisha-6-page-brochure-jpg",
-              "title": "Alisha 6 page Brochure.JPG",
-              "image": "/images/products/alisha--alisha-6-page-brochure-jpg.jpg",
-              "description": "Product brochure.",
-              "file": "/uploads/1794476799678-dc09400e.pdf",
-              "fileName": "20261110_RPI (SST) (Copper pipe welding) (Performa invoice).pdf"
-            }
-          ]
-        },
-        {
-          "id": "atlas-copco",
-          "slug": "atlas-copco",
-          "brand": "Atlas Copco",
-          "folder": "Atlas Copco Air Compressor",
-          "lead": "Atlas Copco 관련 제품 자료입니다.",
-          "products": [
-            {
-              "id": "atlas-copco-catalogue",
-              "title": "Atlas Copco Catalogue",
-              "image": "/images/products/atlas-copco--atlas-copco-catalogue.jpg",
-              "description": "Oil-injected rotary \nscrew compressors \nGA 30+-90/GA 37-90 VSD (30-90 kW/40-125 hp)\n\n2 Atlas Copco GA 30⁺-90/GA 37-90 VSD oil-injected rotary screw compressors Atlas Copco GA 30⁺-90/GA 37-90 VSD oil-injected rotary screw compressors 3\nSmart Temperature \nControl System\nCalculates and achieves the \nideal oil-injection temperature \nbased on actual operating \nconditions to maximize \nefficiency.\nInnovating for a \nsustainable future\nAt Atlas Copco, we have always \nlooked ahead. Which products and \nservices will make our customers \nmore successful? Your future drives \nthe Atlas Copco team every day. \nIt is the reason why we devote so \nmuch time and so many resources to…",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "chicago-pneumatic",
-          "slug": "chicago-pneumatic",
-          "brand": "Chicago Pneumatic",
-          "folder": "CP Air Compressor",
-          "lead": "Chicago Pneumatic 주력 스크류·오일프리·피스톤 컴프레서 라인업입니다.",
-          "products": [
-            {
-              "id": "cp-75-220",
-              "title": "CP 75-220 Screw Compressor",
-              "image": "/images/products/chicago-pneumatic--75-220.jpg",
-              "description": "Chicago Pneumatic CP 75-220 시리즈 오일 주입식 스크류 컴프레서. 산업 현장의 안정적인 압축공기 공급을 위한 주력 모델입니다.",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cp-cpf221",
-              "title": "CPF 220-450 Fixed Speed",
-              "image": "/images/products/chicago-pneumatic--cpf221.jpg",
-              "description": "CPF 시리즈 고정속 대용량 스크류 컴프레서. 중대형 공장의 연속 가동과 높은 공기 수요에 적합합니다.",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cp-cpc-40-60",
-              "title": "CPC 40-60 Package",
-              "image": "/images/products/chicago-pneumatic--cpc-40-60.jpg",
-              "description": "CPC 40-60 오일 주입식 스크류 컴프레서 패키지. 설치와 유지보수가 용이한 현장 맞춤형 솔루션입니다.",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cp-cpm60",
-              "title": "CPM / CPMV / CPVS Series",
-              "image": "/images/products/chicago-pneumatic--cpm60.jpg",
-              "description": "CPM 고정속 및 CPMV·CPVS 가변속 스크류 컴프레서. 부하 변동에 맞춘 에너지 효율적인 운영을 지원합니다.",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cp-oil-free",
-              "title": "Oil-Free Screw Compressor",
-              "image": "/images/products/chicago-pneumatic--oil-free.jpg",
-              "description": "Chicago Pneumatic 오일프리 스크류 컴프레서. 청정 압축공기가 필요한 공정에 적합합니다.",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cp-piston",
-              "title": "Piston Air Compressor",
-              "image": "/images/products/chicago-pneumatic--piston.jpg",
-              "description": "Chicago Pneumatic 피스톤 컴프레서. 워크숍과 소규모 산업 현장에 적합한 실용형 모델입니다.",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cp-filters-2020-india-1",
-              "title": "CP Filters 2020 India (1)",
-              "image": "/images/products/chicago-pneumatic--cp-filters-2020-india-1.jpg",
-              "description": "People. Passion. Performance.FILTER\nChicago Pneumatic: full offer, global presence\nTMD FilterIVR Dryer Air Receiver CPE\nChicago Pneumatic Compressor\nSveanagar, Mumbai Pune Highway, Dapodi,\nPune - 411012 Maharashtra, India.\n : + (91) 93 7191 9200 / 93 7106 0896\n© Sense Bite Design Studio, India, AIM/Filt/Rev1/ Apr15/4000/9096405820\nIdeal Installation\nTechnical Data\nADSORBER FILTER MEDIA (VAPOR REMOVAL)\nSERIES DESCRIPTION MICRON \nRATING\nPRESSURE DROP \n(PSID) @ RATED \nFLOW\nV Activated carbon filter for the elimination of hydrocarbon vapor and \nodor. When installed after a G Series or C Series grade filter, \nit lowers the maximum contents of residual oil to 0.005…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cp-oil-free-compressor-catalog-20-220-v-leaflet-en",
-              "title": "CP Oil Free Compressor Catalog 20 220(V) Leaflet EN",
-              "image": "/images/products/chicago-pneumatic--cp-oil-free-compressor-catalog-20-220-v-leaflet-en.jpg",
-              "description": "BECAUSE \nEXPERIENCE\nMATTERS\nOF SERIES\nOIL-FREE AIR COMPRESSORS\n20-75 HP & 75-220 HP\nPeople. Passion. Performance.\n\n2 I OF SERIES\nOF 20-75 HP\n& 75-220 HP\nSERIES\nChicago Pneumatic’s OF 20-75 HP & 75-220 HP line of oil-free\nrotary compressors brings you outﬆanding suﬆainability, reliability and\nperformance, while minimizing the total cost of ownership. Built to \nperform even in the harshest environments, these compressors keep \nyour production running eﬃciently.\n1 LOW COST OF OWNERSHIP\n3 MAXIMIZE YOUR SYSTEM PERFORMANCE\n - Advanced (Airlogic) controller allows you to monitor \n your OF and optimize its performance.\n2 RELIABILITY YOU CAN COUNT ON\n \n- Eﬃcient inlet ﬁlter…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cp-vfd-ie4-ipm-compressor-brochure",
-              "title": "CP VFD IE4 iPM Compressor Brochure",
-              "image": "/images/products/chicago-pneumatic--cp-vfd-ie4-ipm-compressor-brochure.jpg",
-              "description": "A big leap \nin energy \nefficiency\niPM series with inverter\ndrive (10-100 HP)\n120",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cpvspm-global-catalog",
-              "title": "CPVSPM Global Catalog",
-              "image": "/images/products/chicago-pneumatic--cpvspm-global-catalog.jpg",
-              "description": "Oil-injected Screw \nCompressor – 50Hz\nFixed speed CPM60-180 & \nCPD60 G-CPE120 \nVariable speed CPMV60-180 \nPM& CPVS60-120 PM\n\nFor Chicago Pneumatic, it isn’t just about products. \nWe value our end users’ and distributors’ performance, and do our ultimate best to \nmake it easy to work with us while providing reliable products with a passion.\nThis is how we keep you productive at all times, meeting the needs of professionals \nin vehicle service, general industry and construction around the globe.\nPeople. Passion. Performance.\nFIXED SPEED COMPRESSOR \nPioneering components make for a revolutionary range\nHigh performance components made for CPM, CPD & CPE series\n1 Controller\n2…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "e-brochure-cpf-120-480-hp-cpmv-cpvs-120-340-pm-pan-aisa-2022",
-              "title": "E Brochure CPF 120 480 HP & CPMV CPVS 120 340 PM (Pan Aisa 2022)",
-              "image": "/images/products/chicago-pneumatic--e-brochure-cpf-120-480-hp-cpmv-cpvs-120-340-pm-pan-aisa-2022.jpg",
-              "description": "90-355 kW\nOil-injected \nScrew \nCompressor\n50Hz\n\nSince 1901, the Chicago Pneumatic name has represented reliability and attention to \ncustomer needs, as a global manufacturer of power tools, air compressors, generators, light \ntowers, and hydraulic equipment for professional and industrial applications. It represents \nproducts that are engineered for high performance. In addition to pioneering design, high-\nimpact technology and durability, Chicago Pneumatic means customer value.\nOur people start every single day with a passion to research, develop, manufacture and \ndeliver new products that are meant to meet your needs not only today, but tomorrow as \nwell. All this has…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "e-brochure-cpz-30-2650-filters-2023-1",
-              "title": "E Brochure CPZ 30 2650 & Filters (2023) (1)",
-              "image": "/images/products/chicago-pneumatic--e-brochure-cpz-30-2650-filters-2023-1.jpg",
-              "description": "Quality Air \nSolution\n2 | Quality Air Solution - Chicago Pneumatic\nQuality air solutions will allow you to prevent corrosion, \nleakages, pollution and rust. \nA compressor takes humidity and contamination from the intake air, during the \ncompression process. These particles combine with the oil used in the compressor. \nAll these impurities can cause wear and corrosion to the downstream equipments, \nwith potential costly interruption to production, and reduction in the efficiency and \nservice life of the equipment used. To reduce this negative impact, a whole range \nof Quality Air Solution products have been developed to ensure air quality, increase \nefficiency and…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "tank-mountain-quotation-e-brochure2-cpa-10-15-20hp-7-10-13bar-bd-fixed-speed-ie3",
-              "title": "Tank Mountain Quotation E Brochure2 CPA 10 15 20HP 7 10 13BAR BD Fixed Speed IE3 FM TM TMD",
-              "image": "/images/products/chicago-pneumatic--tank-mountain-quotation-e-brochure2-cpa-10-15-20hp-7-10-13bar-bd-fixed-speed-ie3.jpg",
-              "description": "10-20 HP\nFlexible Drive Rotary Screw\nAir Compresor\n17\n2021\nINTRODUCED LATEST \nGENERATION PM VFD \nCOMPRESSORS",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "elgi",
-          "slug": "elgi",
-          "brand": "ELGI",
-          "folder": "ELGI Air Compressor",
-          "lead": "ELGI 관련 제품 자료입니다.",
-          "products": [
-            {
-              "id": "egpm-catalogue",
-              "title": "EGPM CATALOGUE",
-              "image": "/images/products/elgi--egpm-catalogue.jpg",
-              "description": "EG SERIES\nOil-Injected Rotary Screw \nAir Compressors\nThe Technological Edge \nTo Power Your Business\n11 – 250 kW / 15 – 300 HP (50/60 Hz)\nAround the world, changes are being made in the way \nbusinesses are powered, and in general, the way compressed \nair is used as a power in everyday life. These changes have \nimplications for companies, governments, and individuals in \nthe future.\nAutomotive, Chemical, Food and Beverage, Fast Moving \nConsumer Goods, Cement, Packaging, Pharmaceuticals, \nTextile, Ceramics industries and workshops rely heavily on \ncompressed air. These industries fuel the world’s economy.\nAutomotive\nPackaging\nFood and Beverage\nMining\nCeramic \nCement…",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "fs-curtis",
-          "slug": "fs-curtis",
-          "brand": "FS Curtis",
-          "folder": "FS Air Compressor",
-          "lead": "FS Curtis 관련 제품 자료입니다.",
-          "products": [
-            {
-              "id": "a-series",
-              "title": "A Series",
-              "image": "/images/products/fs-curtis--a-series.jpg",
-              "description": "",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "catalogue-rb55-75-i-n-1",
-              "title": "Catalogue RB55 75 I N (1)",
-              "image": "/images/products/fs-curtis--catalogue-rb55-75-i-n-1.jpg",
-              "description": "Rotary Screw Air \nCompressors\nRb Series 55 - 75 kW\nA New Level of Productivity, \nReliability, Efficiency and Serviceability\nIngersoll Rand’s new Rb series \nrotary screw air compressor \noffers the best of the time proven \ndesigns and technologies with \nbest in class flow and efficiency \nto ensure the highest level of \nProductivity, reliability, Efficiency \nand Serviceability.\nConversion Details : 1 cfm = 0.02831 m³/min • 1 psi = 0.07031 kg/cm² • 1 m³ = 1000 litres • 1 hp = 0.746 kW\n* FAD (Free Air Delivery) m³/min are full-package performance ratings in accordance with CAGI/Pneurop acceptance test standard PN2CPTC2 or ISO 1217.\nPerformance Chart\nUltra coolant\n• Ingersoll…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "eco-rotary-15-120",
-              "title": "Eco Rotary 15 120",
-              "image": "/images/products/fs-curtis--eco-rotary-15-120.jpg",
-              "description": "",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "fas-4-11kw-catalogue",
-              "title": "FAS 4 11Kw Catalogue",
-              "image": "/images/products/fs-curtis--fas-4-11kw-catalogue.jpg",
-              "description": "",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "fscurtis-accessories-leaflet",
-              "title": "FSCURTIS Accessories leaflet",
-              "image": "/images/products/fs-curtis--fscurtis-accessories-leaflet.jpg",
-              "description": "COMPRESSED AIR DRYERS\nAIR RECEIVERS & ACCESSORIES\n\nHEAT EXCHANGER WITH MOISTURE SEPARATOR\nOur Heat Exchanger comprises of Pre cooler, \nEvaporator and built in Stainless Steel demister \nmoisture separator. \nCross flow type Pre cooler (air to air heat \nexchanger) and evaporator (air to refrigerant \nheat exchanger) ensure more cross sectional \narea for flow to make it non-clogging. Heat \nexchanger is designed to have better turbulence \n& maximized heat transfer rate.\nLesser difference in temperature between Inlet \nAir & Outlet Air ensures better effectiveness. \nPiping is completely eliminated and the air \npassage is non-ferrous.\nThe heat exchanger assembly is encapsulated…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "nxvi-catalogue-1",
-              "title": "Nxvi catalogue (1)",
-              "image": "/images/products/fs-curtis--nxvi-catalogue-1.jpg",
-              "description": "",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "vacuum-pump-leaflet",
-              "title": "Vacuum pump leaflet",
-              "image": "/images/products/fs-curtis--vacuum-pump-leaflet.jpg",
-              "description": "ELECTRICALLY DRIVEN \nSINGLE STAGE VACUUM PUMPS \n2-10 HP\nVP SERIES\nELECTRICALLY DRIVEN SINGLE STAGE VACUUM PUMPS 2-10 HP\n@2023 FSCIPL\nSALIENT FEATURES\n• Closed-grained vibration dampening cast iron heavy duty construction for long service life\n• Air cooled, cast iron cylinders. Deep radial fins provide 360 degrees heat dissipation\n• Balanced flywheel supplies a high volume of air flow to cool cylinders and heads\n• Dynamically balanced crankshaft. Precision machining and grinding assures extended running life for the internal bearings \n and wearing surfaces\n• Connecting rods are made of a high tensile strength material. Oil entrance ports are machined at the crankshaft…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "w-series",
-              "title": "W SERIES",
-              "image": "/images/products/fs-curtis--w-series.jpg",
-              "description": "W SERIES\nOil-free, Air-cooled Piston Air Compressor\nŸ Food-processing\nŸ Electronics manufacturing\nŸ Medical air for hospital\nWide-ranging application\nŸ Pharmaceutical\nŸ Biochemical\nŸ Petrochemical\nŸ Precision Painting\nSalient features\nŸ Low speed\nŸ Low power\nŸ Low spares cost\nŸ High availability\nŸ High Efficiency\nOilfree\n100% oil-free\ndesign\n\nBearings: \nlong service life and constant operation.\nHigh precision grease-lubricated bearings. High temperature-resistant grease ensures \nConnecting Rod: \nCNC precise machining process ensures stable compressor operation.\nMade of die-casting aluminium alloy is highly rust-resistant with great strength. \nIntake Valve: \nresistant…",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "ingersoll-rand",
-          "slug": "ingersoll-rand",
-          "brand": "Ingersoll Rand",
-          "folder": "Ingersoll Rand Air Compressor",
-          "lead": "Ingersoll Rand 관련 제품 자료입니다.",
-          "products": [
-            {
-              "id": "54368-8-8-23-marketing-compressor-catalogue-rmb-series-30-160kw-rev-00-2",
-              "title": "54368 8 8 23 MARKETING COMPRESSOR CATALOGUE RMB SERIES 30 160KW (REV.00) (2)",
-              "image": "/images/products/ingersoll-rand--54368-8-8-23-marketing-compressor-catalogue-rmb-series-30-160kw-rev-00-2.jpg",
-              "description": "Contact-Cooled Rotary \nScrew Air Compressors\nRMb Series (30 – 160 kW)\nRevolutionize your operations \nwith our Next Gen value \nperformance – The RMb Series \nof compressors \nIngersoll Rand rotary screw air \ncompressors offer the best of time-proven \ndesigns and technologies with new, \nadvanced features to ensure the highest \nlevels of Productivity, Reliability, \nEfficiency and Serviceability.\nHigh-efficient \nGear Driven System\n• Highly efficient gear driven system \n that is efficient and stable functioning \n to increase service life.\n• It’s the only drive system that is \n maintenance free and totally isolated \n from the environment.\n• Nothing to maintain between \n motor…",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "oil",
-          "slug": "oil",
-          "brand": "Klüber Summit",
-          "folder": "Oil",
-          "lead": "Klüber Summit 관련 제품 자료입니다.",
-          "products": [
-            {
-              "id": "1-klueber-summit-ps-100-400-gb-en",
-              "title": "1 Klueber Summit PS 100 400 GB en",
-              "image": "/images/products/oil--1-klueber-summit-ps-100-400-gb-en.jpg",
-              "description": "OQHMS\u0003\"($KDLDMSR \nOQHMS&Q@EHW \n*KŘADQ\u00032TLLHS\u0003/2\u0003\u0010\u000f\u000f\u000b\u0003\u0010\u0014\u000f\u000b\u0003\u0011\u000f\u000f\u000b\u0003\u0012\u000f\u000f\u000b\u0003\u0013\u000f\u000f\u000b\u0003 QS\f-N\r\u0003\u000f\u0014\u000f\u000f\u0014\u0011\u000b\u0003\u000f\u0014\u000f\u000f\u0014\u0012\u000b\u0003\u000f\u0014\u000f\u000f\u0014\u0013\u000b\u0003\u000f\u0014\u000f\u000f\u0014\u0014\u000b\u0003\u000f\u0014\u000f\u000f\u0014\u0015\u000b\u0003DM \n$CHSHNM\u0003\u0010\u0014\r\u0010\u0010\r\u0011\u000f\u0010\u0010\u0003:QDOK@BDR\u0003DCHSHNM\u0003\u0010\u0014\r\u0010\u0010\r\u0011\u000f\u0010\u0010<\u0003\n%HQHILWV\u0003IRU\u0003\\RXU\u0003DSSOLFDWLRQ \nl /RZ\u0003PDLQWHQDQFH\u0003DQG\u0003RSHUDWLQJ\u0003FRVWV\u0003GXH\u0003WR\u0003RLO\u0003FKDQJH\u0003LQWHUYDOV\u0003XS\u0003WR\u0003\u0018\u000f\u0013\u0013\u0013\u0003RSHUDWLQJ\u0003KRXUV\u0003LQ \nRLO\u0010LQMHFWHG\u0003VFUHZ\u0010W\\SH\u0003FRPSUHVVRUV \nl (DVLHU\u0003FRPSUHVVRU\u0003RLO\u0003FKDQJHRYHU\u0003GXH\u0003WR\u0003QHXWUDO\u0003EHKDYLRXU\u0003RI\u0003RLOV\u0003WRZDUGV\u0003VHDOV \nl *RRG\u0003VRLO\u0003GLVVROYLQJ\u0003FDSDFLW\\\u000f\u0003FOHDQ\u0003RLO\u0003FLUFXLW\u0003GXH\u0003WR\u0003WKH\u0003HVWHU\u0003FRQWHQW\u0003LQ\u0003WKH\u0003RLO\u000f\u0003UHGXFWLRQ\u0003RI\u0003FOHDQLQJ\u0003FRVWV \nl /RZ\u0003IRUPDWLRQ\u0003RI\u0003R[LGDWLRQ\u0003UHVLGXHV\u0003LQ\u0003WKH\u0003RLO\u0003FLUFXLW\u000f\u0003UHGXFHG\u0003RSHUDWLQJ\u0003FRVWV\u0003GXH\u0003WR\u0003H[WHQGHG\u0003RLO\u0003ILOWHU\u0003DQG\u0003VHSDUDWRU…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "2-kl-ber-summit-sh-32-100-gb-en",
-              "title": "2 Klüber Summit SH 32 100 GB en",
-              "image": "/images/products/oil--2-kl-ber-summit-sh-32-100-gb-en.jpg",
-              "description": "print CIElements\nprintGrafix\nKlŘber Summit SH 32, 46, 68, 100, Art-No. 050004, 050005, 050006, 050007, en\nEdition 24.04.2012 [replaces edition 29.03.2012] \nBenefits for your application\n– Low maintenance and operating costs due to extended oil change intervals up to 10,000 operating hours in oil-\ninjected screw-type compressors\n– Easy compressor oil conversion due to neutral behaviour of oils towards seals\n– Low tendency to evaporation ensures clean (oil-free) compressed air and oil-free compressed air ductwork system,\nno unnecessary cleaning or failure of gummed pneumatic valves \n– Low formation of oxidation residues in the oil circuit, reduced operating costs due to…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "kl-ber-summit-sh-46-flyer",
-              "title": "Klüber Summit SH 46 Flyer",
-              "image": "/images/products/oil--kl-ber-summit-sh-46-flyer.jpg",
-              "description": "Klüber Summit SH 46\nSynthetic air compressor oils for oil change intervals\nup to 10,000 operating hours\nKlüber Summit SH 46 is an air compressor oil based on synthetic\nhydrocarbon, additives, and an antifoam solution free from silicone.\nThe oil is miscible with mineral oils and synthetic hydrocarbons, but \nnot with polyglycol-based products. Klüber Summit SH 46 oils have \nbeen designed especially for the lubrication of highly loaded, \noil-injected screw-type compressors with oil change intervals of up \nto 10,000 operating hours.\nLow tendency to evaporation and thus \nlow impact of the oil vapor on the \ncompressed air\nThe based testing standard = TGA…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "kl-ber-summit-fg-elite-32-46-68-100-150-en-en",
-              "title": "Klüber Summit FG Elite 32, 46, 68, 100, 150 EN en",
-              "image": "/images/products/oil--kl-ber-summit-fg-elite-32-46-68-100-150-en-en.jpg",
-              "description": "Product information\nKlüber Summit FG Elite 32, 46, 68, 100, 150\nFully synthetic compressor oils for the food-processing and pharmaceutical\nindustries\nKlüber Summit FG Elite 32, 46, 68, 100, 150,Prod. 050186, 050136, 050183,\n050181, 050182,en\nEdition 10.06.2020 [replaces edition 14.05.2020]\nYour benefits at a glance\n– Klüber Summit FG Elite series is NSF H1 registered for use in the food-processing and pharmaceutical industries\nand complies with FDA 21 CFR Sec 178.3570\n– ISO 21469 certified – supports compliance with the hygienic requirements of your production. You will find further\ninformation on ISO Standard 21469 on our website www.klueber.com\n– Low maintenance and…",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "summit",
-          "slug": "summit",
-          "brand": "Summit",
-          "folder": "Summits",
-          "lead": "Summit 관련 제품 자료입니다.",
-          "products": [
-            {
-              "id": "064-hankook-nitrogen-plant",
-              "title": "064 HANKOOK NITROGEN PLANT",
-              "image": "/images/products/summit--064-hankook-nitrogen-plant.jpg",
-              "description": "Mob: Mob: +91 95009 96000 \nEmail: enq@summitsgroup.in \nWebsite: www.airdryer.in \nE \n \n \nFollow us \n \n \nSummits Hygronics (P) Limited \nSF.192 Eari thottam, Kannampalayam, \nCoimbatore – 641 402. Tamilnadu, India. \n \n \nThe Brand You Can Always \nBe Confident \n With \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nOffer for SUMMITS Nitrogen Gas Generators \n \nQuotation Ref: SHPL/064/26-27 Date : 19.06.2026 \nM/s. Hankook Service Center \nChennai \n \n \nKind Attn: Mr. Suresh -9043176978 \n \n\n \n \n \n \n \nMob: Mob: +91 95009 96000 \nEmail: enq@summitsgroup.in \nWebsite: www.airdryer.in \nE \n \n \nFollow us \n \n \nSummits Hygronics (P) Limited \nSF.192 Eari thottam, Kannampalayam, \nCoimbatore – 641 402.…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "adsorb-series-heatless-dryers",
-              "title": "Adsorb series Heatless Dryers",
-              "image": "/images/products/summit--adsorb-series-heatless-dryers.jpg",
-              "description": "1. Pre-Filter, 5µ\n2. Oil Filter,0.01µ\n3. Main Valves\n4. Exhaust Valves\n5. Check Valves\n6. Silencer\n7. After Filter, 1µ \nWet Air In\nDry Air Out",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "elix-refrigeration-dryer",
-              "title": "Elix Refrigeration dryer",
-              "image": "/images/products/summit--elix-refrigeration-dryer.jpg",
-              "description": "Conventional Tube fin condenser \nMore resistance to fan air flow:\n Microchannel condenser:\nMore e ective heat transfer area:\nLess resistance to fan air ﬂow:",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "summit-fliter",
-              "title": "Summit Fliter",
-              "image": "/images/products/summit--summit-fliter.jpg",
-              "description": "The compressed air filters\nPuro\n28\n\nWhy Compressed air Filters \nThe estimated amount of suspended dust in our atmosphere at any given point of \ntime is approximately 26million tons. 80% of these particles are smaller than \ntwo microns in size. These dust particles along with moisture and oil present in \natmospheric air in the form of vapour and aerosol, pose signiﬁcant challenge to \ne ective utilization of compressed air. These contaminants added with further \nsubstances originating from the compressor, pipelines and receivers further \na ect the quality of air. This creates an abrasive mixture which causes damage \nto machineries, tools and the end product. Thus, ﬁltering…",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "dg",
-          "slug": "dg",
-          "brand": "Kirloskar",
-          "folder": "DG",
-          "lead": "Kirloskar 관련 제품 자료입니다.",
-          "products": [
-            {
-              "id": "kirloskar-320-750-kva-cpb-4-1-3",
-              "title": "Kirloskar 320 750 Kva CPb 4++ (1) (3)",
-              "image": "/images/products/dg--kirloskar-320-750-kva-cpb-4-1-3.jpg",
-              "description": "320-750 kVA\nBETTER POWER FOR A TOMORROWLIMITLESS\n320- 750 kVA\n^ Tolerances Apply\nµ These Weight are for handling & transportation only\n Efﬁciency of Alternator as per standards IEC60034-1\nNotes\nAdBlue used should follow ISO 22241.\nAbove speciﬁcations are subject to change without prior notice due to continuous \ntechnical development\nFor intermediate ratings, kindly contact nearest Kirloskar ofﬁce\nFor Site Conditions other than standard operating conditions consult \nKirloskar Oil Engines for available prime power.",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "ups",
-          "slug": "ups",
-          "brand": "SBN Tech",
-          "folder": "UPS",
-          "lead": "SBN Tech 관련 제품 자료입니다.",
-          "products": [
-            {
-              "id": "sbn-tech-solutions-company-profile",
-              "title": "SBN TECH SOLUTIONS COMPANY PROFILE",
-              "image": "/images/products/ups--sbn-tech-solutions-company-profile.jpg",
-              "description": "SBN TECH SOLUTIONS\nEmpowering India’s Power Backup Industry Since 2017\nSBN Tech Solutions delivers multi -brand UPS \nservices, chip -level repairs, and tailored \npower backup solutions.\nSince 2017, we've combined technical \nexpertise with rapid support for critical \ninfrastructure across South India.\nBranches in Puducherry, Salem & Coimbatore\nAbout us:",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        }
-      ],
-      "categories": [
-        {
-          "id": "compressors",
-          "title": "에어 컴프레서",
-          "description": "오일 주입식·오일프리, 고정속·VSD/VFD 등 산업용 스크류 컴프레서 패키지를 취급합니다.",
-          "items": [
-            {
-              "label": "Atlas Copco",
-              "slug": "atlas-copco"
-            },
-            {
-              "label": "Chicago Pneumatic (CP)",
-              "slug": "chicago-pneumatic"
-            },
-            {
-              "label": "ELGI",
-              "slug": "elgi"
-            },
-            {
-              "label": "FS Curtis",
-              "slug": "fs-curtis"
-            },
-            {
-              "label": "Ingersoll Rand",
-              "slug": "ingersoll-rand"
-            },
-            {
-              "label": "Alisha",
-              "slug": "alisha"
-            }
-          ],
-          "file": "",
-          "fileName": ""
-        },
-        {
-          "id": "dryers-filters",
-          "title": "드라이어 · 필터 · 애프터쿨러",
-          "description": "제습·여과·냉각 설비로 압축공기 품질을 관리합니다. Summit Adsorb(흡착식), Elix(냉동식) 드라이어와 필터를 포함합니다.",
-          "items": [
-            {
-              "label": "Summit 드라이어·필터",
-              "slug": "summit"
-            }
-          ],
-          "file": "",
-          "fileName": ""
-        },
-        {
-          "id": "nitrogen",
-          "title": "Nitrogen Generation Systems",
-          "description": "Nitrogen generation solutions for plant utility systems.",
-          "items": [
-            {
-              "label": "Nitrogen Generation Systems",
-              "slug": "summit"
-            }
-          ],
-          "file": "",
-          "fileName": ""
-        },
-        {
-          "id": "oil",
-          "title": "컴프레서 오일",
-          "description": "장수명·식품급 등 용도별 합성 컴프레서 오일을 공급합니다.",
-          "items": [
-            {
-              "label": "Klüber Summit PS / SH / FG Elite",
-              "slug": "oil"
-            }
-          ],
-          "file": "",
-          "fileName": ""
-        },
-        {
-          "id": "power",
-          "title": "DG · UPS",
-          "description": "비상·대기 전원과 안정적인 전력 품질을 위한 디젤 발전기 및 UPS 솔루션입니다.",
-          "items": [
-            {
-              "label": "Kirloskar DG",
-              "slug": "dg"
-            },
-            {
-              "label": "SBN Tech UPS",
-              "slug": "ups"
-            }
-          ],
-          "file": "",
-          "fileName": ""
-        },
-        {
-          "id": "utility",
-          "title": "진공펌프 · 액세서리",
-          "description": "FS Curtis 진공펌프 및 액세서리 자료를 확인할 수 있습니다.",
-          "items": [
-            {
-              "label": "FS Curtis Accessories / Vacuum",
-              "slug": "fs-curtis"
-            }
-          ],
-          "file": "",
-          "fileName": ""
-        }
-      ]
+      "brands": [],
+      "categories": []
     }
   },
   "en": {
     "hero": {
-      "brand": "Hankook Service Center",
-      "headline": "Total Air Solution",
-      "subheadline": "Air compressor sales, repair, and maintenance trusted industrial service in India.",
-      "ctaLabel": "Contact Us",
-      "ctaHref": "/contact",
-      "videoUrl": "/videos/hero-reel.mp4",
+      "brand": "Kumsung Engineering",
+      "headline": "Points & lines",
+      "subheadline": "An architecture studio. A point holds. A line leads.",
+      "ctaLabel": "Studio",
+      "ctaHref": "/about",
+      "videoUrl": "",
       "slides": [
         {
-          "id": "slide-compressor",
-          "type": "video",
-          "src": "/videos/hero-reel.mp4",
-          "label": "Air Compressor",
-          "brand": "Hankook Service Center",
-          "headline": "Total Air Solution",
-          "subheadline": "Air compressor sales, repair, and maintenance. Trusted industrial air solutions in India.",
-          "ctaLabel": "Contact Us",
-          "ctaHref": "/contact"
-        },
-        {
-          "id": "slide-facility",
+          "id": "studio",
           "type": "image",
-          "src": "/images/slide-2.png",
-          "label": "Compressor Facility",
-          "brand": "Reliable Service",
-          "headline": "Keep Operations Running",
-          "subheadline": "We inspect and service compressor facilities so your production stays stable and efficient.",
-          "ctaLabel": "View All Projects",
-          "ctaHref": "/performance"
-        },
-        {
-          "id": "slide-pipe",
-          "type": "video",
-          "src": "/videos/pipe.mp4",
-          "label": "Piping",
-          "brand": "Engineering",
-          "headline": "Piping & Engineering",
-          "subheadline": "From compressed-air piping design to installation and maintenance, we support site-ready engineering.",
-          "ctaLabel": "About Us",
+          "src": "",
+          "label": "Kumsung",
+          "brand": "Kumsung Engineering",
+          "headline": "Points & lines",
+          "subheadline": "We edit site and light into one scene.",
+          "ctaLabel": "Studio",
           "ctaHref": "/about"
-        },
-        {
-          "id": "slide-1794308288313",
-          "type": "image",
-          "src": "/uploads/1794308299177-ecc320b0.png",
-          "label": "",
-          "brand": "Chicago Pneumatic",
-          "headline": "",
-          "subheadline": "",
-          "ctaLabel": "제품 보기",
-          "ctaHref": "/services/chicago-pneumatic"
         }
       ]
     },
     "greeting": {
-      "title": "Message from the CEO",
-      "body": "Your Trusted Compressed Air Partner for Reliable Production\n\nThank you for visiting Hankook Service Center.\n\nWe provide comprehensive compressed air solutions for industrial facilities, including air compressor sales, maintenance, repairs, and overhauls.\n\nA reliable compressed air supply is essential to maintaining productivity and product quality. By understanding each customer’s equipment and operating conditions, we deliver tailored technical support and responsive service to help minimize unexpected downtime and improve operational efficiency.\n\nWe honor our commitments and provide dependable after-sales support. Through technical expertise and a commitment to earning your trust, we strive to be a partner you can rely on, allowing you to focus on production with confidence.\n\nThank you for your continued trust and support."
+      "title": "Editor's note",
+      "body": "An idea that begins at one point is completed as space along a line.\n\nKumsung Engineering starts with the purpose of a space and the way people move through it. We weigh light, material, structure, and detail together, and propose rooms suited to everyday use."
     },
     "company": {
-      "legalName": "Hankook Service Center Private Limited",
-      "founded": "November 8, 2021",
-      "employees": "6",
-      "businessType": "Service Industry",
-      "businessItem": "Sales and Servicing of Industrial Air Compressors",
-      "hqKorea": "166 Yeonam Yulgeum-ro, Seonghwan-eup, Seobuk-gu, Cheonan-si, Chungcheongnam-do, Korea",
-      "branchIndia": "Office 119, 24/1, Doddanekundi, Ferns City Road, Outer Ring Road, Marathahalli, Bengaluru, Karnataka 560037",
-      "branchIndiaMapEmbed": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1973.0562914194513!2d77.69682492859985!3d12.978534306050603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDU4JzQyLjciTiA3N8KwNDEnNTAuOSJF!5e1!3m2!1sko!2sin!4v1790584743425!5m2!1sko!2sin",
-      "cin": "U29100KA2021PTC153989",
-      "pan": "AAGCH0318F",
-      "tan": "BLRH13130F",
+      "legalName": "Kumsung Engineering Private Limited",
+      "founded": "Studio",
+      "employees": "—",
+      "businessType": "Architecture",
+      "businessItem": "Buildings, interiors, and the space between",
+      "hqKorea": "",
+      "branchIndia": "Visits by appointment",
+      "branchIndiaMapEmbed": "",
+      "chennaiOffice": "",
+      "chennaiMapEmbed": "",
+      "cin": "",
+      "pan": "",
+      "tan": "",
       "email": "hyun.hs@hksc.in",
-      "phone": "",
-      "chennaiOffice": "28-B, CASA Grande Futura, Singaperumal Koil Road, Sriperumbudur, Kancheepuram, Tamil Nadu - 602105, India.",
-      "chennaiMapEmbed": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1973.2628005165345!2d79.93732026970514!3d12.95249630619212!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDU3JzA5LjAiTiA3OcKwNTYnMTYuNyJF!5e1!3m2!1sko!2skr!4v1790449072251!5m2!1sko!2skr"
+      "phone": ""
     },
     "history": [
       {
-        "date": "Feb 2010",
-        "detail": "Establishment of the Compressor Service Center",
-        "id": "h-en-0"
+        "id": "h-en-0",
+        "date": "01",
+        "detail": "Read the site as points"
       },
       {
-        "date": "Aug 2010",
-        "detail": "Establishment of the Compressor Service Center Corporation",
-        "id": "h-en-1"
+        "id": "h-en-1",
+        "date": "02",
+        "detail": "Join the points with a line"
       },
       {
-        "date": "Jan 2012",
-        "detail": "Establishment of Hankook Compressor in Thailand",
-        "id": "h-en-2"
-      },
-      {
-        "date": "Jan 2014",
-        "detail": "Relocation of the service center headquarters of Hankook Compressor Co., Ltd. in Thailand",
-        "id": "h-en-3"
-      },
-      {
-        "date": "Oct 2016",
-        "detail": "Change of name as Service Center Corporation",
-        "id": "h-en-4"
-      },
-      {
-        "date": "Oct 2016",
-        "detail": "Official compressor dealership agreement",
-        "id": "h-en-5"
-      },
-      {
-        "date": "Nov 2021",
-        "detail": "Establishment of Hankook Service Center Pvt. Ltd. in India",
-        "id": "h-en-6"
-      },
-      {
-        "date": "May 2022",
-        "detail": "Compressor Oil Sales Agreement with Tectyl Oil & Chemicals (India) Pvt. Ltd.",
-        "id": "h-en-7"
-      },
-      {
-        "date": "Aug 2022",
-        "detail": "Compressor Oil Sales Agreement with Kluber Lubrication India",
-        "id": "h-en-8"
+        "id": "h-en-2",
+        "date": "03",
+        "detail": "A line becomes a plane, and a plane becomes a scene"
       }
     ],
     "performances": [
       {
-        "date": "Nov 30, 2022",
-        "detail": "GA75+ Air Compressor Overhaul",
-        "client": "Dae Seung Autopart",
-        "id": "p-en-0"
+        "id": "p-en-0",
+        "date": "2026",
+        "detail": "House with a court",
+        "client": "Architectural design · Design study"
       },
       {
-        "date": "Nov 20, 2022",
-        "detail": "GA132 Air Compressor Overhaul",
-        "client": "DAS",
-        "id": "p-en-1"
+        "id": "p-en-1",
+        "date": "2025",
+        "detail": "A small library open to the alley",
+        "client": "Architectural design · Design study"
       },
       {
-        "date": "Sep 6, 2022",
-        "detail": "ES-4000 Control Unit Replacement (CPC 50G)",
-        "client": "SIT",
-        "id": "p-en-2"
+        "id": "p-en-2",
+        "date": "2024",
+        "detail": "Gallery that folds the light",
+        "client": "Architectural design · Design study"
       },
       {
-        "date": "Sep 1, 2022",
-        "detail": "Sale of ELGi EN-22 Air Compressor Package",
-        "client": "Kolon India",
-        "id": "p-en-3"
-      },
-      {
-        "date": "Aug 26, 2022",
-        "detail": "Annual Maintenance Contract for GA160, GA75, GA55, and GA37 Air Compressors",
-        "client": "SHC INDIA",
-        "id": "p-en-4"
-      },
-      {
-        "date": "Aug 24, 2022",
-        "detail": "Sale of GA30 Air Compressor",
-        "client": "Hando Precision",
-        "id": "p-en-5"
-      },
-      {
-        "date": "Aug 5, 2022",
-        "detail": "Sale of FS-Curtis TA-100 Air Compressor",
-        "client": "Samwoo Packing",
-        "id": "p-en-6"
-      },
-      {
-        "date": "Jul 10, 2022",
-        "detail": "Annual Maintenance Contract for GA55 and GA37 Air Compressors",
-        "client": "Woory Automotive",
-        "id": "p-en-7"
-      },
-      {
-        "date": "Jul 8, 2022",
-        "detail": "Sale of GA75 Air Compressor",
-        "client": "Jintech Automotive",
-        "id": "p-en-8"
-      },
-      {
-        "date": "May 20, 2022",
-        "detail": "GA37 VSD Air Compressor Overhaul",
-        "client": "KB Autosys",
-        "id": "p-en-9"
-      },
-      {
-        "date": "Apr 30, 2022",
-        "detail": "Overhaul of GA160, GA75, GA55, and GA37 Air Compressors",
-        "client": "SHC INDIA",
-        "id": "p-en-10"
+        "id": "p-en-3",
+        "date": "2023",
+        "detail": "A workplace that holds the wind",
+        "client": "Architectural design · Design study"
       }
     ],
-    "affiliate": {
-      "name": "Service Center Corp.",
-      "tel": "041-585-9090",
-      "fax": "041-585-9696",
-      "email": "serive9090@naver.com",
-      "website": "https://www.service9090.co.kr"
+    "clients": {
+      "title": "Clients",
+      "lead": "The kinds of scenes we make.",
+      "items": [
+        {
+          "id": "c-1",
+          "name": "House",
+          "logo": ""
+        },
+        {
+          "id": "c-2",
+          "name": "Culture",
+          "logo": ""
+        },
+        {
+          "id": "c-3",
+          "name": "Work",
+          "logo": ""
+        }
+      ]
     },
-    "certificates": [
-      {
-        "title": "Certificate of Incorporation",
-        "image": "/images/certificate-incorporation.png"
-      }
-    ],
     "team": {
-      "title": "Our Team",
-      "lead": "Meet the people behind Hankook Service Center’s industrial compressed air solutions.",
+      "title": "People",
+      "lead": "We edit space together.",
       "ceo": {
-        "name": "Hyun H.S.",
-        "role": "Director",
-        "bio": "Oversees industrial air compressor sales, repairs, and maintenance, delivering comprehensive compressed air solutions in India.",
+        "name": "",
+        "role": "",
+        "bio": "",
         "photo": ""
       },
       "members": []
     },
     "media": {
-      "title": "Field Videos",
+      "title": "Film",
       "lead": "",
       "items": []
     },
     "gallery": {
-      "title": "Gallery",
-      "lead": "Explore photos of our on-site services and daily operations.",
-      "items": [
-        {
-          "id": "g1",
-          "title": "Partnership",
-          "image": "/images/hero-graphic.png",
-          "caption": "Trusted business partnership"
-        },
-        {
-          "id": "g2",
-          "title": "Brand",
-          "image": "/images/banner-blue.png",
-          "caption": "Hankook Service Center"
-        },
-        {
-          "id": "g3",
-          "title": "Incorporation",
-          "image": "/images/certificate-incorporation.png",
-          "caption": "Certificate of Incorporation"
-        },
-        {
-          "id": "g4",
-          "title": "Visual motif",
-          "image": "/images/pattern-light.png",
-          "caption": "Brand visual"
-        }
-      ]
+      "title": "Archive",
+      "lead": "Drawings and scenes will gather here.",
+      "items": []
     },
-    "clients": {
-      "title": "Our Clients",
-      "lead": "We help our clients maintain reliable equipment operation through tailored compressed air solutions and dependable service, building lasting partnerships along the way.",
-      "items": [
-        {
-          "id": "c-1",
-          "name": "SHC INDIA",
-          "logo": ""
-        },
-        {
-          "id": "c-2",
-          "name": "KB Autosys",
-          "logo": ""
-        },
-        {
-          "id": "c-3",
-          "name": "Jintech Automotive",
-          "logo": "/uploads/1790460470095-e785c571.png"
-        },
-        {
-          "id": "c-4",
-          "name": "Woory Automotive",
-          "logo": ""
-        },
-        {
-          "id": "c-5",
-          "name": "Samwoo Packing",
-          "logo": ""
-        },
-        {
-          "id": "c-6",
-          "name": "Hando Precision",
-          "logo": ""
-        },
-        {
-          "id": "c-8",
-          "name": "Kolon India",
-          "logo": ""
-        },
-        {
-          "id": "c-9",
-          "name": "SIT",
-          "logo": ""
-        },
-        {
-          "id": "c-10",
-          "name": "DAS",
-          "logo": ""
-        },
-        {
-          "id": "c-11",
-          "name": "Dae Seung Autopart",
-          "logo": ""
-        }
-      ]
+    "affiliate": {
+      "name": "",
+      "tel": "",
+      "fax": "",
+      "email": "",
+      "website": ""
     },
+    "certificates": [],
     "services": {
-      "label": "Products & Services",
-      "title": "Equipment & Services",
-      "lead": "Comprehensive solutions for industrial compressed air systems. We supply compressors and related equipment from multiple brands, with installation support, repairs, overhauls, and annual maintenance, all coordinated by one team.",
-      "offeringsLabel": "Services",
-      "offeringsTitle": "Our Services",
-      "offeringsLead": "Equipment sales, servicing, and installation support to keep your industrial compressed air systems running reliably.",
-      "equipmentLabel": "Equipment",
-      "equipmentTitle": "Our Equipment Range",
-      "equipmentLead": "Select a brand to explore equipment photos, product information, and available catalogs.",
-      "viewDocs": "View product docs",
-      "ctaTitle": "Need help selecting equipment or planning maintenance?",
-      "ctaLead": "We review compressor, air-treatment, and maintenance options that fit your site conditions.",
-      "ctaButton": "Contact Us",
+      "label": "Practice",
+      "title": "Services",
+      "lead": "We start with the purpose of a space and the way people move through it, then propose architecture, interiors, and the space between.",
+      "offeringsLabel": "Practice",
+      "offeringsTitle": "What we draw",
+      "offeringsLead": "The work moves in three breaths.",
+      "equipmentLabel": "Studies",
+      "equipmentTitle": "Kinds of work",
+      "equipmentLead": "Houses, culture, and workplaces, held in the same sensibility.",
+      "viewDocs": "View work",
+      "ctaTitle": "Project inquiry",
+      "ctaLead": "Tell us the site and how you want to use it. We will set the scope of design with you.",
+      "ctaButton": "Project inquiry",
       "offerings": [
         {
-          "id": "sales",
-          "title": "New Equipment Sales",
-          "description": "We recommend and supply air compressors, dryers, filters, lubricants, uninterruptible power supply (UPS) systems, diesel generators, and related equipment to meet your plant’s requirements."
+          "id": "architecture",
+          "title": "Architecture",
+          "description": "New buildings and alterations, where structure, facade, and movement share one gesture."
         },
         {
-          "id": "repair",
-          "title": "Repairs & Overhauls",
-          "description": "Repair and overhaul services for compressors from brands including Atlas Copco, ELGi, Chicago Pneumatic, and FS-Curtis, covering airends, motors, and controllers."
+          "id": "interior",
+          "title": "Interior",
+          "description": "Furniture, light, and touch. The place to stay appears first. Walls follow."
         },
         {
-          "id": "amc",
-          "title": "Annual Maintenance Contracts (AMC)",
-          "description": "Planned preventive maintenance and breakdown support to help reduce unplanned downtime, with inspections and consumables provided according to the agreed contract scope."
-        },
-        {
-          "id": "treatment",
-          "title": "Air Treatment & Piping",
-          "description": "Installation of air dryers, filters, aftercoolers, and piping to maintain consistent compressed air quality and reliable distribution."
-        },
-        {
-          "id": "rental",
-          "title": "Compressor Rentals",
-          "description": "Rental compressors for temporary replacement, additional capacity, or emergency use."
-        },
-        {
-          "id": "special",
-          "title": "Nitrogen, Cooling & Power Solutions",
-          "description": "Nitrogen generation solutions, chiller reconditioning, and diesel generator and UPS support for your plant’s utility systems."
+          "id": "between",
+          "title": "In between",
+          "description": "Courts, alleys, and eaves. The line where the building meets the outside is the project."
         }
       ],
-      "brands": [
-        {
-          "id": "alisha",
-          "slug": "alisha",
-          "brand": "Alisha",
-          "folder": "Alisha",
-          "lead": "Product documents for Alisha.",
-          "products": [
-            {
-              "id": "alisha-6-page-brochure-jpg",
-              "title": "Alisha 6 page Brochure.JPG",
-              "image": "/images/products/alisha--alisha-6-page-brochure-jpg.jpg",
-              "description": "Product brochure.",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "atlas-copco",
-          "slug": "atlas-copco",
-          "brand": "Atlas Copco",
-          "folder": "Atlas Copco Air Compressor",
-          "lead": "Product documents for Atlas Copco.",
-          "products": [
-            {
-              "id": "atlas-copco-catalogue",
-              "title": "Atlas Copco Catalogue",
-              "image": "/images/products/atlas-copco--atlas-copco-catalogue.jpg",
-              "description": "Oil-injected rotary \nscrew compressors \nGA 30+-90/GA 37-90 VSD (30-90 kW/40-125 hp)\n\n2 Atlas Copco GA 30⁺-90/GA 37-90 VSD oil-injected rotary screw compressors Atlas Copco GA 30⁺-90/GA 37-90 VSD oil-injected rotary screw compressors 3\nSmart Temperature \nControl System\nCalculates and achieves the \nideal oil-injection temperature \nbased on actual operating \nconditions to maximize \nefficiency.\nInnovating for a \nsustainable future\nAt Atlas Copco, we have always \nlooked ahead. Which products and \nservices will make our customers \nmore successful? Your future drives \nthe Atlas Copco team every day. \nIt is the reason why we devote so \nmuch time and so many resources to…",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "chicago-pneumatic",
-          "slug": "chicago-pneumatic",
-          "brand": "Chicago Pneumatic",
-          "folder": "CP Air Compressor",
-          "lead": "Flagship Chicago Pneumatic screw, oil-free, and piston compressor lineup.",
-          "products": [
-            {
-              "id": "cp-75-220",
-              "title": "CP 75-220 Screw Compressor",
-              "image": "/images/products/chicago-pneumatic--75-220.jpg",
-              "description": "Chicago Pneumatic CP 75-220 oil-injected screw compressors — our flagship series for reliable industrial compressed air.",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cp-cpf221",
-              "title": "CPF 220-450 Fixed Speed",
-              "image": "/images/products/chicago-pneumatic--cpf221.jpg",
-              "description": "CPF fixed-speed high-capacity screw compressors for continuous operation and high air demand in mid- to large-scale plants.",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cp-cpc-40-60",
-              "title": "CPC 40-60 Package",
-              "image": "/images/products/chicago-pneumatic--cpc-40-60.jpg",
-              "description": "CPC 40-60 oil-injected screw compressor packages — easy to install and service for site-ready solutions.",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cp-cpm60",
-              "title": "CPM / CPMV / CPVS Series",
-              "image": "/images/products/chicago-pneumatic--cpm60.jpg",
-              "description": "CPM fixed-speed and CPMV/CPVS variable-speed screw compressors for energy-efficient operation under changing load.",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cp-oil-free",
-              "title": "Oil-Free Screw Compressor",
-              "image": "/images/products/chicago-pneumatic--oil-free.jpg",
-              "description": "Chicago Pneumatic oil-free screw compressors for processes that require clean compressed air.",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cp-piston",
-              "title": "Piston Air Compressor",
-              "image": "/images/products/chicago-pneumatic--piston.jpg",
-              "description": "Chicago Pneumatic piston compressors suited to workshops and smaller industrial sites.",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cp-filters-2020-india-1",
-              "title": "CP Filters 2020 India (1)",
-              "image": "/images/products/chicago-pneumatic--cp-filters-2020-india-1.jpg",
-              "description": "People. Passion. Performance.FILTER\nChicago Pneumatic: full offer, global presence\nTMD FilterIVR Dryer Air Receiver CPE\nChicago Pneumatic Compressor\nSveanagar, Mumbai Pune Highway, Dapodi,\nPune - 411012 Maharashtra, India.\n : + (91) 93 7191 9200 / 93 7106 0896\n© Sense Bite Design Studio, India, AIM/Filt/Rev1/ Apr15/4000/9096405820\nIdeal Installation\nTechnical Data\nADSORBER FILTER MEDIA (VAPOR REMOVAL)\nSERIES DESCRIPTION MICRON \nRATING\nPRESSURE DROP \n(PSID) @ RATED \nFLOW\nV Activated carbon filter for the elimination of hydrocarbon vapor and \nodor. When installed after a G Series or C Series grade filter, \nit lowers the maximum contents of residual oil to 0.005…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cp-oil-free-compressor-catalog-20-220-v-leaflet-en",
-              "title": "CP Oil Free Compressor Catalog 20 220(V) Leaflet EN",
-              "image": "/images/products/chicago-pneumatic--cp-oil-free-compressor-catalog-20-220-v-leaflet-en.jpg",
-              "description": "BECAUSE \nEXPERIENCE\nMATTERS\nOF SERIES\nOIL-FREE AIR COMPRESSORS\n20-75 HP & 75-220 HP\nPeople. Passion. Performance.\n\n2 I OF SERIES\nOF 20-75 HP\n& 75-220 HP\nSERIES\nChicago Pneumatic’s OF 20-75 HP & 75-220 HP line of oil-free\nrotary compressors brings you outﬆanding suﬆainability, reliability and\nperformance, while minimizing the total cost of ownership. Built to \nperform even in the harshest environments, these compressors keep \nyour production running eﬃciently.\n1 LOW COST OF OWNERSHIP\n3 MAXIMIZE YOUR SYSTEM PERFORMANCE\n - Advanced (Airlogic) controller allows you to monitor \n your OF and optimize its performance.\n2 RELIABILITY YOU CAN COUNT ON\n \n- Eﬃcient inlet ﬁlter…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cp-vfd-ie4-ipm-compressor-brochure",
-              "title": "CP VFD IE4 iPM Compressor Brochure",
-              "image": "/images/products/chicago-pneumatic--cp-vfd-ie4-ipm-compressor-brochure.jpg",
-              "description": "A big leap \nin energy \nefficiency\niPM series with inverter\ndrive (10-100 HP)\n120",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "cpvspm-global-catalog",
-              "title": "CPVSPM Global Catalog",
-              "image": "/images/products/chicago-pneumatic--cpvspm-global-catalog.jpg",
-              "description": "Oil-injected Screw \nCompressor – 50Hz\nFixed speed CPM60-180 & \nCPD60 G-CPE120 \nVariable speed CPMV60-180 \nPM& CPVS60-120 PM\n\nFor Chicago Pneumatic, it isn’t just about products. \nWe value our end users’ and distributors’ performance, and do our ultimate best to \nmake it easy to work with us while providing reliable products with a passion.\nThis is how we keep you productive at all times, meeting the needs of professionals \nin vehicle service, general industry and construction around the globe.\nPeople. Passion. Performance.\nFIXED SPEED COMPRESSOR \nPioneering components make for a revolutionary range\nHigh performance components made for CPM, CPD & CPE series\n1 Controller\n2…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "e-brochure-cpf-120-480-hp-cpmv-cpvs-120-340-pm-pan-aisa-2022",
-              "title": "E Brochure CPF 120 480 HP & CPMV CPVS 120 340 PM (Pan Aisa 2022)",
-              "image": "/images/products/chicago-pneumatic--e-brochure-cpf-120-480-hp-cpmv-cpvs-120-340-pm-pan-aisa-2022.jpg",
-              "description": "90-355 kW\nOil-injected \nScrew \nCompressor\n50Hz\n\nSince 1901, the Chicago Pneumatic name has represented reliability and attention to \ncustomer needs, as a global manufacturer of power tools, air compressors, generators, light \ntowers, and hydraulic equipment for professional and industrial applications. It represents \nproducts that are engineered for high performance. In addition to pioneering design, high-\nimpact technology and durability, Chicago Pneumatic means customer value.\nOur people start every single day with a passion to research, develop, manufacture and \ndeliver new products that are meant to meet your needs not only today, but tomorrow as \nwell. All this has…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "e-brochure-cpz-30-2650-filters-2023-1",
-              "title": "E Brochure CPZ 30 2650 & Filters (2023) (1)",
-              "image": "/images/products/chicago-pneumatic--e-brochure-cpz-30-2650-filters-2023-1.jpg",
-              "description": "Quality Air \nSolution\n2 | Quality Air Solution - Chicago Pneumatic\nQuality air solutions will allow you to prevent corrosion, \nleakages, pollution and rust. \nA compressor takes humidity and contamination from the intake air, during the \ncompression process. These particles combine with the oil used in the compressor. \nAll these impurities can cause wear and corrosion to the downstream equipments, \nwith potential costly interruption to production, and reduction in the efficiency and \nservice life of the equipment used. To reduce this negative impact, a whole range \nof Quality Air Solution products have been developed to ensure air quality, increase \nefficiency and…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "tank-mountain-quotation-e-brochure2-cpa-10-15-20hp-7-10-13bar-bd-fixed-speed-ie3",
-              "title": "Tank Mountain Quotation E Brochure2 CPA 10 15 20HP 7 10 13BAR BD Fixed Speed IE3 FM TM TMD",
-              "image": "/images/products/chicago-pneumatic--tank-mountain-quotation-e-brochure2-cpa-10-15-20hp-7-10-13bar-bd-fixed-speed-ie3.jpg",
-              "description": "10-20 HP\nFlexible Drive Rotary Screw\nAir Compresor\n17\n2021\nINTRODUCED LATEST \nGENERATION PM VFD \nCOMPRESSORS",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "elgi",
-          "slug": "elgi",
-          "brand": "ELGI",
-          "folder": "ELGI Air Compressor",
-          "lead": "Product documents for ELGI.",
-          "products": [
-            {
-              "id": "egpm-catalogue",
-              "title": "EGPM CATALOGUE",
-              "image": "/images/products/elgi--egpm-catalogue.jpg",
-              "description": "EG SERIES\nOil-Injected Rotary Screw \nAir Compressors\nThe Technological Edge \nTo Power Your Business\n11 – 250 kW / 15 – 300 HP (50/60 Hz)\nAround the world, changes are being made in the way \nbusinesses are powered, and in general, the way compressed \nair is used as a power in everyday life. These changes have \nimplications for companies, governments, and individuals in \nthe future.\nAutomotive, Chemical, Food and Beverage, Fast Moving \nConsumer Goods, Cement, Packaging, Pharmaceuticals, \nTextile, Ceramics industries and workshops rely heavily on \ncompressed air. These industries fuel the world’s economy.\nAutomotive\nPackaging\nFood and Beverage\nMining\nCeramic \nCement…",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "fs-curtis",
-          "slug": "fs-curtis",
-          "brand": "FS Curtis",
-          "folder": "FS Air Compressor",
-          "lead": "Product documents for FS Curtis.",
-          "products": [
-            {
-              "id": "a-series",
-              "title": "A Series",
-              "image": "/images/products/fs-curtis--a-series.jpg",
-              "description": "",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "catalogue-rb55-75-i-n-1",
-              "title": "Catalogue RB55 75 I N (1)",
-              "image": "/images/products/fs-curtis--catalogue-rb55-75-i-n-1.jpg",
-              "description": "Rotary Screw Air \nCompressors\nRb Series 55 - 75 kW\nA New Level of Productivity, \nReliability, Efficiency and Serviceability\nIngersoll Rand’s new Rb series \nrotary screw air compressor \noffers the best of the time proven \ndesigns and technologies with \nbest in class flow and efficiency \nto ensure the highest level of \nProductivity, reliability, Efficiency \nand Serviceability.\nConversion Details : 1 cfm = 0.02831 m³/min • 1 psi = 0.07031 kg/cm² • 1 m³ = 1000 litres • 1 hp = 0.746 kW\n* FAD (Free Air Delivery) m³/min are full-package performance ratings in accordance with CAGI/Pneurop acceptance test standard PN2CPTC2 or ISO 1217.\nPerformance Chart\nUltra coolant\n• Ingersoll…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "eco-rotary-15-120",
-              "title": "Eco Rotary 15 120",
-              "image": "/images/products/fs-curtis--eco-rotary-15-120.jpg",
-              "description": "",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "fas-4-11kw-catalogue",
-              "title": "FAS 4 11Kw Catalogue",
-              "image": "/images/products/fs-curtis--fas-4-11kw-catalogue.jpg",
-              "description": "",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "fscurtis-accessories-leaflet",
-              "title": "FSCURTIS Accessories leaflet",
-              "image": "/images/products/fs-curtis--fscurtis-accessories-leaflet.jpg",
-              "description": "COMPRESSED AIR DRYERS\nAIR RECEIVERS & ACCESSORIES\n\nHEAT EXCHANGER WITH MOISTURE SEPARATOR\nOur Heat Exchanger comprises of Pre cooler, \nEvaporator and built in Stainless Steel demister \nmoisture separator. \nCross flow type Pre cooler (air to air heat \nexchanger) and evaporator (air to refrigerant \nheat exchanger) ensure more cross sectional \narea for flow to make it non-clogging. Heat \nexchanger is designed to have better turbulence \n& maximized heat transfer rate.\nLesser difference in temperature between Inlet \nAir & Outlet Air ensures better effectiveness. \nPiping is completely eliminated and the air \npassage is non-ferrous.\nThe heat exchanger assembly is encapsulated…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "nxvi-catalogue-1",
-              "title": "Nxvi catalogue (1)",
-              "image": "/images/products/fs-curtis--nxvi-catalogue-1.jpg",
-              "description": "",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "vacuum-pump-leaflet",
-              "title": "Vacuum pump leaflet",
-              "image": "/images/products/fs-curtis--vacuum-pump-leaflet.jpg",
-              "description": "ELECTRICALLY DRIVEN \nSINGLE STAGE VACUUM PUMPS \n2-10 HP\nVP SERIES\nELECTRICALLY DRIVEN SINGLE STAGE VACUUM PUMPS 2-10 HP\n@2023 FSCIPL\nSALIENT FEATURES\n• Closed-grained vibration dampening cast iron heavy duty construction for long service life\n• Air cooled, cast iron cylinders. Deep radial fins provide 360 degrees heat dissipation\n• Balanced flywheel supplies a high volume of air flow to cool cylinders and heads\n• Dynamically balanced crankshaft. Precision machining and grinding assures extended running life for the internal bearings \n and wearing surfaces\n• Connecting rods are made of a high tensile strength material. Oil entrance ports are machined at the crankshaft…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "w-series",
-              "title": "W SERIES",
-              "image": "/images/products/fs-curtis--w-series.jpg",
-              "description": "W SERIES\nOil-free, Air-cooled Piston Air Compressor\nŸ Food-processing\nŸ Electronics manufacturing\nŸ Medical air for hospital\nWide-ranging application\nŸ Pharmaceutical\nŸ Biochemical\nŸ Petrochemical\nŸ Precision Painting\nSalient features\nŸ Low speed\nŸ Low power\nŸ Low spares cost\nŸ High availability\nŸ High Efficiency\nOilfree\n100% oil-free\ndesign\n\nBearings: \nlong service life and constant operation.\nHigh precision grease-lubricated bearings. High temperature-resistant grease ensures \nConnecting Rod: \nCNC precise machining process ensures stable compressor operation.\nMade of die-casting aluminium alloy is highly rust-resistant with great strength. \nIntake Valve: \nresistant…",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "ingersoll-rand",
-          "slug": "ingersoll-rand",
-          "brand": "Ingersoll Rand",
-          "folder": "Ingersoll Rand Air Compressor",
-          "lead": "Product documents for Ingersoll Rand.",
-          "products": [
-            {
-              "id": "54368-8-8-23-marketing-compressor-catalogue-rmb-series-30-160kw-rev-00-2",
-              "title": "54368 8 8 23 MARKETING COMPRESSOR CATALOGUE RMB SERIES 30 160KW (REV.00) (2)",
-              "image": "/images/products/ingersoll-rand--54368-8-8-23-marketing-compressor-catalogue-rmb-series-30-160kw-rev-00-2.jpg",
-              "description": "Contact-Cooled Rotary \nScrew Air Compressors\nRMb Series (30 – 160 kW)\nRevolutionize your operations \nwith our Next Gen value \nperformance – The RMb Series \nof compressors \nIngersoll Rand rotary screw air \ncompressors offer the best of time-proven \ndesigns and technologies with new, \nadvanced features to ensure the highest \nlevels of Productivity, Reliability, \nEfficiency and Serviceability.\nHigh-efficient \nGear Driven System\n• Highly efficient gear driven system \n that is efficient and stable functioning \n to increase service life.\n• It’s the only drive system that is \n maintenance free and totally isolated \n from the environment.\n• Nothing to maintain between \n motor…",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "oil",
-          "slug": "oil",
-          "brand": "Klüber Summit",
-          "folder": "Oil",
-          "lead": "Product documents for Klüber Summit.",
-          "products": [
-            {
-              "id": "1-klueber-summit-ps-100-400-gb-en",
-              "title": "1 Klueber Summit PS 100 400 GB en",
-              "image": "/images/products/oil--1-klueber-summit-ps-100-400-gb-en.jpg",
-              "description": "OQHMS\u0003\"($KDLDMSR \nOQHMS&Q@EHW \n*KŘADQ\u00032TLLHS\u0003/2\u0003\u0010\u000f\u000f\u000b\u0003\u0010\u0014\u000f\u000b\u0003\u0011\u000f\u000f\u000b\u0003\u0012\u000f\u000f\u000b\u0003\u0013\u000f\u000f\u000b\u0003 QS\f-N\r\u0003\u000f\u0014\u000f\u000f\u0014\u0011\u000b\u0003\u000f\u0014\u000f\u000f\u0014\u0012\u000b\u0003\u000f\u0014\u000f\u000f\u0014\u0013\u000b\u0003\u000f\u0014\u000f\u000f\u0014\u0014\u000b\u0003\u000f\u0014\u000f\u000f\u0014\u0015\u000b\u0003DM \n$CHSHNM\u0003\u0010\u0014\r\u0010\u0010\r\u0011\u000f\u0010\u0010\u0003:QDOK@BDR\u0003DCHSHNM\u0003\u0010\u0014\r\u0010\u0010\r\u0011\u000f\u0010\u0010<\u0003\n%HQHILWV\u0003IRU\u0003\\RXU\u0003DSSOLFDWLRQ \nl /RZ\u0003PDLQWHQDQFH\u0003DQG\u0003RSHUDWLQJ\u0003FRVWV\u0003GXH\u0003WR\u0003RLO\u0003FKDQJH\u0003LQWHUYDOV\u0003XS\u0003WR\u0003\u0018\u000f\u0013\u0013\u0013\u0003RSHUDWLQJ\u0003KRXUV\u0003LQ \nRLO\u0010LQMHFWHG\u0003VFUHZ\u0010W\\SH\u0003FRPSUHVVRUV \nl (DVLHU\u0003FRPSUHVVRU\u0003RLO\u0003FKDQJHRYHU\u0003GXH\u0003WR\u0003QHXWUDO\u0003EHKDYLRXU\u0003RI\u0003RLOV\u0003WRZDUGV\u0003VHDOV \nl *RRG\u0003VRLO\u0003GLVVROYLQJ\u0003FDSDFLW\\\u000f\u0003FOHDQ\u0003RLO\u0003FLUFXLW\u0003GXH\u0003WR\u0003WKH\u0003HVWHU\u0003FRQWHQW\u0003LQ\u0003WKH\u0003RLO\u000f\u0003UHGXFWLRQ\u0003RI\u0003FOHDQLQJ\u0003FRVWV \nl /RZ\u0003IRUPDWLRQ\u0003RI\u0003R[LGDWLRQ\u0003UHVLGXHV\u0003LQ\u0003WKH\u0003RLO\u0003FLUFXLW\u000f\u0003UHGXFHG\u0003RSHUDWLQJ\u0003FRVWV\u0003GXH\u0003WR\u0003H[WHQGHG\u0003RLO\u0003ILOWHU\u0003DQG\u0003VHSDUDWRU…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "2-kl-ber-summit-sh-32-100-gb-en",
-              "title": "2 Klüber Summit SH 32 100 GB en",
-              "image": "/images/products/oil--2-kl-ber-summit-sh-32-100-gb-en.jpg",
-              "description": "print CIElements\nprintGrafix\nKlŘber Summit SH 32, 46, 68, 100, Art-No. 050004, 050005, 050006, 050007, en\nEdition 24.04.2012 [replaces edition 29.03.2012] \nBenefits for your application\n– Low maintenance and operating costs due to extended oil change intervals up to 10,000 operating hours in oil-\ninjected screw-type compressors\n– Easy compressor oil conversion due to neutral behaviour of oils towards seals\n– Low tendency to evaporation ensures clean (oil-free) compressed air and oil-free compressed air ductwork system,\nno unnecessary cleaning or failure of gummed pneumatic valves \n– Low formation of oxidation residues in the oil circuit, reduced operating costs due to…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "kl-ber-summit-sh-46-flyer",
-              "title": "Klüber Summit SH 46 Flyer",
-              "image": "/images/products/oil--kl-ber-summit-sh-46-flyer.jpg",
-              "description": "Klüber Summit SH 46\nSynthetic air compressor oils for oil change intervals\nup to 10,000 operating hours\nKlüber Summit SH 46 is an air compressor oil based on synthetic\nhydrocarbon, additives, and an antifoam solution free from silicone.\nThe oil is miscible with mineral oils and synthetic hydrocarbons, but \nnot with polyglycol-based products. Klüber Summit SH 46 oils have \nbeen designed especially for the lubrication of highly loaded, \noil-injected screw-type compressors with oil change intervals of up \nto 10,000 operating hours.\nLow tendency to evaporation and thus \nlow impact of the oil vapor on the \ncompressed air\nThe based testing standard = TGA…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "kl-ber-summit-fg-elite-32-46-68-100-150-en-en",
-              "title": "Klüber Summit FG Elite 32, 46, 68, 100, 150 EN en",
-              "image": "/images/products/oil--kl-ber-summit-fg-elite-32-46-68-100-150-en-en.jpg",
-              "description": "Product information\nKlüber Summit FG Elite 32, 46, 68, 100, 150\nFully synthetic compressor oils for the food-processing and pharmaceutical\nindustries\nKlüber Summit FG Elite 32, 46, 68, 100, 150,Prod. 050186, 050136, 050183,\n050181, 050182,en\nEdition 10.06.2020 [replaces edition 14.05.2020]\nYour benefits at a glance\n– Klüber Summit FG Elite series is NSF H1 registered for use in the food-processing and pharmaceutical industries\nand complies with FDA 21 CFR Sec 178.3570\n– ISO 21469 certified – supports compliance with the hygienic requirements of your production. You will find further\ninformation on ISO Standard 21469 on our website www.klueber.com\n– Low maintenance and…",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "summit",
-          "slug": "summit",
-          "brand": "Summit",
-          "folder": "Summits",
-          "lead": "Product documents for Summit.",
-          "products": [
-            {
-              "id": "064-hankook-nitrogen-plant",
-              "title": "064 HANKOOK NITROGEN PLANT",
-              "image": "/images/products/summit--064-hankook-nitrogen-plant.jpg",
-              "description": "Mob: Mob: +91 95009 96000 \nEmail: enq@summitsgroup.in \nWebsite: www.airdryer.in \nE \n \n \nFollow us \n \n \nSummits Hygronics (P) Limited \nSF.192 Eari thottam, Kannampalayam, \nCoimbatore – 641 402. Tamilnadu, India. \n \n \nThe Brand You Can Always \nBe Confident \n With \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nOffer for SUMMITS Nitrogen Gas Generators \n \nQuotation Ref: SHPL/064/26-27 Date : 19.06.2026 \nM/s. Hankook Service Center \nChennai \n \n \nKind Attn: Mr. Suresh -9043176978 \n \n\n \n \n \n \n \nMob: Mob: +91 95009 96000 \nEmail: enq@summitsgroup.in \nWebsite: www.airdryer.in \nE \n \n \nFollow us \n \n \nSummits Hygronics (P) Limited \nSF.192 Eari thottam, Kannampalayam, \nCoimbatore – 641 402.…",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "adsorb-series-heatless-dryers",
-              "title": "Adsorb series Heatless Dryers",
-              "image": "/images/products/summit--adsorb-series-heatless-dryers.jpg",
-              "description": "1. Pre-Filter, 5µ\n2. Oil Filter,0.01µ\n3. Main Valves\n4. Exhaust Valves\n5. Check Valves\n6. Silencer\n7. After Filter, 1µ \nWet Air In\nDry Air Out",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "elix-refrigeration-dryer",
-              "title": "Elix Refrigeration dryer",
-              "image": "/images/products/summit--elix-refrigeration-dryer.jpg",
-              "description": "Conventional Tube fin condenser \nMore resistance to fan air flow:\n Microchannel condenser:\nMore e ective heat transfer area:\nLess resistance to fan air ﬂow:",
-              "file": "",
-              "fileName": ""
-            },
-            {
-              "id": "summit-fliter",
-              "title": "Summit Fliter",
-              "image": "/images/products/summit--summit-fliter.jpg",
-              "description": "The compressed air filters\nPuro\n28\n\nWhy Compressed air Filters \nThe estimated amount of suspended dust in our atmosphere at any given point of \ntime is approximately 26million tons. 80% of these particles are smaller than \ntwo microns in size. These dust particles along with moisture and oil present in \natmospheric air in the form of vapour and aerosol, pose signiﬁcant challenge to \ne ective utilization of compressed air. These contaminants added with further \nsubstances originating from the compressor, pipelines and receivers further \na ect the quality of air. This creates an abrasive mixture which causes damage \nto machineries, tools and the end product. Thus, ﬁltering…",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "dg",
-          "slug": "dg",
-          "brand": "Kirloskar",
-          "folder": "DG",
-          "lead": "Product documents for Kirloskar.",
-          "products": [
-            {
-              "id": "kirloskar-320-750-kva-cpb-4-1-3",
-              "title": "Kirloskar 320 750 Kva CPb 4++ (1) (3)",
-              "image": "/images/products/dg--kirloskar-320-750-kva-cpb-4-1-3.jpg",
-              "description": "320-750 kVA\nBETTER POWER FOR A TOMORROWLIMITLESS\n320- 750 kVA\n^ Tolerances Apply\nµ These Weight are for handling & transportation only\n Efﬁciency of Alternator as per standards IEC60034-1\nNotes\nAdBlue used should follow ISO 22241.\nAbove speciﬁcations are subject to change without prior notice due to continuous \ntechnical development\nFor intermediate ratings, kindly contact nearest Kirloskar ofﬁce\nFor Site Conditions other than standard operating conditions consult \nKirloskar Oil Engines for available prime power.",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        },
-        {
-          "id": "ups",
-          "slug": "ups",
-          "brand": "SBN Tech",
-          "folder": "UPS",
-          "lead": "Product documents for SBN Tech.",
-          "products": [
-            {
-              "id": "sbn-tech-solutions-company-profile",
-              "title": "SBN TECH SOLUTIONS COMPANY PROFILE",
-              "image": "/images/products/ups--sbn-tech-solutions-company-profile.jpg",
-              "description": "SBN TECH SOLUTIONS\nEmpowering India’s Power Backup Industry Since 2017\nSBN Tech Solutions delivers multi -brand UPS \nservices, chip -level repairs, and tailored \npower backup solutions.\nSince 2017, we've combined technical \nexpertise with rapid support for critical \ninfrastructure across South India.\nBranches in Puducherry, Salem & Coimbatore\nAbout us:",
-              "file": "",
-              "fileName": ""
-            }
-          ]
-        }
-      ],
+      "brands": [],
       "categories": [
         {
-          "id": "compressors",
-          "title": "Air Compressors",
-          "description": "Industrial rotary screw compressors, including oil-injected and oil-free models, with fixed-speed and variable-speed options.",
-          "items": [
-            {
-              "label": "Atlas Copco",
-              "slug": "atlas-copco"
-            },
-            {
-              "label": "Chicago Pneumatic (CP)",
-              "slug": "chicago-pneumatic"
-            },
-            {
-              "label": "ELGi",
-              "slug": "elgi"
-            },
-            {
-              "label": "FS-Curtis",
-              "slug": "fs-curtis"
-            },
-            {
-              "label": "Ingersoll Rand",
-              "slug": "ingersoll-rand"
-            },
-            {
-              "label": "Alisha",
-              "slug": "alisha"
-            }
-          ],
+          "id": "house",
+          "title": "Houses",
+          "description": "We decide the order in which daylight crosses a room.",
+          "items": [],
           "file": "",
           "fileName": ""
         },
         {
-          "id": "dryers-filters",
-          "title": "Air Dryers, Filters & Aftercoolers",
-          "description": "Compressed air treatment equipment, including heatless desiccant dryers, refrigerated air dryers, filters, and aftercoolers.",
-          "items": [
-            {
-              "label": "Summit Dryers & Filters",
-              "slug": "summit"
-            }
-          ],
+          "id": "culture",
+          "title": "Culture",
+          "description": "Public scenes where lingering and passing overlap.",
+          "items": [],
           "file": "",
           "fileName": ""
         },
         {
-          "id": "nitrogen",
-          "title": "Nitrogen Generation Systems",
-          "description": "Nitrogen generation solutions for plant utility systems.",
-          "items": [
-            {
-              "label": "Nitrogen Generation Systems",
-              "slug": "summit"
-            }
-          ],
-          "file": "",
-          "fileName": ""
-        },
-        {
-          "id": "oil",
-          "title": "Compressor Lubricants",
-          "description": "Synthetic compressor lubricants for a range of operating conditions, including options for extended service life and food-grade applications.",
-          "items": [
-            {
-              "label": "Klüber Summit PS / SH / FG Elite",
-              "slug": "oil"
-            }
-          ],
-          "file": "",
-          "fileName": ""
-        },
-        {
-          "id": "power",
-          "title": "Diesel Generators & UPS Systems",
-          "description": "Diesel generators and uninterruptible power supply (UPS) systems for reliable backup power and improved power quality.",
-          "items": [
-            {
-              "label": "Kirloskar Diesel Generators",
-              "slug": "dg"
-            },
-            {
-              "label": "SBN Tech UPS Systems",
-              "slug": "ups"
-            }
-          ],
-          "file": "",
-          "fileName": ""
-        },
-        {
-          "id": "utility",
-          "title": "Vacuum Pumps & Accessories",
-          "description": "Explore FS-Curtis vacuum pumps and related accessories.",
-          "items": [
-            {
-              "label": "FS-Curtis Vacuum Pumps & Accessories",
-              "slug": "fs-curtis"
-            }
-          ],
+          "id": "work",
+          "title": "Work",
+          "description": "Focus and encounter follow the same line.",
+          "items": [],
           "file": "",
           "fileName": ""
         }

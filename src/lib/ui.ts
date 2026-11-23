@@ -2,10 +2,11 @@ import type { Locale } from "@/lib/types";
 
 /** Fallback when Accept-Language has neither Korean nor English. */
 export const DEFAULT_LOCALE: Locale = "en";
-export const LOCALE_STORAGE_KEY = "hsc_locale";
+export const LOCALE_STORAGE_KEY = "kumsung_locale";
 
 export type UiCopy = {
   nav: {
+    home: string;
     about: string;
     services: string;
     company: string;
@@ -18,6 +19,7 @@ export type UiCopy = {
     apply: string;
   };
   menu: string;
+  studioStatement: string;
   learnMore: string;
   aboutLabel: string;
   aboutPageLabel: string;
@@ -144,23 +146,27 @@ export type UiCopy = {
   slidePrev: string;
   slideNext: string;
   openInMaps: string;
+  viewProjects: string;
+  heroDiscipline: string;
 };
 
 export const ui: Record<Locale, UiCopy> = {
   ko: {
     nav: {
-      about: "회사소개",
-      services: "설비·서비스",
-      company: "회사정보",
+      home: "홈",
+      about: "회사 소개",
+      services: "서비스",
+      company: "회사",
       history: "연혁",
-      performance: "실적",
-      clients: "고객사",
-      team: "팀원",
-      gallery: "갤러리",
-      contact: "문의",
-      apply: "지원서",
+      performance: "프로젝트",
+      clients: "프로젝트 문의",
+      team: "구성원",
+      gallery: "자료실",
+      contact: "연락처",
+      apply: "채용",
     },
     menu: "메뉴",
+    studioStatement: "하나의 점에서 시작한 생각이 선을 따라 공간으로 완성됩니다.",
     learnMore: "더 알아보기",
     aboutLabel: "인사말",
     aboutPageLabel: "About",
@@ -168,7 +174,7 @@ export const ui: Record<Locale, UiCopy> = {
     aboutPageLead: "대표 인사말, 회사 개요, 연혁과 인증을 안내합니다.",
     companyLabel: "회사정보",
     companyTitle: "회사 개요",
-    companyLead: "안정적인 압축공기가 필요한 제조 현장을 위한 산업용 컴프레서 판매·서비스.",
+    companyLead: "공간의 목적과 사용자의 동선에서 설계를 시작합니다.",
     fields: {
       legalName: "법인명",
       founded: "설립일",
@@ -176,17 +182,17 @@ export const ui: Record<Locale, UiCopy> = {
       businessType: "업종",
       businessItem: "사업 내용",
       hqKorea: "본사 (한국)",
-      branchIndia: "Registration Office",
-      chennaiOffice: "첸나이 사무실",
+      branchIndia: "방문",
+      chennaiOffice: "작업실",
       cin: "CIN",
       email: "이메일",
     },
     historyLabel: "연혁",
     historyTitle: "회사 연혁",
-    historyLead: "한국에서 태국, 인도까지 2010년부터 쌓아 온 컴프레서 서비스 전문성.",
+    historyLead: "관찰에서 선이 되고, 선에서 공간이 됩니다.",
     performanceLabel: "실적",
-    performanceTitle: "주요 실적",
-    performanceLead: "판매, 오버홀, 연간 유지보수 계약 등 주요 수행 내역입니다.",
+    performanceTitle: "프로젝트",
+    performanceLead: "감성적인 제목은 유지하고, 담당 업무와 진행 상태를 함께 적습니다. 아래는 설계 스터디입니다.",
     performanceEmpty: "등록된 실적이 없습니다.",
     performanceSearch: "검색",
     performanceSearchPlaceholder: "날짜, 내용, 고객사 검색",
@@ -199,12 +205,12 @@ export const ui: Record<Locale, UiCopy> = {
       client: "고객사",
     },
     galleryLabel: "Gallery",
-    galleryTitle: "갤러리",
-    galleryLead: "현장과 서비스 활동 사진입니다.",
+    galleryTitle: "자료실",
+    galleryLead: "도면과 장면은 아직 비어 있습니다.",
     galleryClose: "닫기",
     teamLabel: "Team",
-    teamTitle: "팀원 소개",
-    teamLead: "산업용 컴프레서 판매·서비스를 책임지는 Hankook Service Center 팀입니다.",
+    teamTitle: "구성원",
+    teamLead: "공간을 함께 편집하는 사람들입니다.",
     teamCeoLabel: "대표",
     teamMembersLabel: "팀원",
     teamEmpty: "팀원 정보는 준비 중입니다.",
@@ -220,12 +226,11 @@ export const ui: Record<Locale, UiCopy> = {
     familyLabel: "관계사",
     familyLead: "한국 관계사 안내입니다.",
     contactLabel: "문의",
-    contactTitle: "문의하기",
-    contactLead: "아래 양식을 작성해 주시면 빠르게 답변드리겠습니다.",
+    contactTitle: "프로젝트 문의",
+    contactLead: "공간의 목적과 쓰고 싶은 방식을 알려 주시면 설계 범위를 함께 정합니다.",
     clientsLabel: "고객사",
     clientsTitle: "고객사",
-    clientsLead:
-      "고객의 생산 현장에 필요한 압축공기 솔루션과 책임 있는 서비스로, 안정적인 설비 운영과 지속적인 성장을 함께합니다.",
+    clientsLead: "장면을 함께 만든 의뢰입니다.",
     clientsEmpty: "등록된 고객사가 없습니다.",
     clientsSearch: "검색",
     clientsSearchPlaceholder: "고객사명 검색",
@@ -273,15 +278,17 @@ export const ui: Record<Locale, UiCopy> = {
       success: "문의가 접수되었습니다. 감사합니다.",
       error: "전송에 실패했습니다. 잠시 후 다시 시도해 주세요.",
     },
-    footerTagline: "산업용 컴프레서 판매·수리·유지보수 Total Air Solution.",
+    footerTagline: "건축 설계.",
     footerRights: "All rights reserved.",
     developedBy: "Developed by",
     footerAdmin: "Admin",
     footerMvs: "업무 시스템 MVS",
-    heroImageAlt: "Hankook Service Center 파트너십",
+    heroImageAlt: "Kumsung Engineering Private Limited 파트너십",
     slidePrev: "이전 슬라이드",
     slideNext: "다음 슬라이드",
     openInMaps: "지도에서 보기",
+    viewProjects: "프로젝트 보기",
+    heroDiscipline: "공간의 목적과 사용자의 동선에서 설계를 시작합니다.",
     gallerySearch: "검색",
     gallerySearchPlaceholder: "제목, 설명 검색",
     galleryNoResults: "검색 결과가 없습니다.",
@@ -292,18 +299,20 @@ export const ui: Record<Locale, UiCopy> = {
   },
   en: {
     nav: {
+      home: "Home",
       about: "About",
       services: "Services",
-      company: "Company",
-      history: "History",
+      company: "Office",
+      history: "Notes",
       performance: "Projects",
-      clients: "Clients",
+      clients: "Project inquiry",
       team: "Team",
-      gallery: "Gallery",
-      contact: "Contact",
-      apply: "Apply Now",
+      gallery: "Library",
+      contact: "Contact details",
+      apply: "Careers",
     },
     menu: "Menu",
+    studioStatement: "An idea that begins at one point is completed as space along a line.",
     learnMore: "Learn more",
     aboutLabel: "Message from the CEO",
     aboutPageLabel: "About",
@@ -311,8 +320,7 @@ export const ui: Record<Locale, UiCopy> = {
     aboutPageLead: "Message from the CEO, company overview, history, and certifications.",
     companyLabel: "Company",
     companyTitle: "Company Information",
-    companyLead:
-      "Industrial compressor sales and service for manufacturers who need reliable compressed air.",
+    companyLead: "We begin with the purpose of a space and the way people move through it.",
     fields: {
       legalName: "Legal name",
       founded: "Established",
@@ -320,19 +328,17 @@ export const ui: Record<Locale, UiCopy> = {
       businessType: "Business type",
       businessItem: "Core Business",
       hqKorea: "Headquarters (Korea)",
-      branchIndia: "Registration Office",
-      chennaiOffice: "Chennai Office",
+      branchIndia: "Visit",
+      chennaiOffice: "Studio",
       cin: "CIN",
       email: "Email",
     },
     historyLabel: "History",
     historyTitle: "Company History",
-    historyLead:
-      "From Korea to Thailand and India building compressor service expertise since 2010.",
+    historyLead: "Looking becomes a line. A line becomes a plane.",
     performanceLabel: "Projects",
-    performanceTitle: "Featured Projects",
-    performanceLead:
-      "Selected projects covering equipment sales, overhauls, and annual maintenance services.",
+    performanceTitle: "Projects",
+    performanceLead: "Titles stay evocative, with scope and status beside them. These are design studies.",
     performanceEmpty: "No projects listed yet.",
     performanceSearch: "Search",
     performanceSearchPlaceholder: "Search by date, project details, or client",
@@ -345,12 +351,12 @@ export const ui: Record<Locale, UiCopy> = {
       client: "Client",
     },
     galleryLabel: "Gallery",
-    galleryTitle: "Gallery",
-    galleryLead: "Explore photos of our on-site services and daily operations.",
+    galleryTitle: "Library",
+    galleryLead: "Drawings and scenes will gather here.",
     galleryClose: "Close",
     teamLabel: "Team",
-    teamTitle: "Our Team",
-    teamLead: "Meet the people behind Hankook Service Center’s industrial compressed air solutions.",
+    teamTitle: "Team",
+    teamLead: "The people editing space together.",
     teamCeoLabel: "Director",
     teamMembersLabel: "Team Members",
     teamEmpty: "Team profiles are being prepared.",
@@ -366,12 +372,11 @@ export const ui: Record<Locale, UiCopy> = {
     familyLabel: "Family Company",
     familyLead: "Reference affiliate in Korea.",
     contactLabel: "Contact",
-    contactTitle: "Send an Inquiry",
-    contactLead: "Contact us to discuss your requirements. We’ll get back to you shortly.",
+    contactTitle: "Project inquiry",
+    contactLead: "Tell us the purpose of the space and how you want to use it. We will define the scope of design with you.",
     clientsLabel: "Clients",
     clientsTitle: "Our Clients",
-    clientsLead:
-      "We help our clients maintain reliable equipment operation through tailored compressed air solutions and dependable service, building lasting partnerships along the way.",
+    clientsLead: "Commissions we have shaped into scenes.",
     clientsEmpty: "No clients listed yet.",
     clientsSearch: "Search",
     clientsSearchPlaceholder: "Search by client name",
@@ -419,16 +424,17 @@ export const ui: Record<Locale, UiCopy> = {
       success: "Your inquiry has been submitted. Thank you.",
       error: "Failed to send. Please try again.",
     },
-    footerTagline:
-      "Comprehensive compressed air solutions, including industrial air compressor sales, repairs, and maintenance.",
+    footerTagline: "Architecture.",
     footerRights: "All rights reserved.",
     developedBy: "Developed by",
     footerAdmin: "Admin Login",
     footerMvs: "MVS Work Management System",
-    heroImageAlt: "Hankook Service Center partnership",
+    heroImageAlt: "Kumsung Engineering Private Limited partnership",
     slidePrev: "Previous slide",
     slideNext: "Next slide",
     openInMaps: "Open in Maps",
+    viewProjects: "View projects",
+    heroDiscipline: "We begin with the purpose of a space and how people move through it.",
     gallerySearch: "Search",
     gallerySearchPlaceholder: "Search by title or caption",
     galleryNoResults: "No matching results.",
@@ -438,3 +444,16 @@ export const ui: Record<Locale, UiCopy> = {
     galleryViewList: "List view",
   },
 };
+
+export function siteNav(t: UiCopy) {
+  return [
+    { href: "/", label: t.nav.home },
+    { href: "/about", label: t.nav.about },
+    { href: "/services", label: t.nav.services },
+    { href: "/performance", label: t.nav.performance },
+    { href: "/team", label: t.nav.team },
+    { href: "/gallery", label: t.nav.gallery },
+    { href: "/contact#inquiry", label: t.nav.clients },
+    { href: "/contact#visit", label: t.nav.contact },
+  ];
+}

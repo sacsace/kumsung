@@ -30,7 +30,7 @@ const DEFAULTS: MailSettings = {
   secure: true,
   user: "",
   pass: "",
-  fromName: "Hankook Service Center",
+  fromName: "Kumsung Engineering Private Limited",
   fromEmail: "",
   to: INQUIRY_MAIL_TO,
 };
@@ -318,7 +318,7 @@ export async function sendTestEmail(): Promise<{ ok: true } | { ok: false; error
     await transporter.sendMail({
       from,
       to: settings.to || INQUIRY_MAIL_TO,
-      subject: "[테스트] Hankook Service Center 메일 설정",
+      subject: "[테스트] Kumsung Engineering Private Limited 메일 설정",
       text: `Google SMTP 설정이 정상입니다. 문의 접수 시 ${settings.to || INQUIRY_MAIL_TO} 로 메일이 발송됩니다.`,
       html: `<p>Google SMTP 설정이 정상입니다.<br/>문의 접수 시 <strong>${settings.to || INQUIRY_MAIL_TO}</strong> 로 메일이 발송됩니다.</p>`,
     });

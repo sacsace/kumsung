@@ -255,13 +255,55 @@ function OfferingsEditor({
   items: ServiceOfferingItem[];
   onChange: (items: ServiceOfferingItem[]) => void;
 }) {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const open = openIndex !== null ? items[openIndex] : null;
+
+  function updateOpen(patch: Partial<ServiceOfferingItem>) {
+    if (openIndex === null) return;
+    onChange(items.map((row, i) => (i === openIndex ? { ...row, ...patch } : row)));
+  }
+
+  if (open && openIndex !== null) {
+    return (
+      <div className="grid gap-4">
+        <div className="flex items-center justify-between gap-3">
+          <h3 className="text-sm font-bold">{open.title || ui.servicesOfferings}</h3>
+          <button type="button" onClick={() => setOpenIndex(null)} className="text-sm text-[var(--muted)] hover:underline">
+            {ui.backToList}
+          </button>
+        </div>
+        <Field label={ui.title} value={open.title} onChange={(v) => updateOpen({ title: v })} />
+        <TextArea label={ui.body} value={open.description} onChange={(v) => updateOpen({ description: v })} rows={4} />
+        <div className="flex items-center justify-between gap-2">
+          <button
+            type="button"
+            className="text-sm text-red-600 hover:underline"
+            onClick={() => {
+              onChange(items.filter((_, i) => i !== openIndex));
+              setOpenIndex(null);
+            }}
+          >
+            {ui.delete}
+          </button>
+          <button type="button" onClick={() => setOpenIndex(null)} className="btn border border-[var(--line)] bg-white text-sm">
+            {ui.backToList}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="grid gap-4">
       <div className="flex justify-end">
         <button
           type="button"
           className="btn btn-primary text-sm"
-          onClick={() => onChange([...items, emptyOffering()])}
+          onClick={() => {
+            const next = [...items, emptyOffering()];
+            onChange(next);
+            setOpenIndex(next.length - 1);
+          }}
         >
           {ui.servicesAddOffering}
         </button>
@@ -269,11 +311,17 @@ function OfferingsEditor({
       {items.length === 0 ? (
         <p className="text-sm text-[var(--muted)]">{ui.servicesEmptyOfferings}</p>
       ) : (
-        items.map((item, index) => (
-          <div key={item.id} className="border border-[var(--line)] bg-[#f8fafb] p-4">
-            <div className="mb-3 flex items-center justify-between gap-2">
-              <p className="text-xs font-semibold text-[var(--muted)]">#{index + 1}</p>
-              <div className="flex items-center gap-2">
+        <div className="overflow-hidden border border-[var(--line)]">
+          {items.map((item, index) => (
+            <div key={item.id} className="flex items-center border-b border-[var(--line)] last:border-b-0">
+              <button
+                type="button"
+                onClick={() => setOpenIndex(index)}
+                className="min-w-0 flex-1 px-4 py-3 text-left text-sm font-medium hover:bg-[#f7f6f3]"
+              >
+                {item.title || `(${index + 1})`}
+              </button>
+              <div className="pr-3">
                 <MoveButtons
                   index={index}
                   total={items.length}
@@ -281,36 +329,10 @@ function OfferingsEditor({
                   labelUp={ui.servicesMoveUp}
                   labelDown={ui.servicesMoveDown}
                 />
-                <button
-                  type="button"
-                  className="text-xs text-red-600 hover:underline"
-                  onClick={() => onChange(items.filter((_, i) => i !== index))}
-                >
-                  {ui.delete}
-                </button>
               </div>
             </div>
-            <div className="grid gap-3">
-              <Field
-                label={ui.title}
-                value={item.title}
-                onChange={(v) =>
-                  onChange(items.map((row, i) => (i === index ? { ...row, title: v } : row)))
-                }
-              />
-              <TextArea
-                label={ui.body}
-                value={item.description}
-                onChange={(v) =>
-                  onChange(
-                    items.map((row, i) => (i === index ? { ...row, description: v } : row)),
-                  )
-                }
-                rows={3}
-              />
-            </div>
-          </div>
-        ))
+          ))}
+        </div>
       )}
     </div>
   );
@@ -325,7 +347,119 @@ function BrandsEditor({
   items: ServiceBrandItem[];
   onChange: (items: ServiceBrandItem[]) => void;
 }) {
-  const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
+  const [openId, setOpenId] = useState<string | null>(null);
+  const [productId, setProductId] = useState<string | null>(null);
+  const index = items.findIndex((item) => item.id === openId);
+  const brand = index >= 0 ? items[index] : null;
+  const productIndex = brand ? brand.products.findIndex((item) => item.id === productId) : -1;
+  const product = brand && productIndex >= 0 ? brand.products[productIndex] : null;
+
+  function updateBrand(patch: Partial<ServiceBrandItem>) {
+    if (index < 0) return;
+    onChange(items.map((row, i) => (i === index ? { ...row, ...patch } : row)));
+  }
+
+  if (brand && product) {
+    return (
+      <div className="grid gap-3">
+        <button type="button" onClick={() => setProductId(null)} className="text-left text-sm text-[var(--muted)] hover:underline">
+          {ui.backToList}
+        </button>
+        <ProductEditor
+          ui={ui}
+          product={product}
+          onChange={(next) =>
+            updateBrand({
+              products: brand.products.map((row, i) => (i === productIndex ? next : row)),
+            })
+          }
+          onRemove={() => {
+            updateBrand({ products: brand.products.filter((_, i) => i !== productIndex) });
+            setProductId(null);
+          }}
+        />
+      </div>
+    );
+  }
+
+  if (brand) {
+    return (
+      <div className="grid gap-4">
+        <div className="flex items-center justify-between gap-3">
+          <h3 className="text-sm font-bold">{brand.brand || ui.servicesBrands}</h3>
+          <button
+            type="button"
+            onClick={() => {
+              setProductId(null);
+              setOpenId(null);
+            }}
+            className="text-sm text-[var(--muted)] hover:underline"
+          >
+            {ui.backToList}
+          </button>
+        </div>
+        <Field
+          label={ui.servicesBrandName}
+          value={brand.brand}
+          onChange={(v) => updateBrand({ brand: v, slug: brand.slug || slugify(v) })}
+        />
+        <Field
+          label={ui.servicesSlug}
+          value={brand.slug}
+          onChange={(v) => updateBrand({ slug: slugify(v) || v })}
+        />
+        <Field label={ui.servicesFolder} value={brand.folder} onChange={(v) => updateBrand({ folder: v })} />
+        <TextArea label={ui.servicesLead} value={brand.lead} onChange={(v) => updateBrand({ lead: v })} rows={3} />
+        <div className="border-t border-[var(--line)] pt-3">
+          <div className="mb-3 flex items-center justify-between gap-2">
+            <p className="text-sm font-semibold">{ui.servicesBrands}</p>
+            <button
+              type="button"
+              className="border border-[var(--line)] px-2 py-1 text-xs hover:bg-[#f5f7f9]"
+              onClick={() => {
+                const next = emptyProduct();
+                updateBrand({ products: [...brand.products, next] });
+                setProductId(next.id);
+              }}
+            >
+              {ui.servicesAddProduct}
+            </button>
+          </div>
+          {brand.products.length === 0 ? (
+            <p className="text-sm text-[var(--muted)]">{ui.none}</p>
+          ) : (
+            <div className="overflow-hidden border border-[var(--line)] bg-white">
+              {brand.products.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setProductId(item.id)}
+                  className="block w-full border-b border-[var(--line)] px-4 py-3 text-left text-sm last:border-b-0 hover:bg-[#f7f6f3]"
+                >
+                  {item.title || item.fileName || "—"}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="flex items-center justify-between gap-2">
+          <button
+            type="button"
+            className="text-sm text-red-600 hover:underline"
+            onClick={() => {
+              onChange(items.filter((row) => row.id !== brand.id));
+              setOpenId(null);
+            }}
+          >
+            {ui.delete}
+          </button>
+          <button type="button" onClick={() => setOpenId(null)} className="btn border border-[var(--line)] bg-white text-sm">
+            {ui.backToList}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="grid gap-4">
@@ -345,182 +479,29 @@ function BrandsEditor({
       {items.length === 0 ? (
         <p className="text-sm text-[var(--muted)]">{ui.servicesEmptyBrands}</p>
       ) : (
-        items.map((brand, index) => {
-          const open = openId === brand.id;
-          return (
-            <div key={brand.id} className="border border-[var(--line)]">
-              <div className="flex w-full items-center gap-2 bg-[#f5f7f9] px-3 py-2 sm:px-4 sm:py-3">
+        <div className="overflow-hidden border border-[var(--line)]">
+          {items.map((item, itemIndex) => (
+            <div key={item.id} className="flex items-center border-b border-[var(--line)] last:border-b-0">
+              <button
+                type="button"
+                onClick={() => setOpenId(item.id)}
+                className="min-w-0 flex-1 px-4 py-3 text-left hover:bg-[#f7f6f3]"
+              >
+                <span className="block truncate text-sm font-medium">{item.brand || item.slug || `(${itemIndex + 1})`}</span>
+                <span className="block truncate text-xs text-[var(--muted)]">/services/{item.slug || "…"}</span>
+              </button>
+              <div className="pr-3">
                 <MoveButtons
-                  index={index}
+                  index={itemIndex}
                   total={items.length}
-                  onMove={(direction) => onChange(moveItem(items, index, direction))}
+                  onMove={(direction) => onChange(moveItem(items, itemIndex, direction))}
                   labelUp={ui.servicesMoveUp}
                   labelDown={ui.servicesMoveDown}
                 />
-                <button
-                  type="button"
-                  className="flex min-w-0 flex-1 items-center justify-between gap-3 text-left"
-                  onClick={() => setOpenId(open ? null : brand.id)}
-                >
-                  <span className="truncate text-sm font-semibold text-[var(--ink)]">
-                    {brand.brand || brand.slug || `(brand ${index + 1})`}
-                    <span className="ml-2 text-xs font-normal text-[var(--muted)]">
-                      /services/{brand.slug || "…"} · {brand.products.length}
-                    </span>
-                  </span>
-                  <span className="shrink-0 text-xs text-[var(--muted)]">
-                    {open ? "▲" : "▼"}
-                  </span>
-                </button>
               </div>
-              {open ? (
-                <div className="grid gap-3 p-4">
-                  <div className="flex items-center justify-between gap-2">
-                    <p className="text-xs font-semibold text-[var(--muted)]">
-                      #{index + 1} / {items.length}
-                    </p>
-                    <button
-                      type="button"
-                      className="text-xs text-red-600 hover:underline"
-                      onClick={() => {
-                        onChange(items.filter((_, i) => i !== index));
-                        setOpenId(null);
-                      }}
-                    >
-                      {ui.delete}
-                    </button>
-                  </div>
-                  <Field
-                    label={ui.servicesBrandName}
-                    value={brand.brand}
-                    onChange={(v) => {
-                      const slug = brand.slug || slugify(v);
-                      onChange(
-                        items.map((row, i) =>
-                          i === index ? { ...row, brand: v, slug: row.slug || slug } : row,
-                        ),
-                      );
-                    }}
-                  />
-                  <Field
-                    label={ui.servicesSlug}
-                    value={brand.slug}
-                    onChange={(v) =>
-                      onChange(
-                        items.map((row, i) =>
-                          i === index ? { ...row, slug: slugify(v) || v } : row,
-                        ),
-                      )
-                    }
-                  />
-                  <Field
-                    label={ui.servicesFolder}
-                    value={brand.folder}
-                    onChange={(v) =>
-                      onChange(items.map((row, i) => (i === index ? { ...row, folder: v } : row)))
-                    }
-                  />
-                  <TextArea
-                    label={ui.servicesLead}
-                    value={brand.lead}
-                    onChange={(v) =>
-                      onChange(items.map((row, i) => (i === index ? { ...row, lead: v } : row)))
-                    }
-                    rows={2}
-                  />
-
-                  <div className="border-t border-[var(--line)] pt-3">
-                    <div className="mb-3 flex items-center justify-between gap-2">
-                      <p className="text-sm font-semibold text-[var(--ink)]">
-                        {ui.servicesBrands}
-                      </p>
-                      <button
-                        type="button"
-                        className="border border-[var(--line)] px-2 py-1 text-xs hover:bg-[#f5f7f9]"
-                        onClick={() =>
-                          onChange(
-                            items.map((row, i) =>
-                              i === index
-                                ? { ...row, products: [...row.products, emptyProduct()] }
-                                : row,
-                            ),
-                          )
-                        }
-                      >
-                        {ui.servicesAddProduct}
-                      </button>
-                    </div>
-                    <div className="grid gap-3">
-                      {brand.products.map((product, pIndex) => (
-                        <div key={product.id} className="grid gap-2">
-                          <div className="flex items-center justify-between gap-2">
-                            <p className="text-xs font-semibold text-[var(--muted)]">
-                              #{pIndex + 1}
-                            </p>
-                            <MoveButtons
-                              index={pIndex}
-                              total={brand.products.length}
-                              onMove={(direction) =>
-                                onChange(
-                                  items.map((row, i) =>
-                                    i === index
-                                      ? {
-                                          ...row,
-                                          products: moveItem(
-                                            row.products,
-                                            pIndex,
-                                            direction,
-                                          ),
-                                        }
-                                      : row,
-                                  ),
-                                )
-                              }
-                              labelUp={ui.servicesMoveUp}
-                              labelDown={ui.servicesMoveDown}
-                            />
-                          </div>
-                          <ProductEditor
-                            ui={ui}
-                            product={product}
-                            onChange={(next) =>
-                              onChange(
-                                items.map((row, i) =>
-                                  i === index
-                                    ? {
-                                        ...row,
-                                        products: row.products.map((p, j) =>
-                                          j === pIndex ? next : p,
-                                        ),
-                                      }
-                                    : row,
-                                ),
-                              )
-                            }
-                            onRemove={() =>
-                              onChange(
-                                items.map((row, i) =>
-                                  i === index
-                                    ? {
-                                        ...row,
-                                        products: row.products.filter(
-                                          (_, j) => j !== pIndex,
-                                        ),
-                                      }
-                                    : row,
-                                ),
-                              )
-                            }
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ) : null}
             </div>
-          );
-        })
+          ))}
+        </div>
       )}
     </div>
   );
@@ -691,6 +672,7 @@ function CategoriesEditor({
 }) {
   const [uploadingId, setUploadingId] = useState<string | null>(null);
   const [uploadError, setUploadError] = useState("");
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const fileInputRefs = useRef<Record<string, HTMLInputElement | null>>({});
 
   function updateCategory(index: number, patch: Partial<ServiceCategoryItem>) {
@@ -731,18 +713,61 @@ function CategoriesEditor({
     });
   }
 
+  if (openIndex === null || !items[openIndex]) {
+    return (
+      <div className="grid gap-4">
+        <div className="flex justify-end">
+          <button
+            type="button"
+            className="btn btn-primary text-sm"
+            onClick={() => {
+              const next = [...items, emptyCategory()];
+              onChange(next);
+              setOpenIndex(next.length - 1);
+            }}
+          >
+            {ui.servicesAddCategory}
+          </button>
+        </div>
+        {items.length === 0 ? (
+          <p className="text-sm text-[var(--muted)]">{ui.none}</p>
+        ) : (
+          <div className="overflow-hidden border border-[var(--line)]">
+            {items.map((item, index) => (
+              <div key={item.id} className="flex items-center border-b border-[var(--line)] last:border-b-0">
+                <button
+                  type="button"
+                  onClick={() => setOpenIndex(index)}
+                  className="min-w-0 flex-1 px-4 py-3 text-left text-sm font-medium hover:bg-[#f7f6f3]"
+                >
+                  {item.title || `(${index + 1})`}
+                </button>
+                <div className="pr-3">
+                  <MoveButtons
+                    index={index}
+                    total={items.length}
+                    onMove={(direction) => onChange(moveItem(items, index, direction))}
+                    labelUp={ui.servicesMoveUp}
+                    labelDown={ui.servicesMoveDown}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="grid gap-4">
       <div className="flex justify-end">
-        <button
-          type="button"
-          className="btn btn-primary text-sm"
-          onClick={() => onChange([...items, emptyCategory()])}
-        >
-          {ui.servicesAddCategory}
+        <button type="button" onClick={() => setOpenIndex(null)} className="text-sm text-[var(--muted)] hover:underline">
+          {ui.backToList}
         </button>
       </div>
-      {items.map((item, index) => {
+      {[items[openIndex]].map((item) => {
+        const index = openIndex;
         const usedSlugs = new Set(item.items.map((link) => link.slug));
         const availableBrands = brands.filter(
           (brand) => brand.slug && !usedSlugs.has(brand.slug),
@@ -762,7 +787,10 @@ function CategoriesEditor({
                 <button
                   type="button"
                   className="text-xs text-red-600 hover:underline"
-                  onClick={() => onChange(items.filter((_, i) => i !== index))}
+                  onClick={() => {
+                    onChange(items.filter((_, i) => i !== index));
+                    setOpenIndex(null);
+                  }}
                 >
                   {ui.delete}
                 </button>

@@ -38,235 +38,111 @@ export type ServicesCopy = {
 };
 
 const ko: ServicesCopy = {
-  label: "Products & Services",
-  title: "설비와 서비스",
-  lead:
-    "산업용 압축공기 Total Air Solution. 멀티 브랜드 에어 컴프레서와 주변 설비 공급부터 설치, 수리·오버홀, 연간 유지보수까지 한곳에서 지원합니다.",
-  offeringsLabel: "Services",
-  offeringsTitle: "제공 서비스",
-  offeringsLead: "현장 가동을 안정적으로 유지하기 위한 판매·정비·공사 서비스를 제공합니다.",
-  equipmentLabel: "Equipment",
-  equipmentTitle: "취급 설비",
-  equipmentLead:
-    "브랜드를 선택하면 설비 사진, 제품 정보, 카탈로그를 확인할 수 있습니다.",
-  brandsLabel: "주요 취급 브랜드",
-  viewDocs: "제품 자료 보기",
-  ctaTitle: "설비 선정이나 유지보수 상담이 필요하신가요?",
-  ctaLead: "현장 조건에 맞는 컴프레서·처리설비·유지보수 방안을 함께 검토합니다.",
-  ctaButton: "문의하기",
+  label: "Practice",
+  title: "설계",
+  lead: "대지, 빛, 재료를 한 장면으로 편집합니다. 점은 머무르고, 선은 사람을 이끕니다.",
+  offeringsLabel: "Practice",
+  offeringsTitle: "우리가 그리는 것",
+  offeringsLead: "건축을 크게 세 가지 호흡으로 나눕니다.",
+  equipmentLabel: "Studies",
+  equipmentTitle: "작업의 결",
+  equipmentLead: "주택, 문화, 업무 공간을 같은 감수성으로 다룹니다.",
+  brandsLabel: "",
+  viewDocs: "작업 보기",
+  ctaTitle: "다음 장면을 함께 편집할까요?",
+  ctaLead: "대지와 쓰고 싶은 시간을 들려 주시면, 점과 선부터 시작하겠습니다.",
+  ctaButton: "연락",
   offerings: [
     {
-      id: "sales",
-      title: "신규 설비 판매",
-      description:
-        "에어 컴프레서, 드라이어, 필터, 오일, UPS, DG 등 현장 요구에 맞는 설비를 제안하고 공급합니다.",
+      id: "architecture",
+      title: "건축",
+      description: "신축과 증개축. 구조와 입면, 동선이 하나의 제스처가 되도록 계획합니다.",
     },
     {
-      id: "repair",
-      title: "수리 · 오버홀",
-      description:
-        "Atlas Copco, ELGI, Chicago Pneumatic, FS Curtis 등 멀티 브랜드 컴프레서의 에어엔드·모터·제어반 정비와 오버홀을 수행합니다.",
+      id: "interior",
+      title: "실내",
+      description: "가구, 빛, 촉감. 머무는 자리가 먼저 보이고 벽은 그 뒤를 받칩니다.",
     },
     {
-      id: "amc",
-      title: "연간 유지보수(AMC)",
-      description:
-        "예방정비 계약으로 정기 점검, 소모품 교체, 고장 대응을 지원해 비가동 리스크를 낮춥니다.",
-    },
-    {
-      id: "treatment",
-      title: "공기처리 · 배관 공사",
-      description:
-        "드라이어·필터·애프터쿨러 구성과 파이프라인 공사로 안정적인 압축공기 품질과 공급 라인을 구축합니다.",
-    },
-    {
-      id: "rental",
-      title: "렌탈 컴프레서",
-      description:
-        "설비 교체·증설·돌발 대응 시 렌탈 컴프레서로 생산 중단을 최소화합니다.",
-    },
-    {
-      id: "special",
-      title: "질소·냉각·전원 설비",
-      description:
-        "질소 발생장치, 칠러 재컨디셔닝, DG·UPS 등 생산 유틸리티 설비를 함께 지원합니다.",
+      id: "landscape",
+      title: "사이",
+      description: "마당, 골목, 처마. 건물과 바깥이 만나는 선을 설계의 중심으로 둡니다.",
     },
   ],
   equipment: [
     {
-      id: "compressors",
-      title: "에어 컴프레서",
-      description:
-        "오일 주입식·오일프리, 고정속·VSD/VFD 등 산업용 스크류 컴프레서 패키지를 취급합니다.",
-      items: [
-        { label: "Atlas Copco", slug: "atlas-copco" },
-        { label: "Chicago Pneumatic (CP)", slug: "chicago-pneumatic" },
-        { label: "ELGI", slug: "elgi" },
-        { label: "FS Curtis", slug: "fs-curtis" },
-        { label: "Ingersoll Rand", slug: "ingersoll-rand" },
-        { label: "Alisha", slug: "alisha" },
-      ],
+      id: "house",
+      title: "주택",
+      description: "하루의 빛이 방을 건너가는 순서를 먼저 정합니다.",
+      items: [],
     },
     {
-      id: "dryers-filters",
-      title: "드라이어 · 필터 · 애프터쿨러",
-      description:
-        "제습·여과·냉각 설비로 압축공기 품질을 관리합니다. Summit Adsorb(흡착식), Elix(냉동식) 드라이어와 필터를 포함합니다.",
-      items: [
-        { label: "Summit 드라이어·필터", slug: "summit" },
-        { label: "질소 발생장치", slug: "summit" },
-      ],
+      id: "culture",
+      title: "문화",
+      description: "머무름과 스침이 겹치는 공공의 장면을 만듭니다.",
+      items: [],
     },
     {
-      id: "oil",
-      title: "컴프레서 오일",
-      description: "장수명·식품급 등 용도별 합성 컴프레서 오일을 공급합니다.",
-      items: [
-        { label: "Klüber Summit PS / SH / FG Elite", slug: "oil" },
-      ],
-    },
-    {
-      id: "power",
-      title: "DG · UPS",
-      description:
-        "비상·대기 전원과 안정적인 전력 품질을 위한 디젤 발전기 및 UPS 솔루션입니다.",
-      items: [
-        { label: "Kirloskar DG", slug: "dg" },
-        { label: "SBN Tech UPS", slug: "ups" },
-      ],
-    },
-    {
-      id: "utility",
-      title: "진공펌프 · 액세서리",
-      description: "FS Curtis 진공펌프 및 액세서리 자료를 확인할 수 있습니다.",
-      items: [{ label: "FS Curtis Accessories / Vacuum", slug: "fs-curtis" }],
+      id: "work",
+      title: "업무",
+      description: "집중과 마주침이 선을 따라 자연스럽게 이어지게 합니다.",
+      items: [],
     },
   ],
 };
 
 const en: ServicesCopy = {
-  label: "Products & Services",
-  title: "Equipment & Services",
-  lead:
-    "Comprehensive solutions for industrial compressed air systems. We supply compressors and related equipment from multiple brands, with installation support, repairs, overhauls, and annual maintenance, all coordinated by one team.",
-  offeringsLabel: "Services",
-  offeringsTitle: "Our Services",
-  offeringsLead:
-    "Equipment sales, servicing, and installation support to keep your industrial compressed air systems running reliably.",
-  equipmentLabel: "Equipment",
-  equipmentTitle: "Our Equipment Range",
-  equipmentLead:
-    "Select a brand to explore equipment photos, product information, and available catalogs.",
-  brandsLabel: "Key Brands",
-  viewDocs: "View product docs",
-  ctaTitle: "Need help selecting equipment or planning maintenance?",
-  ctaLead:
-    "We review compressor, air-treatment, and maintenance options that fit your site conditions.",
-  ctaButton: "Contact Us",
+  label: "Practice",
+  title: "Design",
+  lead: "We edit site, light, and material into one scene. A point holds. A line leads.",
+  offeringsLabel: "Practice",
+  offeringsTitle: "What we draw",
+  offeringsLead: "The work moves in three breaths.",
+  equipmentLabel: "Studies",
+  equipmentTitle: "Kinds of work",
+  equipmentLead: "Houses, culture, and workplaces, held in the same sensibility.",
+  brandsLabel: "",
+  viewDocs: "View work",
+  ctaTitle: "Shall we edit the next scene together?",
+  ctaLead: "Tell us the site and the time you want to spend there. We begin with points and lines.",
+  ctaButton: "Contact",
   offerings: [
     {
-      id: "sales",
-      title: "New Equipment Sales",
-      description:
-        "We recommend and supply air compressors, dryers, filters, lubricants, uninterruptible power supply (UPS) systems, diesel generators, and related equipment to meet your plant’s requirements.",
+      id: "architecture",
+      title: "Architecture",
+      description: "New buildings and alterations, where structure, facade, and movement share one gesture.",
     },
     {
-      id: "repair",
-      title: "Repairs & Overhauls",
-      description:
-        "Repair and overhaul services for compressors from brands including Atlas Copco, ELGi, Chicago Pneumatic, and FS-Curtis, covering airends, motors, and controllers.",
+      id: "interior",
+      title: "Interior",
+      description: "Furniture, light, and touch. The place to stay appears first. Walls follow.",
     },
     {
-      id: "amc",
-      title: "Annual Maintenance Contracts (AMC)",
-      description:
-        "Planned preventive maintenance and breakdown support to help reduce unplanned downtime, with inspections and consumables provided according to the agreed contract scope.",
-    },
-    {
-      id: "treatment",
-      title: "Air Treatment & Piping",
-      description:
-        "Installation of air dryers, filters, aftercoolers, and piping to maintain consistent compressed air quality and reliable distribution.",
-    },
-    {
-      id: "rental",
-      title: "Compressor Rentals",
-      description:
-        "Rental compressors for temporary replacement, additional capacity, or emergency use.",
-    },
-    {
-      id: "special",
-      title: "Nitrogen, Cooling & Power Solutions",
-      description:
-        "Nitrogen generation solutions, chiller reconditioning, and diesel generator and UPS support for your plant’s utility systems.",
+      id: "landscape",
+      title: "In between",
+      description: "Courts, alleys, and eaves. The line where the building meets the outside is the project.",
     },
   ],
   equipment: [
     {
-      id: "compressors",
-      title: "Air Compressors",
-      description:
-        "Industrial rotary screw compressors, including oil-injected and oil-free models, with fixed-speed and variable-speed options.",
-      items: [
-        { label: "Atlas Copco", slug: "atlas-copco" },
-        { label: "Chicago Pneumatic (CP)", slug: "chicago-pneumatic" },
-        { label: "ELGi", slug: "elgi" },
-        { label: "FS-Curtis", slug: "fs-curtis" },
-        { label: "Ingersoll Rand", slug: "ingersoll-rand" },
-        { label: "Alisha", slug: "alisha" },
-      ],
+      id: "house",
+      title: "Houses",
+      description: "We decide the order in which daylight crosses a room.",
+      items: [],
     },
     {
-      id: "dryers-filters",
-      title: "Air Dryers, Filters & Aftercoolers",
-      description:
-        "Compressed air treatment equipment, including heatless desiccant dryers, refrigerated air dryers, filters, and aftercoolers.",
-      items: [{ label: "Summit Dryers & Filters", slug: "summit" }],
+      id: "culture",
+      title: "Culture",
+      description: "Public scenes where lingering and passing overlap.",
+      items: [],
     },
     {
-      id: "nitrogen",
-      title: "Nitrogen Generation Systems",
-      description: "Nitrogen generation solutions for plant utility systems.",
-      items: [{ label: "Nitrogen Generation Systems", slug: "summit" }],
-    },
-    {
-      id: "oil",
-      title: "Compressor Lubricants",
-      description:
-        "Synthetic compressor lubricants for a range of operating conditions, including options for extended service life and food-grade applications.",
-      items: [{ label: "Klüber Summit PS / SH / FG Elite", slug: "oil" }],
-    },
-    {
-      id: "power",
-      title: "Diesel Generators & UPS Systems",
-      description:
-        "Diesel generators and uninterruptible power supply (UPS) systems for reliable backup power and improved power quality.",
-      items: [
-        { label: "Kirloskar Diesel Generators", slug: "dg" },
-        { label: "SBN Tech UPS Systems", slug: "ups" },
-      ],
-    },
-    {
-      id: "utility",
-      title: "Vacuum Pumps & Accessories",
-      description: "Explore FS-Curtis vacuum pumps and related accessories.",
-      items: [{ label: "FS-Curtis Vacuum Pumps & Accessories", slug: "fs-curtis" }],
+      id: "work",
+      title: "Work",
+      description: "Focus and encounter follow the same line.",
+      items: [],
     },
   ],
 };
 
 export const servicesCopy: Record<Locale, ServicesCopy> = { ko, en };
-
-/** Brand cards shown on the services index (excludes company profile folder). */
-export const featuredBrandSlugs = [
-  "atlas-copco",
-  "chicago-pneumatic",
-  "elgi",
-  "fs-curtis",
-  "ingersoll-rand",
-  "alisha",
-  "summit",
-  "oil",
-  "dg",
-  "ups",
-] as const;

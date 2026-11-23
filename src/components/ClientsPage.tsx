@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
 import { LanguageProvider, useLanguage } from "@/components/LanguageProvider";
+import { PageIntro } from "@/components/PageIntro";
+import { SiteFrame } from "@/components/SiteFrame";
 import { SafeSearchInput } from "@/components/SafeSearchInput";
 import type { ClientItem, Locale, SiteContent } from "@/lib/types";
 
@@ -44,21 +44,12 @@ function ClientsSections() {
   }, [allItems, query]);
 
   return (
-    <div className="site-shell bg-white">
-      <Header variant="solid" />
-
-      <main className="flex-1">
-        <section className="border-b border-[var(--line)] bg-[var(--navy-deep)] pt-28 pb-14 text-white md:pt-32 md:pb-16">
-          <div className="container">
-            <p className="section-label !text-white/55">{t.clientsLabel}</p>
-            <h1 className="section-title !mb-3 !text-white">
-              {clients?.title || t.clientsTitle}
-            </h1>
-            <p className="max-w-3xl text-pretty text-white/70 leading-relaxed">
-              {clients?.lead || t.clientsLead}
-            </p>
-          </div>
-        </section>
+    <SiteFrame>
+        <PageIntro
+          eyebrow={t.clientsLabel}
+          title={clients?.title || t.clientsTitle}
+          lead={clients?.lead || t.clientsLead}
+        />
 
         <section className="section bg-white">
           <div className="container">
@@ -93,10 +84,7 @@ function ClientsSections() {
             )}
           </div>
         </section>
-      </main>
-
-      <Footer />
-    </div>
+    </SiteFrame>
   );
 }
 

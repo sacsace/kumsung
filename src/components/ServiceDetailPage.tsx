@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
 import { LanguageProvider, useLanguage } from "@/components/LanguageProvider";
+import { PageIntro } from "@/components/PageIntro";
+import { SiteFrame } from "@/components/SiteFrame";
 import { productPageUi } from "@/lib/products";
 import type { Locale, ServiceBrandItem, SiteContent } from "@/lib/types";
 
@@ -75,25 +75,17 @@ function ServiceDetailSections({ brand }: { brand: ServiceBrandItem }) {
   }
 
   return (
-    <div className="site-shell bg-white">
-      <Header variant="solid" />
-
-      <main className="flex-1">
-        <section className="border-b border-[var(--line)] bg-[var(--navy-deep)] pt-28 pb-14 text-white md:pt-32 md:pb-16">
-          <div className="container">
-            <a
-              href="/services"
-              className="text-sm text-white/60 transition-colors hover:text-white"
-            >
+    <SiteFrame>
+        <PageIntro
+          before={
+            <a href="/services" className="text-sm text-[var(--muted)] hover:text-[var(--ink)]">
               ← {ui.back}
             </a>
-            {brand.folder ? (
-              <p className="section-label mt-5 !text-white/55">{brand.folder}</p>
-            ) : null}
-            <h1 className="section-title !mb-3 !text-white">{brand.brand}</h1>
-            <p className="max-w-3xl text-pretty leading-relaxed text-white/70">{brand.lead}</p>
-          </div>
-        </section>
+          }
+          eyebrow={brand.folder || undefined}
+          title={brand.brand}
+          lead={brand.lead}
+        />
 
         <section className="section bg-white">
           <div className="container">
@@ -165,7 +157,7 @@ function ServiceDetailSections({ brand }: { brand: ServiceBrandItem }) {
             <div className="mt-12 border border-[var(--line)] bg-[#f5f7f9] p-5 md:flex md:items-center md:justify-between md:p-6">
               <p className="text-sm text-[var(--ink)]">{ui.contact}</p>
               <a
-                href="/contact"
+                href="/contact#inquiry"
                 className="mt-3 inline-flex border border-[var(--navy)] bg-[var(--navy)] px-4 py-2 text-sm font-semibold tracking-wide !text-white md:mt-0"
               >
                 {ui.contact}
@@ -173,9 +165,6 @@ function ServiceDetailSections({ brand }: { brand: ServiceBrandItem }) {
             </div>
           </div>
         </section>
-      </main>
-
-      <Footer />
 
       {current?.image && active !== null ? (
         <div
@@ -238,7 +227,7 @@ function ServiceDetailSections({ brand }: { brand: ServiceBrandItem }) {
           </div>
         </div>
       ) : null}
-    </div>
+    </SiteFrame>
   );
 }
 

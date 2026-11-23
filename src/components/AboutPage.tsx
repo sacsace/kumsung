@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
 import { LanguageProvider, useLanguage } from "@/components/LanguageProvider";
+import { PageIntro } from "@/components/PageIntro";
+import { SiteFrame } from "@/components/SiteFrame";
 import { SafeSearchInput } from "@/components/SafeSearchInput";
 import { ViewModeToggle } from "@/components/ViewModeToggle";
 import type { SiteContent } from "@/lib/types";
@@ -19,6 +19,7 @@ function splitParagraphs(text: string) {
 }
 
 function InfoBlock({ label, value }: { label: string; value: string }) {
+  if (!value?.trim()) return null;
   return (
     <div className="bg-white p-4 md:p-5">
       <p className="text-[0.7rem] font-semibold tracking-[0.1em] text-[var(--steel)]">{label}</p>
@@ -44,17 +45,8 @@ function AboutSections() {
   }, [allCerts, certQuery]);
 
   return (
-    <div className="site-shell bg-white">
-      <Header variant="solid" />
-
-      <main className="flex-1">
-        <section className="border-b border-[var(--line)] bg-[var(--navy-deep)] pt-28 pb-14 text-white md:pt-32 md:pb-16">
-          <div className="container">
-            <p className="section-label !text-white/55">{t.aboutPageLabel}</p>
-            <h1 className="section-title !mb-3 !text-white">{t.aboutPageTitle}</h1>
-            <p className="max-w-2xl text-white/70">{t.aboutPageLead}</p>
-          </div>
-        </section>
+    <SiteFrame>
+        <PageIntro eyebrow={t.aboutPageLabel} title={t.aboutPageTitle} lead={t.aboutPageLead} />
 
         <section id="greeting" className="section bg-white">
           <div className="container grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
@@ -74,15 +66,10 @@ function AboutSections() {
                 ))}
               </div>
             </div>
-            <div className="relative aspect-[4/3] overflow-hidden bg-[var(--bg)]">
-              <Image
-                src="/images/hero-graphic.png"
-                alt={t.heroImageAlt}
-                fill
-                className="object-cover object-left"
-                sizes="(max-width: 1024px) 100vw, 45vw"
-                priority
-              />
+            <div className="sheet-grid relative aspect-[4/3] overflow-hidden border border-[var(--line)]" aria-hidden>
+              <span className="absolute -right-[0.2em] -bottom-[0.28em] font-display text-[clamp(10rem,18vw,16rem)] leading-none font-medium tracking-[-0.08em] text-[var(--signal)]">
+                K
+              </span>
             </div>
           </div>
         </section>
@@ -238,10 +225,7 @@ function AboutSections() {
             </div>
           </section>
         ) : null}
-      </main>
-
-      <Footer />
-    </div>
+    </SiteFrame>
   );
 }
 

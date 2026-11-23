@@ -37,7 +37,6 @@ export function Header({ variant = "overlay" }: { variant?: "overlay" | "solid" 
     { href: "/about", label: t.nav.about },
     { href: "/services", label: t.nav.services },
     { href: "/performance", label: t.nav.performance },
-    { href: "/clients", label: t.nav.clients },
     { href: "/team", label: t.nav.team },
     { href: "/gallery", label: t.nav.gallery },
   ];
@@ -77,7 +76,7 @@ export function Header({ variant = "overlay" }: { variant?: "overlay" | "solid" 
       }`}
     >
       <div className="container flex h-[3.465rem] items-center justify-between gap-3 md:h-[3.71rem] md:gap-4">
-        <a href="/" className="inline-flex shrink-0 items-center" aria-label="Hankook Service Center">
+        <a href="/" className="inline-flex shrink-0 items-center" aria-label="Kumsung Engineering Private Limited">
           <SiteLogo tone="color" priority />
         </a>
 

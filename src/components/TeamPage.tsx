@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
 import { LanguageProvider, useLanguage } from "@/components/LanguageProvider";
+import { PageIntro } from "@/components/PageIntro";
+import { SiteFrame } from "@/components/SiteFrame";
 import { OpenApplicationCta } from "@/components/OpenApplicationCta";
 import type { SiteContent, TeamMember } from "@/lib/types";
 
@@ -48,17 +48,12 @@ function TeamSections() {
   const hasAnyone = hasCeo || members.length > 0;
 
   return (
-    <div className="site-shell bg-white">
-      <Header variant="solid" />
-
-      <main className="flex-1">
-        <section className="border-b border-[var(--line)] bg-[var(--navy-deep)] pt-28 pb-14 text-white md:pt-32 md:pb-16">
-          <div className="container">
-            <p className="section-label !text-white/55">{t.teamLabel}</p>
-            <h1 className="section-title !mb-3 !text-white">{team?.title || t.teamTitle}</h1>
-            <p className="max-w-xl text-white/70">{team?.lead || t.teamLead}</p>
-          </div>
-        </section>
+    <SiteFrame>
+        <PageIntro
+          eyebrow={t.teamLabel}
+          title={team?.title || t.teamTitle}
+          lead={team?.lead || t.teamLead}
+        />
 
         <section className="section bg-white text-[var(--ink)]">
           <div className="container space-y-14">
@@ -126,10 +121,7 @@ function TeamSections() {
         </section>
 
         <OpenApplicationCta />
-      </main>
-
-      <Footer />
-    </div>
+    </SiteFrame>
   );
 }
 

@@ -1,5 +1,4 @@
 import { promises as fs } from "fs";
-import { seedKoreanFromEnglish } from "@/lib/locale-seed";
 import { ensureServicesContent } from "@/lib/services-default";
 import { sortPerformances, type SiteContent } from "@/lib/types";
 import {
@@ -47,80 +46,30 @@ function defaultHeroSlides(locale: "ko" | "en") {
   if (locale === "ko") {
     return [
       {
-        id: "slide-compressor",
-        type: "video" as const,
-        src: CURRENT_HERO_VIDEO,
-        label: "에어 컴프레서",
-        brand: "Hankook Service Center",
-        headline: "Total Air Solution",
-        subheadline:
-          "에어 컴프레서 판매·수리·유지보수. 인도에서 신뢰할 수 있는 산업용 에어 솔루션을 제공합니다.",
-        ctaLabel: "문의하기",
-        ctaHref: "/contact",
-      },
-      {
-        id: "slide-facility",
+        id: "studio",
         type: "image" as const,
-        src: "/images/slide-2.png",
-        label: "컴프레서 설비",
-        brand: "Reliable Service",
-        headline: "안정적인 설비 운영",
-        subheadline:
-          "산업 현장의 컴프레서 설비를 점검하고, 생산이 멈추지 않도록 신속하고 정확한 서비스를 제공합니다.",
-        ctaLabel: "실적 보기",
-        ctaHref: "/performance",
-      },
-      {
-        id: "slide-pipe",
-        type: "video" as const,
-        src: "/videos/pipe.mp4",
-        label: "배관",
-        brand: "Engineering",
-        headline: "배관과 엔지니어링",
-        subheadline:
-          "압축공기 배관 설계부터 시공·유지관리까지, 현장 맞춤형 엔지니어링 솔루션을 지원합니다.",
-        ctaLabel: "회사 소개",
-        ctaHref: "/about",
+        src: "",
+        label: "Kumsung",
+        brand: "Kumsung Engineering Private Limited",
+        headline: "점과 선",
+        subheadline: "대지와 빛을 하나의 장면으로 편집합니다.",
+        ctaLabel: "연락",
+        ctaHref: "/contact",
       },
     ];
   }
 
   return [
     {
-      id: "slide-compressor",
-      type: "video" as const,
-      src: CURRENT_HERO_VIDEO,
-      label: "Air Compressor",
-      brand: "Hankook Service Center",
-      headline: "Total Air Solution",
-      subheadline:
-        "Air compressor sales, repair, and maintenance. Trusted industrial air solutions in India.",
-      ctaLabel: "Contact Us",
-      ctaHref: "/contact",
-    },
-    {
-      id: "slide-facility",
+      id: "studio",
       type: "image" as const,
-      src: "/images/slide-2.png",
-      label: "Compressor Facility",
-      brand: "Reliable Service",
-      headline: "Keep Operations Running",
-      subheadline:
-        "We inspect and service compressor facilities so your production stays stable and efficient.",
-      ctaLabel: "View All Projects",
-      ctaHref: "/performance",
-    },
-    {
-      id: "slide-pipe",
-      type: "video" as const,
-      src: "/videos/pipe.mp4",
-      label: "Piping",
-      brand: "Engineering",
-      headline: "Piping & Engineering",
-      subheadline:
-        "From compressed-air piping design to installation and maintenance, we support site-ready engineering.",
-      ctaLabel: "About Us",
-      ctaHref: "/about",
+      src: "",
+      label: "Kumsung",
+      brand: "Kumsung Engineering Private Limited",
+      headline: "Points & lines",
+      subheadline: "We edit site and light into one architectural scene.",
+      ctaLabel: "Contact",
+      ctaHref: "/contact",
     },
   ];
 }
@@ -343,14 +292,6 @@ export async function getContent(): Promise<SiteContent> {
     contentMigrated = true;
   }
 
-  if (content.ko && content.en) {
-    const seededKo = seedKoreanFromEnglish(content.ko, content.en);
-    if (JSON.stringify(seededKo) !== JSON.stringify(content.ko)) {
-      content.ko = seededKo;
-      contentMigrated = true;
-    }
-  }
-
   if (contentMigrated) {
     await fs.writeFile(contentPath, JSON.stringify(content, null, 2), "utf-8");
   }
@@ -358,18 +299,6 @@ export async function getContent(): Promise<SiteContent> {
   for (const locale of ["ko", "en"] as const) {
     const localeData = content[locale];
     if (!localeData.hero.videoUrl) localeData.hero.videoUrl = "";
-    if (!localeData.company.chennaiOffice) {
-      localeData.company.chennaiOffice =
-        "28-B, CASA Grande Futura, Singaperumal Koil Road, Sriperumbudur, Kancheepuram, Tamil Nadu - 602105, India.";
-    }
-    if (!localeData.company.branchIndiaMapEmbed) {
-      localeData.company.branchIndiaMapEmbed =
-        "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1973.0562914194513!2d77.69682492859985!3d12.978534306050603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDU4JzQyLjciTiA3N8KwNDEnNTAuOSJF!5e1!3m2!1sko!2sin!4v1790584743425!5m2!1sko!2sin";
-    }
-    if (!localeData.company.chennaiMapEmbed) {
-      localeData.company.chennaiMapEmbed =
-        "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1973.2628005165345!2d79.93732026970514!3d12.95249630619212!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDU3JzA5LjAiTiA3OcKwNTYnMTYuNyJF!5e1!3m2!1sko!2skr!4v1790449072251!5m2!1sko!2skr";
-    }
     if (!localeData.hero.slides?.length) {
       localeData.hero.slides = defaultHeroSlides(locale);
     }
@@ -405,10 +334,7 @@ export async function getContent(): Promise<SiteContent> {
       );
       localeData.clients = {
         title: locale === "ko" ? "고객사" : "Clients",
-        lead:
-          locale === "ko"
-            ? "고객의 생산 현장에 필요한 압축공기 솔루션과 책임 있는 서비스로, 안정적인 설비 운영과 지속적인 성장을 함께합니다."
-            : "With compressed air solutions and responsible service for production sites, we support stable equipment operation and grow together with our clients.",
+        lead: locale === "ko" ? "함께 장면을 만든 사람들." : "People we have made scenes with.",
         items: names.map((name, i) => ({
           id: `c-${i + 1}`,
           name,

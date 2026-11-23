@@ -3,7 +3,7 @@ import { LOCALE_STORAGE_KEY } from "@/lib/ui";
 
 export const LOCALE_COOKIE = LOCALE_STORAGE_KEY;
 /** Set only when the user explicitly picks a language in the UI. */
-export const LOCALE_MANUAL_KEY = "hsc_locale_manual";
+export const LOCALE_MANUAL_KEY = "kumsung_locale_manual";
 
 /**
  * Prefer Korean when Accept-Language ranks `ko*` highest among ko/en,

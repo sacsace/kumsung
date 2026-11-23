@@ -26,7 +26,7 @@ const brandIntro: Record<
   "atlas-copco": {
     ko: {
       title: "Atlas Copco",
-      lead: "오일 주입식 스크류 컴프레서 등 Atlas Copco 산업용 압축공기 설비 자료를 안내합니다.",
+      lead: "오일 주입식 스크류 컴프레서 등 Atlas Copco 산업용 압축공기 자료를 안내합니다.",
     },
     en: {
       title: "Atlas Copco",
@@ -86,11 +86,11 @@ const brandIntro: Record<
   summit: {
     ko: {
       title: "Summit",
-      lead: "흡착식·냉동식 드라이어, 필터, Hankook 질소 발생장치 등 Summit 관련 설비 자료입니다.",
+      lead: "흡착식·냉동식 드라이어, 필터, Kumsung 질소 발생장치 등 Summit 관련 자료입니다.",
     },
     en: {
       title: "Summit",
-      lead: "Summit air-treatment documents covering heatless and refrigeration dryers, filters, and Hankook nitrogen plants.",
+      lead: "Summit air-treatment documents covering heatless and refrigeration dryers, filters, and Kumsung nitrogen plants.",
     },
   },
   oil: {
@@ -123,13 +123,13 @@ const brandIntro: Record<
       lead: "SBN Tech UPS and power-solution company profile documents.",
     },
   },
-  hankook: {
+  "kumsung-engineering-private-limited": {
     ko: {
-      title: "Hankook Service Center",
+      title: "Kumsung Engineering Private Limited",
       lead: "회사 프로필 및 컴프레서·공기처리 비교 참고 자료입니다.",
     },
     en: {
-      title: "Hankook Service Center",
+      title: "Kumsung Engineering Private Limited",
       lead: "Company profile and reference materials for compressors and air treatment.",
     },
   },
@@ -165,7 +165,7 @@ export function getBrandCover(brand: CatalogBrand): string | undefined {
 
 export const productPageUi = {
   ko: {
-    back: "설비·서비스로 돌아가기",
+    back: "서비스로 돌아가기",
     docsLabel: "제품 자료",
     docsLead: "해당 폴더의 카탈로그·브로슈어 미리보기와 요약 설명입니다.",
     empty: "등록된 제품 자료가 없습니다.",
@@ -177,7 +177,7 @@ export const productPageUi = {
     download: "카탈로그 다운로드",
   },
   en: {
-    back: "Back to Equipment & Services",
+    back: "Back to Services",
     docsLabel: "Product Documents",
     docsLead: "Preview images and short descriptions from the product folder.",
     empty: "No product documents yet.",

@@ -14,7 +14,7 @@ function storePath() {
 }
 
 function getEnvPassword() {
-  return process.env.ADMIN_PASSWORD || "hankook@2026";
+  return process.env.ADMIN_PASSWORD || "kumsung@2026";
 }
 
 function hashPassword(password: string, salt: string) {
